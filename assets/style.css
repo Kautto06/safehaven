@@ -1,0 +1,205 @@
+/*Responsive*/
+@media (max-width: 768px) {
+    .login-container {
+        padding: 30px;
+    }
+
+    .login-container h2 {
+        font-size: 1.5em;
+    }
+
+    .login-container input[type="password"], 
+    .login-container button {
+        padding: 12px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 20px;
+    }
+
+    .login-container h2 {
+        font-size: 1.3em;
+    }
+
+    .login-container input[type="password"], 
+    .login-container button {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+}
+
+/*Margen*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*Estilos Register */
+
+.error-message {
+    color: red;
+    font-size: 0.875em;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+html, bodyregister {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+bodyregister {
+    font-family: Arial, sans-serif;
+    background-color: #A9C5A0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-size: cover; 
+    background: linear-gradient(135deg, #A9C5A0, #1f3825); 
+    min-height: 100vh; 
+}
+
+.register-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+.register-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.register-icon {
+    width: 200px; /* Ajusta el tamaño según sea necesario */
+    height: 50px;
+    margin-bottom: 15px;
+}
+
+.register-label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.register-input, .register-select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.register-submit {
+    background-color: #5C8268;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.register-submit:hover {
+    background-color: #45a049;
+}
+/*Estilos Login */
+
+
+html, bodylogin {
+    width: 100%;
+    height: 100%;
+}
+
+bodylogin {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #A9C5A0; /* Color principal */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #A9C5A0, #1f3825); 
+    background-size: cover; 
+    min-height: 100vh; 
+    overflow: hidden;
+}
+
+
+.login-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%;
+    max-width: 400px; 
+}
+
+
+.login-container h2 {
+    margin-bottom: 30px;
+    color: #3C574F; 
+    font-size: 1.8em;
+}
+
+
+.login-container .logo {
+    width: 200px; /* Ajusta el tamaño según sea necesario */
+    height: 50px;
+    margin-bottom: 15px;
+}
+
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #BCC8B3;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+
+.login-container button {
+    width: 100%;
+    padding: 15px;
+    background-color: #769F80; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+
+.login-container button:hover {
+    background-color: #5C8268; 
+}
+
+
+#error-message {
+    color: #D9534F; 
+    display: none;
+    margin-top: 15px;
+}
+
+
+
