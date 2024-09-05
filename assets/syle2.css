@@ -1,0 +1,518 @@
+
+@media (max-width: 600px) {
+    .pagination-link {
+        padding: 8px 12px; /* Reduce el padding en pantallas pequeñas */
+        font-size: 0.9em; /* Reduce el tamaño del texto en pantallas pequeñas */
+    }
+}
+/* Estilos generales para el body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #F5F5DC;
+}
+
+/* Estilos para el header del foro */
+.forum-header {
+    background-color: #A9C5A0; /* Color principal */
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    position: relative;
+}
+
+/* Logo en el centro del header */
+.logo-container {
+    flex: 1;
+    text-align: center;
+}
+
+.header-logo {
+    width: 150px; /* Ajusta el tamaño según sea necesario */
+    height: auto;
+}
+
+/* Menú desplegable (rayas) a la derecha */
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    cursor: pointer;
+}
+
+.menu-toggle .bar {
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+}
+
+/* Asegúrate de que el contenido principal esté bien posicionado */
+main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilos para el título del foro y el contenedor de publicaciones más populares */
+.header-right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+
+.header-right span {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #3C574F; /* Ajusta el color del título según tu paleta de colores */
+}
+
+.sort-button {
+    background-color: #A9C5A0; /* Color principal */
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    color: white;
+}
+
+.sort-button i {
+    margin-right: 5px;
+}
+
+/* Estilos para el contenido del foro */
+.forum-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Estilos para cada ítem del foro */
+.forum-item {
+    display: flex;
+    align-items: flex-start;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 0; /* Ajusta el margen superior e inferior */
+    width: 100%;
+    padding: 15px;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s; /* Agrega transición para animación */
+}
+.forum-item:hover {
+    transform: scale(1.05); /* Aumenta el tamaño del recuadro */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aumenta la sombra al pasar el ratón */
+}
+/* Estilos para la imagen del foro */
+.forum-image {
+    width: 100px; /* Ajusta el tamaño según sea necesario */
+    height: 100px;
+    margin-right: 15px;
+}
+
+/* Estilos para el texto del foro */
+.forum-text {
+    flex: 1;
+}
+.forum-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #3C574F; /* Ajusta el color del título según tu paleta de colores */
+    margin-bottom: 10px;
+}
+.forum-text p {
+    margin-bottom: 10px;
+}
+
+/* Estilos para el botón de ver */
+.view-button {
+    background-color: #5C8268;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 0.9em;
+
+    transition: background-color 0.3s, transform 0.3s; /* Agrega transición para animación */
+}
+
+.view-button:hover {
+    background-color: #45a049;
+    transform: scale(1.1);
+}
+
+/* Estilos para el botón de likes */
+.like-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #E0E0E0;
+    border: none;
+    border-radius: 0%;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.like-button:hover {
+    background-color: #D0D0D0; /* Cambia el color de fondo al pasar el ratón */
+    transform: scale(1.1); /* Aumenta el tamaño del botón */
+}
+
+.like-button i {
+    margin-right: 5px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.pagination-link {
+    background-color: #A9C5A0; /* Color de fondo */
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin: 0 5px;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.pagination-link:hover {
+    background-color: #8DAF8E; /* Color de fondo al pasar el ratón */
+}
+
+.pagination-link.active {
+    background-color: #5C8268; /* Color para el enlace activo */
+    font-weight: bold;
+}
+
+/* Efecto de desvanecimiento y ampliación al pasar el ratón */
+.pagination-link:hover {
+    background-color: #8DAF8E; /* Color de fondo al pasar el ratón */
+    transform: scale(1.1); /* Aumenta el tamaño del enlace al pasar el ratón */
+}
+
+/* Estilos para el contenedor del botón de crear publicación */
+.create-post-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0; /* Espacio alrededor del botón */
+}
+
+/* Estilos para el botón de crear publicación */
+.create-post-button {
+    background-color: #5C8268; /* Color de fondo del botón */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s; /* Agrega transición para animación */
+}
+
+.create-post-button:hover {
+    background-color: #45a049; /* Color de fondo al pasar el ratón */
+    transform: scale(1.05); /* Aumenta el tamaño del botón al pasar el ratón */
+}
+
+.evaluation-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos para cada pregunta */
+.question {
+    margin-bottom: 15px;
+}
+
+.question label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.question select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Estilos para la sección de comentarios */
+.comment-section {
+    margin-bottom: 20px;
+}
+
+.comment-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.comment-section textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+/* Estilos para los botones */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submit-button, .cancel-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.submit-button {
+    background-color: #5C8268; /* Verde */
+    color: white;
+}
+
+.submit-button:hover {
+    background-color: #45a049; /* Verde más oscuro */
+    transform: scale(1.05);
+}
+
+.cancel-button {
+    background-color: #E57373; /* Rojo */
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #D32F2F; /* Rojo más oscuro */
+    transform: scale(1.05);
+}
+
+
+
+/* Estilos para el contenedor de la notificación */
+.notification {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #464646; /* Verde para éxito */
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.view-results-button {
+    background-color: #fff;
+    color: #000000; /* Verde para el botón */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.view-results-button:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.05);
+}
+
+/* Estilos para el overlay */
+.overlay {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Grisáceo con opacidad */
+    z-index: 1000; /* Asegúrate de que esté sobre el contenido */
+}
+
+/* Estilos para el contenedor de la notificación */
+.notification {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #252525; /* Verde para éxito */
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1001; /* Asegúrate de que esté sobre el overlay */
+}
+
+.view-results-button {
+    background-color: #fff;
+    color: #070707; /* Verde para el botón */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.view-results-button:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.05);
+}
+
+.experts-content {
+    margin: 30px auto;
+    max-width: 900px;
+    padding: 20px;
+}
+
+.expert-item {
+    background-color: white;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.expert-item:hover {
+    transform: scale(1.05);
+}
+
+/* Imagen del experto */
+.expert-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+/* Texto de cada experto */
+.expert-text {
+    flex: 1;
+}
+
+.expert-title {
+    margin: 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.expert-text p {
+    margin: 5px 0;
+    color: #666;
+}
+
+/* Botón para ver perfil */
+.view-button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.view-button:hover {
+    background-color: #45a049;
+}
+
+/* Estilos para el botón de teléfono */
+.phone-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #E0E0E0;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.phone-button:hover {
+    background-color: #D0D0D0;
+    transform: scale(1.1);
+}
+
+.phone-button i {
+    margin-right: 5px;
+}
+
+
+/* Paginación */
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination-link {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: white;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 0 5px;
+    transition: background-color 0.3s ease;
+}
+
+.pagination-link:hover {
+    background-color: #007BFF;
+    color: white;
+}
+
+
+
+.create-post-button:hover {
+    background-color: #E68900;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .expert-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .expert-image {
+        margin-bottom: 15px;
+    }
+
+    .menu-toggle {
+        right: 10px;
+    }
+}
