@@ -361,3 +361,37 @@ main {
 .modal-button:hover {
     background-color: #45a049;
 }
+
+.form-group-terms {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.form-group-terms input[type="checkbox"] {
+    margin-right: 10px;
+    cursor: pointer;
+    accent-color: #5C8268; /* Color del checkmark */
+}
+
+.form-group-terms label {
+    font-size: 0.875em;
+    color: #3C574F;
+}
+
+.form-group-terms label a {
+    color: #5C8268;
+    text-decoration: none;
+}
+
+.form-group-terms label a:hover {
+    text-decoration: underline;
+}
+
+.form-group-terms .error-message {
+    display: block;
+    color: red;
+    font-size: 0.875em;
+    margin-top: 5px;
+    margin-left: 25px; /* Alinea el mensaje de error con el resto del contenido */
+}

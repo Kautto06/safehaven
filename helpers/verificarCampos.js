@@ -75,6 +75,12 @@ function validarFormulario() {
         esValido = false;
     }
 
+    var terminos = document.getElementById("terminos").checked;
+    if (!terminos) {
+        document.getElementById("error-terminos").textContent = "Debe aceptar los términos y condiciones.";
+        esValido = false;
+    }
+
     return esValido; // Si todo es válido, permite el envío del formulario
 }
 
