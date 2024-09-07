@@ -713,7 +713,7 @@ textarea {
 }
 
 /* Estilos para el botón de enviar */
-.submit-button {
+.submit-buttonEncuesta {
     background-color: #f80f0f; /* Rojo */
     color: white;
     border: none;
@@ -729,7 +729,7 @@ textarea {
     margin-right: auto;
 }
 
-.submit-button:hover {
+.submit-buttonEncuesta:hover {
     background-color: #D32F2F; /* Rojo más oscuro */
     transform: scale(1.05);
 }

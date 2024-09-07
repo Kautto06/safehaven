@@ -1,3 +1,24 @@
+function mostrarMensaje(titulo, mensaje, botonTexto, urlBoton) {
+    const modal = document.getElementById("mensaje");
+    const modalBody = document.getElementById("modal-body-text");
+    const modalButton = document.getElementById("modal-button");
+    
+    modalBody.innerHTML = `<strong>${titulo}</strong><br>${mensaje}`;
+    modalButton.textContent = botonTexto;
+    modalButton.onclick = () => {
+        if (urlBoton) {
+            window.location.href = urlBoton;
+        }
+        modal.style.display = "none";
+    };
+    
+    document.getElementById("modal-close").onclick = () => {
+        modal.style.display = "none";
+    };
+    
+    modal.style.display = "block";
+}
+
 function validarFormulario() {
     let esValido = true;
 
@@ -67,10 +88,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const passwordField = document.querySelector(`#${this.getAttribute('data-target')}`);
             
             if (passwordField.type === 'password') {
+
                 passwordField.type = 'text';
                 this.querySelector('i').classList.remove('fa-eye');
                 this.querySelector('i').classList.add('fa-eye-slash');
             } else {
+
                 passwordField.type = 'password';
                 this.querySelector('i').classList.remove('fa-eye-slash');
                 this.querySelector('i').classList.add('fa-eye');
@@ -79,3 +102,49 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+function registrarUsuario(event) {
+    event.preventDefault();
+
+    if (!validarFormulario()) {
+        return;
+    }
+
+    const nuevoUsuario = {
+        nombre: document.getElementById("nombre").value,
+        apellidos: document.getElementById("apellidos").value,
+        telefono: document.getElementById("telefono").value,
+        correo: document.getElementById("correo").value,
+        genero: document.getElementById("genero").value,
+        fecha_nacimiento: document.getElementById("fecha_nacimiento").value,
+        password: document.getElementById("password").value
+    };
+
+    let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+    const usuarioExistente = usuarios.find(u => u.correo === nuevoUsuario.correo);
+
+    if (usuarioExistente) {
+        // Mostrar mensaje de error
+        mostrarMensaje("Error", "El correo ya está registrado. Por favor, use otro correo.", "Cerrar");
+        return;
+    }
+
+    usuarios.push(nuevoUsuario);
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+    // Mostrar mensaje de éxito
+    mostrarMensaje("Éxito", "Usuario registrado con éxito.", "Ir a Iniciar Sesión", "login.html");
+
+    document.getElementById("registerForm").reset();
+}
+
+document.getElementById("registerForm").addEventListener('submit', registrarUsuario);
+
+
+function mostrarUsuarios() {
+    let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+    console.log('Usuarios registrados:', usuarios);
+}
+
+// Invoca esta función para mostrar los usuarios almacenados
+mostrarUsuarios();

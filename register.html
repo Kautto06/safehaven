@@ -71,7 +71,7 @@
             <div class="form-group password-field">
                 <label for="confirmPassword">Confirmar Contraseña:</label>
                 <div class="password-field">
-                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <input type="password" id="confirmPassword" name="password" required>
                     <span class="toggle-password" data-target="confirmPassword">
                         <i class="fa fa-eye" id="toggleIcon2"></i>
                     </span>
@@ -82,7 +82,14 @@
 
             <input type="submit" value="Registrarse" class="register-submit">
         </form>
+        <div id="mensaje" class="modal">
+            <div class="modal-content">
+                <span id="modal-close" class="modal-close">&times;</span>
+                <div id="modal-body-text" class="modal-body-text"></div>
+                <button id="modal-button" class="modal-button"></button>
+            </div>
+        </div>
     </div>
-    <script src="helpers/verificarDatos.js" async defer></script>
+    <script src="helpers/verificarCampos.js" ></script>
 </body>
 </html>
