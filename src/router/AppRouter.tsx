@@ -7,6 +7,7 @@ import Register from "../pages/Register";
 import { IonReactRouter } from "@ionic/react-router";
 import Expertos from "../pages/Expertos";
 import Foro from "../pages/Foro";
+import Notificaciones from "../pages/Notificaciones";
 
 const AppRouter: React.FC = () =>{
     return(
@@ -15,6 +16,7 @@ const AppRouter: React.FC = () =>{
             <Route exact path="/register" component={Register}/>
             <Route exact path="/expertos" component={Expertos}/>
             <Route exact path="/foro" component={Foro}/>
+            <Route exact path="/notificaciones" component={Notificaciones}/>
             <Route exact path="/">
                 <Redirect to="/login"/>
             </Route>
