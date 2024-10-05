@@ -1,0 +1,198 @@
+/* src/assets/Experts.css */
+
+main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.experts-body{
+    --background: #F5F5DC;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #5C8268; /* Color del título */
+  margin-bottom: 20px;
+  padding-top: 20px;
+  text-transform: uppercase; /* Mayúsculas para más impacto */
+}
+
+.forum-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+  }
+
+  .header-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .header-right span {
+    font-size: 1.8em;
+    font-weight: 600;
+    color: #4A6651;
+    text-align: center;
+  }
+  
+  .sort-button {
+    width: 5px; 
+    height: 10px; 
+    padding: 0; 
+    border-radius: 50%;
+    --icon-size: 0.1px;
+    
+    margin-left: 20px;
+    font-size: 1.2em;
+    background-color: #A9C5A0;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .sort-button:hover {
+    background-color: #5C8268;
+  }
+  
+  .logo-container {
+    flex-grow: 1;
+  }
+  
+  .header-logo {
+    height: 60px;
+  }
+  
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+  
+  .menu-toggle .bar {
+    height: 4px;
+    background-color: #333;
+    margin: 3px 0;
+  }
+  
+  .experts-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .forum-item {
+    display: flex;
+    align-items: flex-start;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 0; /* Ajusta el margen superior e inferior */
+    width: 140%;
+    padding: 20px;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .forum-item:hover {
+    transform: scale(1.05); /* Aumenta el tamaño del recuadro */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aumenta la sombra al pasar el ratón */
+}
+  
+  .forum-image {
+    width: 100px; /* Ajusta el tamaño según sea necesario */
+    height: 100px;
+    margin-right: 15px;
+  }
+  
+  .forum-text {
+    flex: 1;
+  }
+  
+  .forum-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #3C574F; /* Ajusta el color del título según tu paleta de colores */
+    margin-bottom: 10px;
+  }
+  
+  .phone-button{
+    --background: #164484;
+    --border-color: #164484;
+    color: white;
+    position: absolute;
+    bottom:20px;
+    right: 10px;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    transition: background-color 0.3s, transform 0.3s;
+
+  }
+
+  .phone-button:hover {
+    transform: scale(1.1);
+}
+
+  .view-button {
+    padding: 10px 15px;
+    --background: #5C8268;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .view-button:hover {
+    transform: scale(1.1);
+}
+  
+  .pagination {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .pagination-link {
+    margin: 0 5px;
+    border: 1px solid #5C8268;
+    background-color: #A9C5A0;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-bottom: 50px;
+  }
+  
+  .pagination-link:hover {
+    background-color: #2f3136;
+    color: white;
+  }
+  
+  .pagination-link.active {
+    background-color: #585a59;
+    color: white;
+  }
+  
+  .pagination-link ion-icon {
+    vertical-align: middle;
+  }
+  

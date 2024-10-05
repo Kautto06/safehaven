@@ -1,0 +1,26 @@
+.header-title {
+    text-align: center;
+    flex: 1;
+}
+
+.header-logo {
+    width: 160px; 
+    height: 10px;
+    padding: 3px;
+    align-self: center;
+
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 200px;
+}
+
+.cabecera{
+    --background: #A9C5A0;
+    align-items: center;
+}

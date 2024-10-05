@@ -1,0 +1,7 @@
+{
+  "name": "SafeHaven",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
