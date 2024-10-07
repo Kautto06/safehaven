@@ -40,31 +40,27 @@ h1 {
   text-align: center;
 }
 
-.sort-button {
-  width: 5px; 
+.sort-button-forum {
+  width: 70px; 
   height: 10px; 
   padding: 0; 
   border-radius: 50%;
   --icon-size: 0.1px;
   margin-left: 20px;
   font-size: 1.2em;
-  background-color: #A9C5A0;
+  --background: #A9C5A0;
   color: white;
   border-radius: 5px;
   padding: 5px 10px;
   cursor: pointer;
 }
 
-.sort-button:hover {
-  background-color: #5C8268;
+.sort-button-forum:hover {
+  --background: #5C8268;
 }
 
 .logo-container {
   flex-grow: 1;
-}
-
-.header-logo {
-  height: 60px;
 }
 
 .menu-toggle {
@@ -136,36 +132,43 @@ h1 {
 
 
 .like-button {
-  position: absolute;
-  bottom: 20px;
-  right: 10px;
-  --background: transparent;
-  color: #5C8268;
-  font-size: 1.2em;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
+  position: absolute !important;
+  bottom: 20px !important;
+  right: 10px !important;
+  background: transparent !important;
+  color: #5C8268 !important;
+  font-size: 1.2em !important;
+  border: none !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
 }
+
 
 .like-button:hover {
   transform: scale(1.1);
 }
 
+
 .view-button {
-    --background-color: #5C8268;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 15px;
-    cursor: pointer;
-    font-size: 0.9em;
-    --background: #5C8268;
-    transition: background-color 0.3s, transform 0.3s; /* Agrega transición para animación */
+  --background: #5C8268!important; /* Color de fondo */
+  color: white !important; /* Color del texto */
+  border: none !important; /* Elimina el borde */
+  border-radius: 5px !important; /* Bordes redondeados */
+  padding: 8px 15px !important; /* Espaciado interno */
+  cursor: pointer !important; /* Cambia el cursor al pasar por encima */
+  font-size: 0.9em !important; /* Tamaño de la fuente */
+  transition: background-color 0.3s, transform 0.3s !important; /* Transición para animación */
+  box-shadow: none !important; /* Elimina cualquier sombra del botón */
+
+  
 }
 
+
+
 .view-button:hover {
-  transform: scale(1.1);
+  transform: scale(1.1) !important; /* Aumenta el tamaño al pasar el ratón */
+  --background: #4A7D65 !important; /* Color de fondo al pasar el ratón */
 }
 
 .pagination {
@@ -175,8 +178,7 @@ h1 {
 
 .pagination-link {
   margin: 0 5px;
-  border: 1px solid grey;
-  background-color: grey;
+  --background: grey;
   color: white;
   border-radius: 8px;
   padding: 10px 15px;
@@ -186,12 +188,12 @@ h1 {
 }
 
 .pagination-link:hover {
-  background-color: #2f3136;
+  --background: #2f3136;
   color: white;
 }
 
 .pagination-link.active {
-  background-color: #585a59;
+  --background: #585a59;
   color: white;
 }
 
@@ -200,23 +202,23 @@ h1 {
 }
 
 .create-post-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0; /* Espacio alrededor del botón */
+    display: flex !important;
+    justify-content: center !important;
+    margin: 20px 0 !important; /* Espacio alrededor del botón */
 }
 
 /* Estilos para el botón de crear publicación */
 .create-post-button {
-    --background: #5C8268; /* Color de fondo del botón */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 12px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s; /* Agrega transición para animación */
+    --background: #5C8268!important; /* Color de fondo del botón */
+    color: white !important; 
+    border: none !important;
+    border-radius: 5px !important;
+    padding: 12px 20px !important;
+    font-size: 1em !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s, transform 0.3s !important; /* Agrega transición para animación */
 }
 
 .create-post-button:hover { /* Color de fondo al pasar el ratón */
-    transform: scale(1.05); /* Aumenta el tamaño del botón al pasar el ratón */
+    transform: scale(1.05) !important; /* Aumenta el tamaño del botón al pasar el ratón */
 }

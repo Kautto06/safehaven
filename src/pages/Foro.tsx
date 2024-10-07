@@ -34,7 +34,7 @@ const Foro: React.FC = () => {
           <h1>AlvaroWeko</h1>
           <div className="header-right">
             <span>Publicaciones más populares</span>
-            <IonButton fill="clear" className="sort-button">
+            <IonButton fill="clear" className="sort-button-forum">
               <IonIcon slot="icon-only" icon={filterOutline} />
             </IonButton>
           </div>
@@ -46,10 +46,10 @@ const Foro: React.FC = () => {
                 <div className='forum-text'>
                   <h2 className='forum-title'>Título del Mensaje</h2 >
                   <p>Ejemplo de contenido del mensaje del foro. Aquí puedes poner un resumen del mensaje o tema que se está discutiendo.</p>
-                  <IonButton className='view-button'>Ver</IonButton>
+                  <IonButton fill='clear' className='view-button'>Ver</IonButton>
                 </div>
                   
-                <IonButton fill="clear" className="like-button" onClick={() => handleLikeClick(idx)}>
+                <IonButton fill='clear' className='like-button' onClick={() => handleLikeClick(idx)}>
                 <IonIcon icon={thumbsUpOutline} /> {likes[idx]}
               </IonButton>
               </div>
@@ -70,7 +70,7 @@ const Foro: React.FC = () => {
         </div>
 
         <div className="create-post-container">
-          <IonButton className='create-post-button'>
+          <IonButton fill='clear' className='create-post-button'>
             <IonIcon slot="start" icon={createOutline} /> Crear publicación
           </IonButton>
         </div>

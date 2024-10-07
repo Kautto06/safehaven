@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { IonPage, IonHeader, IonContent, IonImg, IonButton, IonIcon, IonPopover, IonList, IonItem, IonLabel, IonToast } from '@ionic/react';
-import { callOutline, arrowBackOutline, arrowForwardOutline, funnelOutline } from 'ionicons/icons';
+import { callOutline, arrowBackOutline, arrowForwardOutline, funnelOutline,filterOutline } from 'ionicons/icons';
 import '../assets/Expertos.css';
 import logo from '../assets/Logos/logoNoBackground.png';
 import profile from '../assets/images/profile.svg';
@@ -42,7 +42,7 @@ const Expertos: React.FC = () => {
           <div className="header-right">
             <span>Expertos más destacados</span>
             <IonButton fill="clear" className="sort-button" onClick={openPopover}>
-              <IonIcon slot="icon-only" icon={funnelOutline}></IonIcon>
+              <IonIcon slot="icon-only" icon={filterOutline} />
             </IonButton>
 
             {/* Popover (Dropdown Menu) */}
@@ -75,11 +75,11 @@ const Expertos: React.FC = () => {
                   <p>
                     Ejemplo de contenido del mensaje del experto. Aquí puedes poner un resumen del mensaje o tema que se está discutiendo.
                   </p>
-                  <IonButton className="view-button">Ver</IonButton>
+                  <IonButton fill="clear" className="view-button-expert">Ver</IonButton>
                 </div>
                 <IonButton
                   className="phone-button"
-                  fill="outline"
+                  fill="clear"
                   onClick={() => copyPhoneNumber('+123456789')}
                 >
                   <IonIcon icon={callOutline} />

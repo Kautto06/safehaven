@@ -12,7 +12,7 @@ main {
 }
 
 h1 {
-  text-align: center;
+  text-align: center ;
   font-size: 2.5em;
   font-weight: bold;
   color: #5C8268; /* Color del título */
@@ -21,12 +21,7 @@ h1 {
   text-transform: uppercase; /* Mayúsculas para más impacto */
 }
 
-.forum-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: rgb(255, 255, 255);
-  }
+
 
   .header-right {
     display: flex;
@@ -43,7 +38,7 @@ h1 {
   }
   
   .sort-button {
-    width: 5px; 
+    width: 70px; 
     height: 10px; 
     padding: 0; 
     border-radius: 50%;
@@ -51,7 +46,7 @@ h1 {
     
     margin-left: 20px;
     font-size: 1.2em;
-    background-color: #A9C5A0;
+    --background: #A9C5A0;
     color: white;
     border-radius: 5px;
     padding: 5px 10px;
@@ -59,30 +54,7 @@ h1 {
   }
   
   .sort-button:hover {
-    background-color: #5C8268;
-  }
-  
-  .logo-container {
-    flex-grow: 1;
-  }
-  
-  .header-logo {
-    height: 60px;
-  }
-  
-  .menu-toggle {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-  }
-  
-  .menu-toggle .bar {
-    height: 4px;
-    background-color: #333;
-    margin: 3px 0;
+    --background: #5C8268;
   }
   
   .experts-content {
@@ -130,28 +102,28 @@ h1 {
   }
   
   .phone-button{
-    --background: #164484;
-    --border-color: #164484;
-    color: white;
-    position: absolute;
-    bottom:20px;
-    right: 10px;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 12px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    font-size: 0.9em;
-    transition: background-color 0.3s, transform 0.3s;
+    --background: #164484 !important;
+    border-color: #164484 !important;
+    color: white !important;
+    position: absolute !important; 
+    bottom:20px !important;
+    right: 10px !important;
+    border: none !important;
+    border-radius: 5px !important;
+    padding: 8px 12px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    font-size: 0.9em !important;
+    transition: background-color 0.3s, transform 0.3s !important ;
 
   }
 
   .phone-button:hover {
-    transform: scale(1.1);
+    transform: scale(1.1) !important;
 }
 
-  .view-button {
+  .view-button-expert {
     padding: 10px 15px;
     --background: #5C8268;
     color: white;
@@ -161,38 +133,32 @@ h1 {
     transition: background-color 0.3s ease;
   }
 
-  .view-button:hover {
+  .view-button-expert:hover {
     transform: scale(1.1);
 }
   
-  .pagination {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .pagination-link {
-    margin: 0 5px;
-    border: 1px solid #5C8268;
-    background-color: #A9C5A0;
-    color: white;
-    border-radius: 8px;
-    padding: 10px 15px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    margin-bottom: 50px;
-  }
-  
-  .pagination-link:hover {
-    background-color: #2f3136;
-    color: white;
-  }
-  
-  .pagination-link.active {
-    background-color: #585a59;
-    color: white;
-  }
-  
-  .pagination-link ion-icon {
-    vertical-align: middle;
-  }
-  
+.pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.pagination-link {
+  margin: 0 5px;
+  --background: grey;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-bottom: 50px;
+}
+
+.pagination-link:hover {
+  --background: #2f3136;
+  color: white;
+}
+
+.pagination-link.active {
+  --background: #585a59;
+  color: white;
+}

@@ -9,7 +9,7 @@ import {
 import Header from '../components/Header';
 import '../assets/Notificaciones.css';
 import { chevronForwardOutline, chevronBackOutline } from 'ionicons/icons';
-import markAsRead from '../helpers/vermas'
+
 const Notificaciones: React.FC = () => {
     const [notifications, setNotifications] = useState(
         Array(5).fill({
@@ -19,6 +19,7 @@ const Notificaciones: React.FC = () => {
         })
     );
 
+    // Función para contar notificaciones no leídas
     const unreadCount = notifications.filter(notification => !notification.isRead).length;
 
     const handleReadNotification = (index: number) => {
@@ -28,8 +29,6 @@ const Notificaciones: React.FC = () => {
           )
         );
     };
-
-    
 
     return (
         <IonPage>
@@ -41,8 +40,9 @@ const Notificaciones: React.FC = () => {
                             <h1>Notificaciones</h1>
                             <div className="notification-bell">
                                 🔔
+                                {/* Muestra el contador si hay notificaciones no leídas */}
                                 {unreadCount > 0 && (
-                                    <span className="notification-count">{unreadCount}</span> // Contador de notificaciones no leídas
+                                    <span className="notification-count">{unreadCount}</span>
                                 )}
                             </div>
                         </div>
@@ -51,7 +51,7 @@ const Notificaciones: React.FC = () => {
                             <div className="notification-card" key={index}>
                                 <div className='notification-title'>{notification.title}</div>
                                 <div className='notification-content'>{notification.content}</div>
-                                <IonButton className='notification-button' onClick={()=>handleReadNotification(index)}>Ver más</IonButton>
+                                <IonButton fill="clear" className='notification-button' onClick={()=>handleReadNotification(index)}>Ver más</IonButton>
                                 <span className="close-btn">&times;</span>
                                 <div className={`notification-status ${notification.isRead ? 'read-status' : ''}`}>
                                     {notification.isRead ? 'Leído' : ''}
@@ -78,4 +78,3 @@ const Notificaciones: React.FC = () => {
 };
 
 export default Notificaciones;
-

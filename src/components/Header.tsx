@@ -12,13 +12,18 @@ const DropdownMenu: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                 <IonItem routerLink="/login" onClick={onClose}>
                     <IonLabel>Login</IonLabel>
                 </IonItem>
-                <IonItem routerLink="/pagina-1" onClick={onClose}>
-                    <IonLabel>Página chupala</IonLabel>
+                <IonItem routerLink="/Expertos" onClick={onClose}>
+                    <IonLabel>NuestroExpertos</IonLabel>
                 </IonItem>
-                <IonItem routerLink="/pagina-2" onClick={onClose}>
-                    <IonLabel>Página xD UWU</IonLabel>
+                <IonItem routerLink="/Foro" onClick={onClose}>
+                    <IonLabel>Foro</IonLabel>
                 </IonItem>
-                {/* Agrega más páginas aquí */}
+                <IonItem routerLink="/Denuncia" onClick={onClose}>
+                    <IonLabel>Denuncia</IonLabel>
+                </IonItem>
+                <IonItem routerLink="/Notificaciones" onClick={onClose}>
+                    <IonLabel>Notificaciones</IonLabel>
+                </IonItem>
             </IonList>
         </div>
     );
