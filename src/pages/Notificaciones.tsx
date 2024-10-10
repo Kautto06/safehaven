@@ -7,6 +7,7 @@ import {
   IonImg,
 } from '@ionic/react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import '../assets/Notificaciones.css';
 import { chevronForwardOutline, chevronBackOutline } from 'ionicons/icons';
 
@@ -73,6 +74,7 @@ const Notificaciones: React.FC = () => {
                     </div>
                 </main>
             </IonContent>
+            <Footer/>
         </IonPage>
     );
 };

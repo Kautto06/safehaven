@@ -3,6 +3,7 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonButton, IonCar
 import { thumbsUpOutline, createOutline, chevronBackOutline, chevronForwardOutline, filterOutline } from 'ionicons/icons';
 import Header from '../components/Header';
 import '../assets/Foro.css'
+import Footer from '../components/Footer';
 
 
 const Foro: React.FC = () => {
@@ -78,6 +79,7 @@ const Foro: React.FC = () => {
 
         
       </IonContent>
+      <Footer/>
     </IonPage>
   );
 };

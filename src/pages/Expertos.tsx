@@ -6,6 +6,7 @@ import '../assets/Expertos.css';
 import logo from '../assets/Logos/logoNoBackground.png';
 import profile from '../assets/images/profile.svg';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const Expertos: React.FC = () => {
   const [showPopover, setShowPopover] = useState(false);
@@ -112,6 +113,7 @@ const Expertos: React.FC = () => {
         duration={1500}
         position="bottom"
       />
+      <Footer/>
     </IonPage>
   );
 };
