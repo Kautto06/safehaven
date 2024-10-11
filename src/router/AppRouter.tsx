@@ -10,6 +10,7 @@ import Foro from "../pages/Foro";
 import Notificaciones from "../pages/Notificaciones";
 import Denuncia from "../pages/Denuncia";
 import Actividades from "../pages/Actividades";
+import Autoevaluacion from "../pages/Autoevaluacion";
 
 const AppRouter: React.FC = () =>{
     return(
@@ -21,6 +22,7 @@ const AppRouter: React.FC = () =>{
             <Route exact path="/notificaciones" component={Notificaciones}/>
             <Route exact path="/denuncia" component={Denuncia}/>
             <Route exact path="/actividades" component={Actividades}/>
+            <Route exact path="/autoevaluacion" component={Autoevaluacion}/>
             <Route exact path="/">
                 <Redirect to="/login"/>
             </Route>

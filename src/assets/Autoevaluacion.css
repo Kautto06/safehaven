@@ -1,0 +1,249 @@
+
+@media (max-width: 600px) {
+    .pagination-link {
+        padding: 8px 12px; /* Reduce el padding en pantallas pequeñas */
+        font-size: 0.9em; /* Reduce el tamaño del texto en pantallas pequeñas */
+    }
+}
+/* Estilos generales para el body */
+.evaluation-body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --background: #F5F5DC;
+}
+
+
+/* Asegúrate de que el contenido principal esté bien posicionado */
+main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilos para el título del foro y el contenedor de publicaciones más populares */
+
+
+.evaluation-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos para cada pregunta */
+.question {
+    margin-bottom: 15px;
+}
+
+.question-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.question-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Estilos para la sección de comentarios */
+.comment-section {
+    margin-bottom: 20px;
+}
+
+.comment-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.comment-section textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+/* Estilos para los botones */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submit-button-evaluation, .cancel-button-evaluation{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.submit-button-evaluation {
+    --background: #5C8268; /* Verde */
+    color: white;
+}
+
+.submit-button-evaluation:hover {
+    --background: #45a049; /* Verde más oscuro */
+    transform: scale(1.05);
+}
+
+.cancel-button-evaluation {
+    --background: #E57373; /* Rojo */
+    color: white;
+}
+
+.cancel-button-evaluation:hover {
+    --background: #D32F2F; /* Rojo más oscuro */
+    transform: scale(1.05);
+}
+
+
+
+/* Estilos para el contenedor de la notificación */
+.notification {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #464646; /* Verde para éxito */
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.view-results-button {
+    background-color: #fff;
+    color: #000000; /* Verde para el botón */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.view-results-button:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.05);
+}
+
+/* Estilos para el overlay */
+.overlay {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Grisáceo con opacidad */
+    z-index: 1000; /* Asegúrate de que esté sobre el contenido */
+}
+
+/* Estilos para el contenedor de la notificación */
+.notification {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #252525; /* Verde para éxito */
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1001; /* Asegúrate de que esté sobre el overlay */
+}
+
+.view-results-button {
+    background-color: #fff;
+    color: #070707; /* Verde para el botón */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.view-results-button:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.05);
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 0.5px;
+    margin-bottom: px;
+  }
+  
+  .error-highlight {
+    border: 2px solid red;
+  }
+  
+  .submitted-data {
+    margin-top: 20px;
+  }
+  
+  .comment-section {
+    margin-top: 20px;
+  }
+  
+  /* Evitar que el mensaje de error distorsione el contenido */
+  .evaluation-form .question {
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .evaluation-form .question .error-message {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: translateY(5px);
+  }
+  
+
+
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .expert-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .expert-image {
+        margin-bottom: 15px;
+    }
+
+    .menu-toggle {
+        right: 10px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
