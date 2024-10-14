@@ -1,0 +1,155 @@
+@media (max-width: 600px) {
+    .pagination-link {
+        padding: 8px 12px; /* Reduce el padding en pantallas pequeñas */
+        font-size: 0.9em; /* Reduce el tamaño del texto en pantallas pequeñas */
+    }
+}
+
+/* Estilos generales para el body */
+.calendar-page-body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --background: #F5F5DC;
+}
+
+/* Asegúrate de que el contenido principal esté bien posicionado */
+main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .expert-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .expert-image {
+        margin-bottom: 15px;
+    }
+
+    .menu-toggle {
+        right: 10px;
+    }
+}
+
+.event-title {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.search-event {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    --background: #F5F5DC;
+}
+
+.search-event-input {
+    display: flex;
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-event-button {
+    padding: 10px;
+    --background: #b5c9ac;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.calendar-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.calendar {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 1200px; /* Aumenta el tamaño máximo del calendario */
+}
+
+.calendar th,
+.calendar td {
+    border: 1px solid #ccc;
+    padding: 20px; /* Aumenta el tamaño de las celdas */
+    text-align: center;
+    background-color: white;
+    vertical-align: top; /* Asegura que el contenido esté alineado en la parte superior */
+    position: relative; /* Necesario para el posicionamiento absoluto del número del día */
+    height: 70px; /* Ajusta la altura de las celdas del calendario */
+    transition: transform 0.3s ease; /* Añade transición para escalado */
+}
+
+/* Efecto de hover para escalar el día */
+.calendar td:hover {
+    transform: scale(1.1); /* Escala el día al 110% de su tamaño original */
+    z-index: 10; /* Asegura que el día que haces hover esté encima */
+}
+
+.calendar th {
+    background-color: #b5c9ac;
+    color: black;
+    width: 14.28%; /* Ajusta el ancho de cada columna para que los días de la semana se ajusten */
+    font-size: 16px; /* Tamaño de texto para los encabezados */
+}
+
+/* Para mostrar el número del día */
+.calendar td::before {
+    content: attr(data-dia); /* Utiliza un atributo personalizado para mostrar el número del día */
+    position: absolute;
+    top: 5px; /* Ajusta la posición vertical */
+    right: 5px; /* Ajusta la posición horizontal */
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+}
+
+.save-event-btn {
+    display: flex;
+    margin: 0 auto;
+    width: 20%;
+    padding: 10px 20px;
+    --background: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.calendar-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-controls-button {
+    padding: 10px;
+    --background: #b5c9ac;
+    border: none;
+    border-radius: 5px;
+    margin: 0 18px;
+    cursor: pointer;
+    color: white;
+}
+
+.calendar-controls-button:hover {
+    --background: #9ea9a3;
+}
+
+#month-year {
+    font-size: 18px;
+    font-weight: bold;
+}

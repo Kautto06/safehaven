@@ -1,6 +1,7 @@
 
 /* Estilos generales para el body */
 .notification-body {
+    align-content: center;
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -17,7 +18,12 @@ main {
 }
 
 /* Paginación */
-.pagination-link {
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .pagination-link {
     margin: 0 5px;
     --background: grey;
     color: white;
@@ -80,8 +86,8 @@ main {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    height: 120px;
-    width: 110%;
+    height: 110px;
+    width: 100%;
     padding: 20px;
     margin-bottom: 15px;
     position: relative;
@@ -97,7 +103,7 @@ main {
 .notification-button {
     display: inline-block;
     text-align: center;
-    width: 10.5%;
+    width: 15%;
     margin-top: 5px;
     margin-left: 25px;
     padding: 5px;

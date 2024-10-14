@@ -1,0 +1,39 @@
+{
+    "questions": [
+      {
+        "id": "1",
+        "label": "¿Tu pareja o alguien cercano te ha insultado o menospreciado?",
+        "options": ["Nunca", "A veces", "Con frecuencia", "Siempre"]
+      },
+      {
+        "id": "2",
+        "label": "¿Te sientes controlado/a en tus decisiones (como qué ropa usar, con quién salir, etc.)?",
+        "options": ["Nunca", "A veces", "Con frecuencia", "Siempre"]
+      },
+      {
+        "id": "3",
+        "label": "¿Tu pareja o alguien cercano te ha empujado, golpeado o usado la fuerza física contra ti?",
+        "options": ["Nunca", "A veces", "Con frecuencia", "Siempre"]
+      },
+      {
+        "id": "4",
+        "label": "¿Te sientes aislado/a o alejado/a de tus amigos o familiares por indicación de tu pareja o alguien cercano?",
+        "options": ["Nunca", "A veces", "Con frecuencia", "Siempre"]
+      },
+      {
+        "id": "5",
+        "label": "¿Sientes miedo de tu pareja o de alguien cercano, incluso si no te han agredido físicamente?",
+        "options": ["Nunca", "A veces", "Con frecuencia", "Siempre"]
+      },
+      {
+        "id": "6",
+        "label": "¿Has sido forzado/a a realizar actos sexuales en contra de tu voluntad?",
+        "options": ["Nunca", "A veces", "Con frecuencia", "Siempre"]
+      },
+      {
+        "id": "7",
+        "label": "¿Tu pareja o alguien cercano te amenaza con hacerte daño a ti, a tus hijos o a alguien importante para ti?",
+        "options": ["Nunca", "A veces", "Con frecuencia", "Siempre"]
+      }
+    ]
+}

@@ -18,11 +18,11 @@ const Actividades: React.FC = () => {
                     <IonButton className='search-bar-button' fill='clear'>Buscar</IonButton>
                 </div>
 
-                <div className='notifications-grid'>
+                <div className='activity-grid'>
                     {[...Array(6)].map((_, i) => (
-                        <div className="notification-card">
-                            <div className="notification-icon">ℹ️</div>
-                            <div className="notification-content">
+                        <div className="activity-card">
+                            <div className="activity-icon">ℹ️</div>
+                            <div className="activity-content">
                                 <h2>Title</h2>
                                 <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very short story.</p>
                             </div>

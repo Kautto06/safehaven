@@ -1,34 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IonContent, IonPage, IonButton, IonAlert } from '@ionic/react';
 import Header from '../components/Header'; // Importar el header
 import Footer from '../components/Footer';
 import '../assets/Autoevaluacion.css';
 
+// Importar el archivo JSON directamente
+import preguntasData from '../data/preguntas.json';
+
 const Autoevaluacion: React.FC = () => {
-  const questions = [
-    { id: 'question1', label: 'Pregunta 1' },
-    { id: 'question2', label: 'Pregunta 2' },
-    { id: 'question3', label: 'Pregunta 3' },
-    { id: 'question4', label: 'Pregunta 4' }
-  ];
-
-  const [formData, setFormData] = useState<{ [key: string]: string }>({
-    question1: '',
-    question2: '',
-    question3: '',
-    question4: '',
-    comment: ''
-  });
-
+  const [questions, setQuestions] = useState<any[]>([]); // Estado para las preguntas
+  const [formData, setFormData] = useState<{ [key: string]: string }>({});
   const [showAlert, setShowAlert] = useState(false);
-  const [errorMessages, setErrorMessages] = useState<{ [key: string]: string | null }>({
-    question1: null,
-    question2: null,
-    question3: null,
-    question4: null,
-    comment: null
-  });
+  const [errorMessages, setErrorMessages] = useState<{ [key: string]: string | null }>({});
   const [submittedData, setSubmittedData] = useState<{ [key: string]: string } | null>(null);
+
+  // Cargar preguntas desde el archivo importado
+  useEffect(() => {
+    // Usar los datos importados del archivo JSON
+    const data = preguntasData;
+
+    setQuestions(data.questions); // Establecer las preguntas desde el JSON
+
+    // Inicializar formData con valores vacíos
+    const initialData = data.questions.reduce((acc: any, question: any) => {
+      acc[question.id] = '';
+      return acc;
+    }, {});
+
+    setFormData(initialData);
+  }, []);
 
   const handleInputChange = (name: string, value: string) => {
     setFormData((prevData) => ({
@@ -54,7 +54,7 @@ const Autoevaluacion: React.FC = () => {
     // Validación para cada pregunta
     questions.forEach((question) => {
       if (formData[question.id] === '') {
-        newErrorMessages[question.id] = `Por favor responde la ${question.label}.`;
+        newErrorMessages[question.id] = `Por favor responde la pregunta.`;                                                                                                                                                                                    
         allQuestionsAnswered = false;
       }
     });
@@ -71,13 +71,11 @@ const Autoevaluacion: React.FC = () => {
   };
 
   const handleCancel = () => {
-    setFormData({
-      question1: '',
-      question2: '',
-      question3: '',
-      question4: '',
-      comment: ''
-    });
+    const resetFormData = Object.keys(formData).reduce((acc: any, key: string) => {
+      acc[key] = '';
+      return acc;
+    }, {});
+    setFormData(resetFormData);
     setSubmittedData(null); // Limpiar los datos enviados
   };
 
@@ -99,9 +97,9 @@ const Autoevaluacion: React.FC = () => {
                   onChange={(e) => handleInputChange(question.id, e.target.value)} // Cambiar el evento de manera directa
                 >
                   <option value="">Selecciona una opción</option>
-                  <option value="option1">Opción 1</option>
-                  <option value="option2">Opción 2</option>
-                  <option value="option3">Opción 3</option>
+                  {question.options.map((option: string, index: number) => (
+                    <option key={index} value={option}>{option}</option>
+                  ))}
                 </select>
 
                 {errorMessages[question.id] && (
@@ -115,7 +113,7 @@ const Autoevaluacion: React.FC = () => {
               <textarea
                 id="comment"
                 name="comment"
-                value={formData.comment}
+                value={formData.comment || ''}
                 onChange={(e) => handleInputChange('comment', e.target.value ?? '')} // Manejar null o undefined
                 placeholder="Deja tu comentario aquí"
               />
@@ -128,7 +126,12 @@ const Autoevaluacion: React.FC = () => {
           </form>
 
           {/* Mostrar datos enviados como JSON */}
-          
+          {submittedData && (
+            <div className="submitted-data">
+              <h2>Datos enviados:</h2>
+              <pre>{JSON.stringify(submittedData, null, 2)}</pre>
+            </div>
+          )}
 
           {/* Notificación de éxito */}
           <IonAlert

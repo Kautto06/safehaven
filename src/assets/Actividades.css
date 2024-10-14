@@ -70,7 +70,7 @@ main {
 .activity-section {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 60px;
+    padding: 30px;
     margin-top: 50px;
     background-color: white;
     border-radius: 8px;
@@ -106,7 +106,7 @@ main {
     border-radius: 5px;
 }
 
-.notifications-grid {
+.activity-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 50px;
@@ -114,7 +114,7 @@ main {
 
 
 
-.notification-card {
+.activity-card {
     background-color: white;
     border-color: #71797E;
     border-style: solid;
@@ -128,22 +128,22 @@ main {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.notification-card:hover {
+.activity-card:hover {
     transform: scale(1.05); /* Aumenta el tamaño del recuadro */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aumenta la sombra al pasar el ratón */
 }
 
-.notification-icon {
+.activity-icon {
     font-size: 30px;
     margin-right: 15px;
 }
 
-.notification-content h2 {
+.activity-content h2 {
     font-size: 18px;
     margin: 0;
 }
 
-.notification-content p {
+.activity-content p {
     font-size: 14px;
     color: #666;
     margin: 5px 0 0;
