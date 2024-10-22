@@ -7,7 +7,8 @@
     width: 160px; 
     height: 50px;
     padding: 3px;
-    align-self: center;
+    display: block; /* Asegura que la imagen se centre */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
 }
 
 .dropdown-menu {
@@ -17,9 +18,37 @@
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     width: 200px;
+    border-radius: 5px; /* Añadir bordes redondeados */
 }
 
-.cabecera{
+.dropdown-menu .ion-item {
+    --ion-item-background: transparent; /* Fondo transparente para items */
+}
+
+.cabecera {
     --background: #A9C5A0;
     align-items: center;
+    display: flex; /* Asegura que los elementos en la barra se alineen correctamente */
+    justify-content: space-between; /* Espacia los elementos del header */
 }
+
+.cabecera .ion-buttons {
+    margin-right: 10px; /* Espacio a la derecha de los botones */
+}
+
+.dropdown-menu .ion-item:hover {
+    background-color: #f0f0f0; /* Color de fondo al pasar el mouse */
+}
+.logo-button {
+    cursor: pointer; /* Cambia el cursor al pasar sobre el logo */
+    display: flex; /* Alinea los elementos dentro del div */
+    align-items: center; /* Centra verticalmente */
+}
+
+.header-title {
+    margin: 0; /* Elimina el margen para evitar desalineación */
+    flex: 1; /* Ocupa todo el espacio disponible */
+}
+
+
+

@@ -29,10 +29,9 @@ const Foro: React.FC = () => {
   return (
     <IonPage>
       <Header/>
-
       <IonContent className='forum-body'>
         <main>
-          <h1>AlvaroWeko</h1>
+          <h1>Foro</h1>
           <div className="header-right">
             <span>Publicaciones más populares</span>
             <IonButton fill="clear" className="sort-button-forum">
@@ -43,7 +42,7 @@ const Foro: React.FC = () => {
           <section className="forum-content">
             {Array(4).fill(0).map((_, idx) => (
               <div key={idx} className="forum-item">
-                <IonImg src="https://d22kgo07nfc6jd.cloudfront.net/media/upload/fbf50514e50f8574fea6db58da3909273ddb330669c9dec57b82abbf19165.jpg" alt="Imagen del foro" className="forum-image" />
+                <IonImg src="https://www.shutterstock.com/image-vector/no-image-available-icon-template-260nw-1340428865.jpg" alt="Imagen del foro" className="forum-image" />
                 <div className='forum-text'>
                   <h2 className='forum-title'>Título del Mensaje</h2 >
                   <p>Ejemplo de contenido del mensaje del foro. Aquí puedes poner un resumen del mensaje o tema que se está discutiendo.</p>
@@ -75,9 +74,6 @@ const Foro: React.FC = () => {
             <IonIcon slot="start" icon={createOutline} /> Crear publicación
           </IonButton>
         </div>
-        
-
-        
       </IonContent>
       <Footer/>
     </IonPage>

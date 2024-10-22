@@ -1,0 +1,80 @@
+/* Estilo para el contenedor del carrusel */
+.swiper-container {
+    height: 80vh; /* Aumentar la altura del carrusel */
+  }
+  
+  /* Estilo para cada slide */
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Asegúrate de que el slide ocupe todo el alto */
+  }
+  
+  /* Estilo para el contenido del slide */
+  .slide-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    padding: 100px;
+    width: 100%;
+    background-size: cover; /* Asegura que la imagen de fondo cubra todo el slide */
+    background-position: center; /* Centra la imagen de fondo */
+    color: white; /* Color del texto */
+    position: relative; /* Necesario para colocar el texto sobre la imagen */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Pseudo-elemento para difuminar la imagen de fondo */
+  .slide-content::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Color negro semitransparente */ /* Igual que el contenido para unificar bordes */
+    z-index: 1; /* Asegúrate de que esté por debajo del texto */
+  }
+  
+  /* Título del slide */
+  .slide-content h2 {
+    font-size: 2.5em; /* Aumentar el tamaño del título */
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Sombra para mejor legibilidad */
+    z-index: 2; /* Asegúrate de que esté por encima del pseudo-elemento */
+  }
+  
+  /* Descripción del slide */
+  .slide-content p {
+    font-size: 1.5em; /* Aumentar el tamaño de la descripción */
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Sombra para mejor legibilidad */
+    z-index: 2; /* Asegúrate de que esté por encima del pseudo-elemento */
+  }
+  
+  /* Botón de acción */
+  .btn-seccion {
+    --background: #5C8268;
+    --background-hover: #3171e0;
+    --border-radius: 8px;
+    font-size: 16px;
+    padding: 10px 20px;
+    z-index: 2; /* Asegúrate de que esté por encima del pseudo-elemento */
+    position: relative; /* Asegúrate de que el botón esté en la posición correcta */
+    margin-top: 20px; /* Espacio entre el texto y el botón */
+  }
+  
+  /* Personalizar la paginación de Swiper */
+  .swiper-pagination-bullet {
+    background: #5C8268;
+    margin: 10px; /* Aumentar el margen para separar los puntos de la barra */
+  }
+  
+  .swiper-pagination-bullet-active {
+    background: #3171e0;
+  }
+  

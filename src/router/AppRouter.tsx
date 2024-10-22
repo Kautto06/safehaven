@@ -12,6 +12,7 @@ import Denuncia from "../pages/Denuncia";
 import Actividades from "../pages/Actividades";
 import Autoevaluacion from "../pages/Autoevaluacion";
 import Calendario from "../pages/Calendario";
+import Home from "../pages/Home";
 
 const AppRouter: React.FC = () =>{
     return(
@@ -25,9 +26,8 @@ const AppRouter: React.FC = () =>{
             <Route exact path="/actividades" component={Actividades}/>
             <Route exact path="/autoevaluacion" component={Autoevaluacion}/>
             <Route exact path="/calendario" component={Calendario}/>
-            <Route exact path="/">
-                <Redirect to="/login"/>
-            </Route>
+            <Route exact path="/" component={Home}/>
+
         </IonReactRouter>
     )
 }
