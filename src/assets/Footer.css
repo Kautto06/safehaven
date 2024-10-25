@@ -1,0 +1,48 @@
+.footer-toolbar {
+    --background: #A9C5A0; /* Mismo color de fondo que el header */
+    color: rgb(37, 35, 35); /* Color del texto */
+    padding: 10px 0; /* Reducir el padding para disminuir la altura */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between; /* Mantener el espacio entre los elementos */
+    align-items: center; /* Alinear verticalmente los elementos al centro */
+    width: 100%;
+    max-width: 1200px; /* Ancho máximo para evitar que se extienda demasiado */
+    margin: auto; /* Centrar el contenido */
+    padding: 0 20px; /* Padding horizontal */
+    box-sizing: border-box; /* Evita que el padding expanda el tamaño del contenedor */
+}
+
+.footer-section {
+    margin: 0 10px; /* Margen horizontal entre secciones */
+    text-align: center; /* Asegura que el contenido esté centrado */
+    font-weight: bold; /* Poner el texto en negrita */
+}
+
+.social-icons {
+    display: flex; /* Asegura que los iconos sociales estén en fila */
+    justify-content: center;
+    align-items: center; /* Centra verticalmente los iconos */
+    margin-top: 0; /* Remover el margen superior */
+}
+
+.social-icon {
+    font-size: 24px; /* Tamaño del icono */
+    margin: 0 10px; /* Espacio entre los iconos */
+    color: rgb(37, 35, 35); /* Color de los iconos en blanco para mejor contraste */
+    transition: color 0.3s ease;
+    cursor: pointer; /* Cambia el cursor a pointer al pasar por encima */
+}
+
+.social-icon:hover {
+    color: #FFD700; /* Color dorado al pasar el ratón por encima */
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: row; /* Mantener en fila en pantallas pequeñas */
+        text-align: center;
+    }
+}

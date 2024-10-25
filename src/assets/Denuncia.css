@@ -1,0 +1,161 @@
+/* Estilos generales para el body */
+.report-body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --background: #F5F5DC;
+}
+
+/* Estilos para el header del foro */
+
+/* Logo en el centro del header */
+
+/* Asegúrate de que el contenido principal esté bien posicionado */
+main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilos para el título del foro y el contenedor de publicaciones más populares */
+
+/* Estilos para los botones */
+.IonButton {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submit-button, .cancel-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.submit-button {
+    --background: #5C8268 !important; /* Verde */
+    color: white;
+}
+
+
+.cancel-button {
+    background-color: #E57373; /* Rojo */
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #D32F2F; /* Rojo más oscuro */
+    transform: scale(1.05);
+}
+
+
+
+
+@media (max-width: 768px) {
+    .expert-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .expert-image {
+        margin-bottom: 15px;
+    }
+
+    .menu-toggle {
+        right: 10px;
+    }
+}
+
+
+
+
+/* Estilos para las secciones del formulario */
+.form-section {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #F5F5DC; /* Línea separadora entre secciones */
+}
+
+.form-section:last-child {
+    border-bottom: none; /* Elimina la línea separadora en la última sección */
+}
+
+.form-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Estilos para el contenedor del select */
+.select-container {
+    position: relative;
+}
+
+.select-container select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    appearance: none; /* Oculta el estilo predeterminado del select */
+    background-color: #fff;
+    background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"%3E%3Cpath d="M7 10l5 5 5-5z" fill="%23000"/%3E%3C/svg%3E'); /* Icono de flecha hacia abajo */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px 16px;
+}
+
+.anonymous-report-title {
+    font-size: 2em; /* Tamaño de fuente grande para el título */
+    font-weight: bold; /* Negrita */
+    color: #124422; /* Color del texto, ajusta según tu paleta de colores */
+    text-align: center; /* Centra el texto */
+    margin-top: 0px; /* Espacio superior */
+    margin-bottom: 0px; /* Espacio inferior */
+    padding: 10px; /* Espacio interno */
+}
+
+.select-container select:focus {
+    outline: none;
+    border-color: #A9C5A0; /* Color del borde al enfocar */
+}
+
+/* Estilos para las áreas de texto */
+IonTextArea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+/* Estilos para el icono de clip */
+.form-section i {
+    font-size: 1.2em;
+    color: #333;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+/* Estilos para el input de archivo */
+.file-upload {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.file-icon {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.file-icon i {
+    margin-right: 5px;
+}
+
+/* Estilos para el botón de enviar */

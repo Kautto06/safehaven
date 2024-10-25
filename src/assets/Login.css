@@ -1,0 +1,164 @@
+  /* Reseteo de márgenes y relleno, y ajuste del box-sizing */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #A9C5A0; /* Color principal */
+    background: linear-gradient(135deg, #A9C5A0, #1f3825);
+    background-attachment: fixed; 
+    background-size: cover; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    overflow-x: hidden; /* Evita el scroll horizontal */
+    
+}
+
+  /* Estilos para el body */
+  
+  .login-body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --background: linear-gradient(135deg, #A9C5A0, #1f3825);
+    background-attachment: fixed;
+    background-size: cover;
+    overflow-x: hidden;
+  }
+
+
+  /* Estilos específicos para el contenedor del login */
+  .login-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    margin: 120px auto;
+  }
+
+  /* Estilo del header de la página de login */
+  .login-container h2 {
+    margin-bottom: 30px;
+    color: #3C574F;
+    font-size: 1.8em;
+}
+
+.login-container .logo {
+    width: 200px; /* Ajusta el tamaño según sea necesario */
+    height: auto;
+    margin-bottom: 15px;
+}
+
+/* Estilos para el formulario */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="email"], 
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    text-align: left;
+    font-size: 1em;
+}
+
+/* Estilos específicos para el campo de contraseña */
+.password-field {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;         /* Alineación del ícono a la derecha del campo */
+    top: 50%;            /* Centra el ícono verticalmente */
+    transform: translateY(-50%); /* Ajuste para que el ícono esté centrado */
+    cursor: pointer;     /* Indica que es un botón clickeable */
+  }
+  
+  .toggle-password i {
+    font-size: 1.2rem;   /* Tamaño del ícono */
+    color: #555;         /* Color del ícono */
+  }
+
+/* Ajustes para el campo de contraseña en ambos formularios */
+
+
+/* Estilos para el ícono de la contraseña */
+.password-field .toggle-password {
+    position: absolute;
+    top: 50%; /* Ajusta la posición vertical */
+    right: 15px; /* Ajusta la posición horizontal */
+    transform: translateY(-50%); /* Centra verticalmente */
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #BCC8B3;
+    z-index: 10; /* Asegura que el icono esté encima del campo de texto */
+}
+
+/* Ajustes específicos para el formulario de login */
+.login-body .password-field .toggle-password {
+    top: 65%; /* Ajuste adicional si es necesario */
+}
+
+/* Ajustes específicos para el formulario de registro */
+.register-body .password-field .toggle-password {
+    top: 50%; /* Ajuste adicional si es necesario */
+}
+
+/* Estilos específicos para el campo de confirmación de contraseña */
+.confirm-password-field .toggle-password {
+    position: absolute;
+    top: 50%; /* Ajusta la posición vertical */
+    right: 15px; /* Ajusta la posición horizontal */
+    transform: translateY(-50%); /* Centra verticalmente */
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #BCC8B3;
+    z-index: 10; /* Asegura que el icono esté encima del campo de texto */
+}
+.login-container button {
+    width: 100%;
+    padding: 15px;
+    background-color: #769F80;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+
+.login-container button:hover {
+    background-color: #5C8268;
+}
+
+#error-message {
+    color: #D9534F;
+    display: none;
+    margin-top: 15px;
+}
+
+/* Estilos para el formulario de registro */
+
+
+/* Asegúrate de que el contenido principal esté bien posicionado */
+main {
+    padding: 20px;
+}

@@ -1,0 +1,251 @@
+/* Estilo para el contenedor del carrusel */
+.swiper-container {
+    height: 80vh; /* Aumentar la altura del carrusel */
+  }
+  
+  /* Estilo para cada slide */
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Asegúrate de que el slide ocupe todo el alto */
+    transition: transform 1.0s ease-in-out;
+  }
+  
+  /* Estilo para el contenido del slide */
+  .slide-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    padding: 100px;
+    width: 100%;
+    background-size: cover; /* Asegura que la imagen de fondo cubra todo el slide */
+    background-position: center; /* Centra la imagen de fondo */
+    color: white; /* Color del texto */
+    position: relative; /* Necesario para colocar el texto sobre la imagen */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Pseudo-elemento para difuminar la imagen de fondo */
+  .slide-content::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6); /* Color negro semitransparente */ /* Igual que el contenido para unificar bordes */
+    z-index: 1; /* Asegúrate de que esté por debajo del texto */
+  }
+  
+  /* Título del slide */
+  .slide-content h2 {
+    font-size: 2.5em; /* Aumentar el tamaño del título */
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Sombra para mejor legibilidad */
+    z-index: 2; /* Asegúrate de que esté por encima del pseudo-elemento */
+  }
+  
+  /* Descripción del slide */
+  .slide-content p {
+    font-size: 1.5em; /* Aumentar el tamaño de la descripción */
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Sombra para mejor legibilidad */
+    z-index: 2; /* Asegúrate de que esté por encima del pseudo-elemento */
+  }
+  
+  /* Botón de acción */
+  .btn-seccion {
+    --background: #5C8268;
+    --background-hover: #3171e0;
+    --border-radius: 8px;
+    font-size: 16px;
+    padding: 10px 20px;
+    z-index: 2; /* Asegúrate de que esté por encima del pseudo-elemento */
+    position: relative; /* Asegúrate de que el botón esté en la posición correcta */
+    margin-top: 20px; /* Espacio entre el texto y el botón */
+  }
+
+  .btn-seccion:hover {
+    --background-hover: #25508c;
+    transform: scale(1.05); /* Un ligero aumento del botón al hacer hover */
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Personalizar la paginación de Swiper */
+  .swiper-pagination-bullet {
+    background: #5C8268;
+    margin: 10px; /* Aumentar el margen para separar los puntos de la barra */
+  }
+  
+  .swiper-pagination-bullet-active {
+    background: #3171e0;
+  }
+
+  /* Estilo para la sección "Acerca de Nosotros" */
+.about-us-section {
+  background-color: #F5F5DC; /* Color crema */
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.about-us-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-us-content h2 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.about-us-content p {
+  font-size: 1.2em;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+
+
+/* Estilo para la sección subdividida */
+.content-section {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 20px;
+}
+
+/* Estilo para la sección del foro */
+.forum-section {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.forum-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.forum-post {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.forum-post:hover {
+  transform: scale(1.01);
+}
+
+.forum-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.post-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-details h3 {
+  font-size: 1.2em;
+  margin: 0;
+}
+
+.post-details p {
+  font-size: 0.9em;
+  color: #666;
+}
+
+
+/* Estilo para la sección subdividida */
+.content-section {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 20px;
+}
+
+/* Sección izquierda - Foro */
+.forum-section, .experts-section {
+  flex: 1;
+  margin-bottom: 40px; /* Asegura que ambas secciones tengan el mismo margen inferior */
+  display: flex;
+  flex-direction: column; /* Alinea las publicaciones verticalmente */
+  gap: 20px; /* Espacio entre publicaciones dentro de la misma sección */
+}
+
+
+/* Estilo para los contenedores de los posts del foro y de los expertos */
+.forum-post, .expert-item {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  margin-bottom: 40px; /* Espacio entre publicaciones del foro y expertos */
+}
+
+
+
+/* Alineación uniforme cuando se amplía el contenido */
+.forum-post:hover, .expert-item:hover {
+  transform: scale(1.02);
+}
+
+.forum-image, .expert-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+/* Detalles de los posts del foro y expertos */
+.post-details, .expert-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Asegura que el título y el texto se distribuyan uniformemente */
+  flex-grow: 1; /* Permite que el texto ocupe el mismo espacio en todos los elementos */
+}
+
+
+
+
+.post-details h3, .expert-details h3 {
+  font-size: 1.2em;
+  margin: 0;
+}
+
+.post-details p, .expert-details p {
+  font-size: 0.9em;
+  color: #666;
+  margin: 0; /* Asegurarse de que no haya márgenes extra */
+}
+
+/* Asegurar consistencia en el tamaño de los textos */
+.post-details p, .expert-details p {
+  flex-grow: 1; /* Asegura que el párrafo use todo el espacio disponible */
+  display: flex;
+  align-items: center; /* Centra verticalmente el texto si es necesario */
+}
+
+.expert-details p:nth-child(2) {
+  font-weight: bold; /* Acentúa el rol del experto */
+}
+
+
+
+  

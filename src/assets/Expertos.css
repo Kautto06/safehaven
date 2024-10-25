@@ -1,0 +1,164 @@
+/* src/assets/Experts.css */
+
+main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.experts-body{
+    --background: #F5F5DC;
+}
+
+h1 {
+  text-align: center ;
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #5C8268; /* Color del título */
+  margin-bottom: 20px;
+  padding-top: 20px;
+  text-transform: uppercase; /* Mayúsculas para más impacto */
+}
+
+
+
+  .header-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .header-right span {
+    font-size: 1.8em;
+    font-weight: 600;
+    color: #4A6651;
+    text-align: center;
+  }
+  
+  .sort-button {
+    width: 70px; 
+    height: 10px; 
+    padding: 0; 
+    border-radius: 50%;
+    --icon-size: 0.1px;
+    
+    margin-left: 20px;
+    font-size: 1.2em;
+    --background: #A9C5A0;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .sort-button:hover {
+    --background: #5C8268;
+  }
+  
+  .experts-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .forum-item {
+    display: flex;
+    align-items: flex-start;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 0; /* Ajusta el margen superior e inferior */
+    width: 140%;
+    padding: 20px;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .forum-item:hover {
+    transform: scale(1.05); /* Aumenta el tamaño del recuadro */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aumenta la sombra al pasar el ratón */
+}
+  
+  .forum-image {
+    width: 100px; /* Ajusta el tamaño según sea necesario */
+    height: 100px;
+    margin-right: 15px;
+  }
+  
+  .forum-text {
+    flex: 1;
+  }
+  
+  .forum-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #3C574F; /* Ajusta el color del título según tu paleta de colores */
+    margin-bottom: 10px;
+  }
+  
+  .phone-button{
+    --background: #164484 !important;
+    border-color: #164484 !important;
+    color: white !important;
+    position: absolute !important; 
+    bottom:20px !important;
+    right: 10px !important;
+    border: none !important;
+    border-radius: 5px !important;
+    padding: 8px 12px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    font-size: 0.9em !important;
+    transition: background-color 0.3s, transform 0.3s !important ;
+
+  }
+
+  .phone-button:hover {
+    transform: scale(1.1) !important;
+}
+
+  .view-button-expert {
+    padding: 10px 15px;
+    --background: #5C8268;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .view-button-expert:hover {
+    transform: scale(1.1);
+}
+  
+.pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.pagination-link {
+  margin: 0 5px;
+  --background: grey;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-bottom: 50px;
+}
+
+.pagination-link:hover {
+  --background: #2f3136;
+  color: white;
+}
+
+.pagination-link.active {
+  --background: #585a59;
+  color: white;
+}

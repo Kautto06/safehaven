@@ -1,0 +1,11 @@
+.footer-toolbar-simple {
+    --background: #A9C5A0; /* Color de fondo */
+    text-align: center;
+    padding: 15px;
+  }
+  
+  .footer-text {
+    color: #2b2727;
+    font-size: 20px;
+  }
+  
