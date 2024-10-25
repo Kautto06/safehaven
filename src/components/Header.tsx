@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { IonHeader, IonToolbar, IonTitle, IonButtons,IonButton, IonIcon, IonList, IonItem, IonLabel } from '@ionic/react';
+import { IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, IonList, IonItem, IonLabel } from '@ionic/react';
 import { menuOutline, personCircleOutline, notifications, logOutOutline } from 'ionicons/icons';
 import '../assets/header.css'; 
 import logo from '../assets/logos/logoNoBackground.png';
+import { useAuthStore } from '../hooks/useAuthStore'; 
+import { useHistory } from 'react-router-dom';
 
 const DropdownMenu: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     return (
@@ -29,9 +31,6 @@ const DropdownMenu: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                 <IonItem routerLink="/Notificaciones" onClick={onClose}>
                     <IonLabel>Notificaciones</IonLabel>
                 </IonItem>
-                <IonItem routerLink="/login" onClick={onClose}>
-                    <IonLabel>Cerrar Sesión</IonLabel>
-                </IonItem>
             </IonList>
         </div>
     );
@@ -40,6 +39,8 @@ const DropdownMenu: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 const Header: React.FC = () => {
     const [showMenu, setShowMenu] = useState(false);
     const [showProfileMenu, setShowProfileMenu] = useState(false);
+    const { startLogout } = useAuthStore();
+    const history = useHistory(); // Usar el hook useHistory para redirigir
 
     const toggleMenu = () => {
         setShowMenu(!showMenu);
@@ -47,6 +48,13 @@ const Header: React.FC = () => {
 
     const toggleProfileMenu = () => {
         setShowProfileMenu(!showProfileMenu);
+    };
+
+    const handleLogout = async () => {
+        startLogout(); // Llama a la función para cerrar sesión
+        localStorage.clear(); // Limpia el localStorage
+        setShowProfileMenu(false); // Cierra el menú de perfil
+        history.push('/login'); // Redirige a la página de inicio de sesión
     };
 
     return (
@@ -76,7 +84,7 @@ const Header: React.FC = () => {
                         <IonItem routerLink="/Actividades" onClick={() => setShowProfileMenu(false)}>
                             <IonLabel>Actividades</IonLabel>
                         </IonItem>
-                        <IonItem routerLink="/login" onClick={() => setShowProfileMenu(false)}>
+                        <IonItem className='logout-button' onClick={handleLogout} aria-label="Cerrar sesión">
                             <IonIcon icon={logOutOutline} slot="start" />
                             <IonLabel>Cerrar Sesión</IonLabel>
                         </IonItem>

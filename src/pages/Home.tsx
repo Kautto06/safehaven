@@ -8,6 +8,7 @@ import { Navigation, Pagination } from 'swiper/modules';
 import { useHistory } from 'react-router-dom';
 import '../assets/Home.css';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 // Importar imágenes
 import actividadesImg from '../assets/images/actividades.jpg';
@@ -55,7 +56,71 @@ const Home: React.FC = () => {
             </SwiperSlide>
           ))}
         </Swiper>
+        {/* Sección Acerca de Nosotros */}
+        <div className="about-us-section">
+          <div className="about-us-content">
+            <h2>Acerca de Nosotros</h2>
+            <p>
+              Nuestra misión es concienciar a las personas sobre la violencia de género y proporcionar herramientas de prevención para combatir este grave problema social.
+              A través de esta aplicación, ofrecemos una plataforma de recursos y apoyo para ayudar a las víctimas y fomentar la educación sobre el tema.
+            </p>
+            <p>
+              Creemos firmemente que el cambio empieza por la concienciación, y es por eso que hemos desarrollado esta aplicación con un enfoque en la prevención y el
+              empoderamiento de las personas para tomar acción contra la violencia de género.
+            </p>
+            <p>
+              Únete a nuestra comunidad, participa en nuestras actividades, realiza autoevaluaciones periódicas y encuentra ayuda a través de nuestros expertos. Juntos podemos
+              crear un entorno más seguro y respetuoso para todos.
+            </p>
+          </div>
+        </div>
+        <div className="content-section">
+              {/* Sección izquierda - Foro */}
+              <div className="forum-section">
+                <h2>Foro - Publicaciones más vistas</h2>
+                <div className="forum-posts">
+                  {[
+                    { titulo: "Publicación 1", texto: "Introducción a la publicación 1", imagen: "https://www.shutterstock.com/image-vector/no-image-available-icon-template-260nw-1340428865.jpg" },
+                    { titulo: "Publicación 2", texto: "Introducción a la publicación 2", imagen: "https://www.shutterstock.com/image-vector/no-image-available-icon-template-260nw-1340428865.jpg" },
+                    { titulo: "Publicación 3", texto: "Introducción a la publicación 3", imagen: "https://www.shutterstock.com/image-vector/no-image-available-icon-template-260nw-1340428865.jpg" },
+                    { titulo: "Publicación 4", texto: "Introducción a la publicación 4", imagen: "https://www.shutterstock.com/image-vector/no-image-available-icon-template-260nw-1340428865.jpg" },
+                    { titulo: "Publicación 5", texto: "Introducción a la publicación 5", imagen: "https://www.shutterstock.com/image-vector/no-image-available-icon-template-260nw-1340428865.jpg" },
+                  ].map((post, index) => (
+                    <div className="forum-post" key={index} onClick={() => console.log(`Navegar a ${post.titulo}`)}>
+                      <img src={post.imagen} alt={post.titulo} className="forum-image" />
+                      <div className="post-details">
+                        <h3>{post.titulo}</h3>
+                        <p>{post.texto}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="experts-section">
+                <h2>Expertos</h2>
+                <div className="experts-list">
+                  {[
+                    { nombre: "Dra. Ana Pérez", texto: "Especialista en apoyo psicológico a víctimas.", imagen: "https://www.shutterstock.com/image-vector/no-image-available-icon-template-260nw-1340428865.jpg" },
+                    { nombre: "Dr. Juan Gómez", texto: "Experto en derecho familiar y protección legal.", imagen: "https://www.shutterstock.com/image-vector/no-image-available-icon-template-260nw-1340428865.jpg" },
+                    { nombre: "Lic. Laura Sánchez", texto: "Ayuda en reinserción y asistencia social.", imagen: "https://www.shutterstock.com/image-vector/no-image-available-icon-template-260nw-1340428865.jpg" },
+                    { nombre: "Dra. María López", texto: "Experta en terapia psicológica y emocional.", imagen: "https://www.shutterstock.com/image-vector/no-image-available-icon-template-260nw-1340428865.jpg" },
+                    { nombre: "Benjamin Peñalillo", texto: "Asesoría legal", imagen: "https://www.shutterstock.com/image-vector/no-image-available-icon-template-260nw-1340428865.jpg" },
+                    { nombre: "Francisco Maure", texto: "Especialista en apoyo psicológico a víctimas.", imagen: "https://www.shutterstock.com/image-vector/no-image-available-icon-template-260nw-1340428865.jpg" },
+                  ].map((expert, index) => (
+                    <div className="expert-item" key={index} onClick={() => console.log(`Navegar a perfil de ${expert.nombre}`)}>
+                      <img src={expert.imagen} alt={expert.nombre} className="expert-image" />
+                      <div className="expert-details">
+                        <h3>{expert.nombre}</h3>
+                        <p>{expert.texto}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+          </div>
       </IonContent>
+      <Footer/>
     </IonPage>
   );
 };

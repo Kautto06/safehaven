@@ -45,6 +45,10 @@
     align-items: center; /* Centra verticalmente */
 }
 
+.logout-button{
+    cursor: pointer;
+}
+
 .header-title {
     margin: 0; /* Elimina el margen para evitar desalineación */
     flex: 1; /* Ocupa todo el espacio disponible */
