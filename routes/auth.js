@@ -1,7 +1,8 @@
 const {Router} = require('express')
 const { check } = require('express-validator')
 const { validarCampos } = require('../middlewares/validar-campos')
-const { crearUsuario, loginUsuario } = require('../controllers/auth')
+const { crearUsuario, loginUsuario, revalidarToken } = require('../controllers/auth')
+const { validarJWT } = require('../middlewares/validar-jwt')
 
 const router = Router()
 
@@ -20,5 +21,7 @@ router.post('/login',[
     check('password','El password debe tener como minimo 8 caracteres').isLength({min: 8}),
     validarCampos
 ],loginUsuario)
+
+router.get('/renew',validarJWT, revalidarToken);
 
 module.exports = router

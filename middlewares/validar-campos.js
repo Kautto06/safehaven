@@ -4,8 +4,6 @@ const { validationResult } = require("express-validator");
 
 const validarCampos = (req,res=response,next) => {
 
-    // manejo de errores
-
     const errors = validationResult(req);
     
     if (!errors.isEmpty()){
@@ -14,7 +12,6 @@ const validarCampos = (req,res=response,next) => {
             errors: errors.mapped()
         })
     }
-
     next()
 }
 

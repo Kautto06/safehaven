@@ -4,10 +4,11 @@ const {generarJWT} = require('../helpers/generar-jwt')
 const {response} = require('express')
 
 const crearUsuario = async(req,res=response) => {
-    const {email,phone,password,birthday,genero} = req.body
+    const {email,phone,password,birthday,gender,nombre,apellidos} = req.body
     try{
         const query = `SELECT * FROM usuarios WHERE email = '${email}'`
         const existeUsuario = await ejecutarConsulta(query)
+
 
         console.log(existeUsuario)
 
@@ -22,16 +23,19 @@ const crearUsuario = async(req,res=response) => {
         const cryptPassword = bcrypt.hashSync(password,salt)
 
         const insertQuery = `
-            INSERT INTO usuarios (email, phone, password, birthday, genero)
-            VALUES ('${email}', '${phone}', '${cryptPassword}', '${birthday}', '${genero}')
+            INSERT INTO usuarios (email, phone, password, birthday, genero,nombre, apellidos)
+            VALUES ('${email}', '${phone}', '${cryptPassword}', '${birthday}', '${gender}','${nombre}','${apellidos}' )
         `;
 
         await ejecutarConsulta(insertQuery)
 
-        const token = await generarJWT(email)
+        const token = await generarJWT(email,nombre,apellidos)
 
         res.status(201).json({
             ok: true,
+            email,
+            nombre,
+            apellidos,
             msg: 'Usuario creado correctamente',
             token
         });
@@ -49,6 +53,7 @@ const loginUsuario = async(req,res=response) => {
     const {email,password} = req.body
 
     try{
+
         const query = `SELECT * FROM usuarios WHERE email = '${email}'`
         const usuario = await ejecutarConsulta(query)
 
@@ -60,9 +65,7 @@ const loginUsuario = async(req,res=response) => {
         }
 
         const [rowDataPacket] = usuario
-        console.log(rowDataPacket)
         const validPassword = bcrypt.compareSync(password,rowDataPacket.password)
-        console.log(validPassword)
 
         if(!validPassword){
             return res.status(400).json({
@@ -71,15 +74,15 @@ const loginUsuario = async(req,res=response) => {
             })
         }
 
-        const token = await generarJWT(rowDataPacket.email)
+        const token = await generarJWT(rowDataPacket.email,rowDataPacket.nombre,rowDataPacket.apellidos)
 
         res.status(201).json({
             ok: true,
-            uid: usuario.id,
-            name: usuario.name,
+            email: rowDataPacket.email,
+            nombre: rowDataPacket.nombre,
+            apellidos: rowDataPacket.apellidos,
             token
         })
-
 
     } catch(error){
         console.log(error)
@@ -90,7 +93,23 @@ const loginUsuario = async(req,res=response) => {
     }
 }
 
+const revalidarToken = async(req,res=response) => {
+
+    const {email,nombre,apellidos} = req
+
+    const nuevoToken= await generarJWT(email,nombre,apellidos)
+
+    res.json({
+        ok: true,
+        email,
+        nombre,
+        apellidos,
+        token: nuevoToken
+    })
+}
+
 module.exports = {
     crearUsuario,
-    loginUsuario
+    loginUsuario, 
+    revalidarToken
 }

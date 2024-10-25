@@ -18,3 +18,4 @@ app.listen(process.env.PORT, () => {
 process.on('exit',()=>{
     db.end()
 })
+
