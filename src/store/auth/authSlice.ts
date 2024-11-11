@@ -1,8 +1,10 @@
 
-interface User {
+export interface User {
   name: string;
   lastName: string;
   email: string;
+  birthday: string; // Fecha de nacimiento
+  phone: string; // Número de teléfono
 }
   
 interface AuthState {
