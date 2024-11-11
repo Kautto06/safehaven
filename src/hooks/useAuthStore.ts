@@ -44,19 +44,30 @@ export const useAuthStore = () => {
   // Función para iniciar sesión
   const startLogin = async ({ email, password }: LoginData) => {
     dispatch(onChecking());
-
+  
     try {
-      // Llamada a la API para autenticar al usuario
       const { data } = await pageApi.post('/auth/login', { email, password });
-      // Guardar el token y el email en localStorage
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('email', data.email);
-      localStorage.setItem('token-init-date', new Date().getTime().toString());
-
+  
+      console.log('Respuesta de la API:', data);
+      // Verifica los datos antes de enviarlos a Redux
+      console.log('Datos de usuario antes de despachar onLogin:', {
+        name: data.nombre,
+        lastName: data.apellidos,
+        email: data.email,
+        birthday: data.birthday,
+        phone: data.phone
+      });
+  
       // Despachar acción onLogin con la información del usuario
-      dispatch(onLogin({ email: data.email, name: data.nombre, lastName: data.apellidos }));
+      dispatch(onLogin({
+        name: data.nombre,
+        lastName: data.apellidos,
+        email: data.email,
+        birthday: data.birthday, // Asegúrate de incluir el campo birthday
+        phone: data.phone, // Asegúrate de incluir el campo phone
+      }));
+  
     } catch (error: any) {
-      // Si falla el login, despacha la acción onLogout y muestra el error
       dispatch(onLogout('Credenciales incorrectas'));
       setTimeout(() => {
         dispatch(clearErrorMessage());
@@ -78,7 +89,7 @@ export const useAuthStore = () => {
       localStorage.setItem('token-init-date', new Date().getTime().toString());
 
       // Despachar la acción de onLogin con el email y nombre del usuario
-      dispatch(onLogin({  name: data.nombre, lastName: data.apellidos ,email: data.email,}));
+      dispatch(onLogin({  name: data.nombre, lastName: data.apellidos ,email: data.email, birthday:data.birthday, phone:data.phone}));
     } catch (error: any) {
       dispatch(onLogout(error.response.data?.msg || '--'));
       setTimeout(() => {
@@ -108,7 +119,7 @@ export const useAuthStore = () => {
       localStorage.setItem('email', data.email);
       localStorage.setItem('token-init-date', new Date().getTime().toString());
   
-      dispatch(onLogin({ name: data.nombre, lastName: data.apellidos, email: data.email }));
+      dispatch(onLogin({ name: data.nombre, lastName: data.apellidos, email: data.email, birthday:data.birthday, phone:data.phone }));
       setTokenExpired(false); // Resetear el estado de token expirado
     } catch (error: any) {
       console.error('Error al renovar el token:', error); // Para depuración

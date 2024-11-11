@@ -81,7 +81,7 @@ const Header: React.FC = () => {
             {showProfileMenu && (
                 <div className="dropdown-menu">
                     <IonList>
-                        <IonItem routerLink="/Actividades" onClick={() => setShowProfileMenu(false)}>
+                        <IonItem routerLink="/PerfilUsuario" onClick={() => setShowProfileMenu(false)}>
                             <IonLabel>Actividades</IonLabel>
                         </IonItem>
                         <IonItem className='logout-button' onClick={handleLogout} aria-label="Cerrar sesión">

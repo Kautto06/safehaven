@@ -12,7 +12,9 @@ import Actividades from "../pages/Actividades";
 import Autoevaluacion from "../pages/Autoevaluacion";
 import Calendario from "../pages/Calendario";
 import Home from "../pages/Home";
+import PerfilUsuario from "../pages/PerfilUsuario";
 import { useAuthStore } from '../hooks/useAuthStore';
+
 
 const AppRouter: React.FC = () => {
     const { status, checkAuthToken, tokenExpired, setTokenExpired } = useAuthStore();
@@ -45,6 +47,7 @@ const AppRouter: React.FC = () => {
               <Route exact path="/actividades" component={Actividades} />
               <Route exact path="/autoevaluacion" component={Autoevaluacion} />
               <Route exact path="/calendario" component={Calendario} />
+              <Route exact path="/PerfilUsuario" component={PerfilUsuario} />
               <Route exact path="/" component={Home} />
               <Redirect to="/" />
             </>
