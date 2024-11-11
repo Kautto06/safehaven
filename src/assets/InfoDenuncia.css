@@ -1,0 +1,105 @@
+/* Estilo para la página de denuncia informativa */
+.informativa-body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+    min-height: 100vh; /* Asegura que el body ocupe toda la altura de la ventana */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .informativa-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-top: 20px;
+  }
+  
+  .main-infoD {
+    flex-grow: 1; /* Asegura que el main ocupe el espacio disponible */
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Habilita el scroll vertical */
+  }
+  
+  .informativa-section {
+    margin-bottom: 20px;
+  }
+  
+  .informativa-section h2 {
+    color: #2980b9;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .informativa-section p {
+    font-size: 1rem;
+    color: #7f8c8d;
+    line-height: 1.6;
+  }
+  
+  .informativa-section ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .informativa-section li {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+  }
+  
+  .informativa-section li strong {
+    color: #2980b9;
+  }
+  
+  .important {
+    color: #e74c3c;
+    font-weight: bold;
+  }
+  
+  .next-button {
+    display: flex;
+    width: 15%;
+    padding: 12px;
+    background-color: #5C8268;
+    color: white;
+    font-size: 1.2rem;
+    justify-content: center;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 20px 0;
+  }
+  
+  .next-button:hover {
+    background-color: #538d67;
+  }
+  
+  .next-button:focus {
+    outline: none;
+  }
+  
+  /* Estilos para mejorar la visibilidad de los títulos y textos */
+  h1, h2 {
+    font-family: 'Helvetica Neue', sans-serif;
+  }
+  
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  ul {
+    margin-top: 10px;
+  }
+  
+  ul li {
+    margin-bottom: 8px;
+  }
+  

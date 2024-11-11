@@ -1,6 +1,6 @@
 import { IonRouterOutlet, IonAlert } from "@ionic/react";
-import React, { useEffect } from "react";
-import { Route, Redirect } from "react-router";
+import React, { useEffect, useState } from "react";
+import { Route, Redirect, useLocation } from "react-router";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import { IonReactRouter } from "@ionic/react-router";
@@ -13,20 +13,22 @@ import Autoevaluacion from "../pages/Autoevaluacion";
 import Calendario from "../pages/Calendario";
 import Home from "../pages/Home";
 import { useAuthStore } from '../hooks/useAuthStore';
+import AutoevaluacionInfo from "../pages/InfoAutoevaluacion";
+import InformativaDenuncia from "../pages/InfoDenuncia";
 
 const AppRouter: React.FC = () => {
     const { status, checkAuthToken, tokenExpired, setTokenExpired } = useAuthStore();
-  
+    const location = useLocation();
+
+    const [isTokenChecked, setIsTokenChecked] = useState(false);
+
     useEffect(() => {
-      const verifyToken = async () => {
-        await checkAuthToken();
-      };
-  
-      // Solo llamar a verifyToken si el estado es 'checking'
-      if (status === 'checking') {
-        verifyToken();
+      // Solo verificar el token si está en 'checking' y no hemos verificado el token aún
+      if (status === 'checking' && !isTokenChecked) {
+          checkAuthToken();
+          setIsTokenChecked(true); // Marcar como verificado
       }
-    }, [status, checkAuthToken]); // Asegúrate de incluir `status` en las dependencias
+  }, [status, checkAuthToken, isTokenChecked]); // Asegúrate de incluir `status` en las dependencias
   
     // Mensaje de carga mientras se verifica el estado de autenticación
     if (status === 'checking') {
@@ -41,12 +43,14 @@ const AppRouter: React.FC = () => {
               <Route exact path="/expertos" component={Expertos} />
               <Route exact path="/foro" component={Foro} />
               <Route exact path="/notificaciones" component={Notificaciones} />
-              <Route exact path="/denuncia" component={Denuncia} />
+              <Route exact path="/denuncia/formulario" component={Denuncia} />
               <Route exact path="/actividades" component={Actividades} />
-              <Route exact path="/autoevaluacion" component={Autoevaluacion} />
+              <Route exact path="/autoevaluacion" component={AutoevaluacionInfo}/>
+              <Route exact path="/autoevaluacion/formulario" component={Autoevaluacion} />
               <Route exact path="/calendario" component={Calendario} />
               <Route exact path="/" component={Home} />
-              <Redirect to="/" />
+              <Route exact path="/denuncia" component={InformativaDenuncia}/>
+              <Redirect to={location.pathname} />
             </>
           ) : (
             <>
