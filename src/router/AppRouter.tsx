@@ -44,16 +44,16 @@ const AppRouter: React.FC = () => {
               <Route exact path="/autoevaluacion" component={AutoevaluacionInfo}/>
               <Route exact path="/autoevaluacion/formulario" component={Autoevaluacion} />
               <Route exact path="/calendario" component={CalendarComponent} />
-              <Route exact path="/PerfilUsuario" component={UserProfile} />
-              <Route exact path="/EditarPerfil" component={EditProfile} />
+              <Route exact path="/perfilUsuario" component={UserProfile} />
+              <Route exact path="/editarPerfil" component={EditProfile} />
               <Route exact path="/" component={Home} />
               
               <Redirect to= {location.pathname}/>
             </>
           ) : (
             <>
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/register" component={Register} />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
               <Redirect to="/login" />
             </>
           )}

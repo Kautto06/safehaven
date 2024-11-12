@@ -4,7 +4,8 @@ export interface User {
   lastName: string;
   email: string;
   birthday: string; // Fecha de nacimiento
-  phone: string; // Número de teléfono
+  phone: string;
+  gender: string; // Número de teléfono
 }
   
 interface AuthState {

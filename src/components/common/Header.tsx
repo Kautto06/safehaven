@@ -12,28 +12,28 @@ const DropdownMenu: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     return (
         <div className="dropdown-menu">
             <IonList>
-                <IonItem routerLink="/Expertos" onClick={onClose}>
+                <IonItem routerLink="/expertos" onClick={onClose}>
                     <IonLabel>Nuestros Expertos</IonLabel>
                 </IonItem>
-                <IonItem routerLink="/Foro" onClick={onClose}>
+                <IonItem routerLink="/foro" onClick={onClose}>
                     <IonLabel>Foro</IonLabel>
                 </IonItem>
-                <IonItem routerLink="/Denuncia" onClick={onClose}>
+                <IonItem routerLink="/denuncia" onClick={onClose}>
                     <IonLabel>Denuncia</IonLabel>
                 </IonItem>
-                <IonItem routerLink="/Autoevaluacion" onClick={onClose}>
+                <IonItem routerLink="/autoevaluacion" onClick={onClose}>
                     <IonLabel>Autoevaluación</IonLabel>
                 </IonItem>
-                <IonItem routerLink="/Calendario" onClick={onClose}>
+                <IonItem routerLink="/calendario" onClick={onClose}>
                     <IonLabel>Calendario de actividades</IonLabel>
                 </IonItem>
-                <IonItem routerLink="/Actividades" onClick={onClose}>
+                <IonItem routerLink="/actividades" onClick={onClose}>
                     <IonLabel>Actividades</IonLabel>
                 </IonItem>
-                <IonItem routerLink="/Notificaciones" onClick={onClose}>
+                <IonItem routerLink="/notificaciones" onClick={onClose}>
                     <IonLabel>Notificaciones</IonLabel>
                 </IonItem>
-                <IonItem routerLink="/Actividades" onClick={onClose}>
+                <IonItem routerLink="/actividades" onClick={onClose}>
                             <IonLabel>Actividades</IonLabel>
                 </IonItem>
             </IonList>
@@ -73,7 +73,7 @@ export const Header: React.FC = () => {
         <IonHeader>
             <IonToolbar className='cabecera'>
                 <IonTitle className="header-title">
-                    <div className="logo-button" onClick={() => (window.location.href = '/Home')}>
+                    <div className="logo-button" onClick={() => (history.push('/'))}>
                         <img src={logo} alt="Logo" className="header-logo" />
                     </div>
                 </IonTitle>
@@ -84,7 +84,7 @@ export const Header: React.FC = () => {
                     <IonButton onClick={handleProfileRedirect} aria-label="Ir al perfil de usuario">
                         <IonIcon icon={personCircleOutline} />
                     </IonButton>
-                    <IonButton routerLink="/Notificaciones" aria-label="Ir a notificaciones">
+                    <IonButton routerLink="/notificaciones" aria-label="Ir a notificaciones">
                         <IonIcon icon={notifications} />
                     </IonButton>
                 </IonButtons>
