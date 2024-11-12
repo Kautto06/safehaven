@@ -13,12 +13,14 @@ import profile from '../assets/images/profile.svg';
 import '../assets/PerfilUsuario.css';
 
 const UserProfile: React.FC = () => {
-  const { user, status } = useSelector((state: RootState) => state.auth);
+  const { user, status} = useAuthStore();
   const [showMenu, setShowMenu] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const { startLogout } = useAuthStore();
   const history = useHistory();
 
+
+  console.log(user)
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return new Intl.DateTimeFormat('es-ES').format(date);
@@ -29,10 +31,10 @@ const UserProfile: React.FC = () => {
     localStorage.clear(); // Limpia el localStorage
     setShowProfileMenu(false); // Cierra el menú de perfil
     history.push('/login'); // Redirige a la página de inicio de sesión
-};
-const handleEditProfile = () => {
-  history.push('/EditarPerfil'); // Redirige a una página de edición
-};
+  };
+  const handleEditProfile = () => {
+    history.push('/EditarPerfil'); // Redirige a una página de edición
+  };
 
   if (status !== 'authenticated' || !user || !('name' in user)) {
     return (

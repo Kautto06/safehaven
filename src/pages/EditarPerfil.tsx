@@ -4,12 +4,12 @@ import { useState } from 'react';
 import { IonContent, IonPage, IonButton, IonIcon, IonImg, IonSpinner } from '@ionic/react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import axios from 'axios'; // Importa axios
 import pageApi from '../api/backend';
+import { useAuthStore } from '../hooks/useAuthStore';
 
 const EditProfile: React.FC = () => {
   // Accedemos al usuario desde el estado de Redux
-  const { user, status } = useSelector((state: RootState) => state.auth);
+  const { user, status} = useAuthStore();
 
   if (status !== 'authenticated' || !user || !('name' in user)) {
     return (

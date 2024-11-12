@@ -49,6 +49,7 @@ const AppRouter: React.FC = () => {
               <Route exact path="/notificaciones" component={Notificaciones} />
               <Route exact path="/denuncia/formulario" component={Denuncia} />
               <Route exact path="/actividades" component={Actividades} />
+              <Route exact path="/denuncia" component={InformativaDenuncia}/>
               <Route exact path="/autoevaluacion" component={AutoevaluacionInfo}/>
               <Route exact path="/autoevaluacion/formulario" component={Autoevaluacion} />
               <Route exact path="/calendario" component={Calendario} />
@@ -56,7 +57,7 @@ const AppRouter: React.FC = () => {
               <Route exact path="/EditarPerfil" component={EditarPerfil} />
               <Route exact path="/" component={Home} />
               
-              <Redirect to="/" />
+              <Redirect to= {location.pathname}/>
             </>
           ) : (
             <>
