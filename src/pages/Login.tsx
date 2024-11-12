@@ -17,7 +17,7 @@ const Login: React.FC = () => {
 
   useEffect(() => {
     if (status === 'authenticated') {
-      history.push('/home');
+      history.push('/');
     }
   }, [status, history]);
 
@@ -43,6 +43,7 @@ const Login: React.FC = () => {
     if (!verificarDatos()) return;
     try {
       await startLogin({ email, password });
+      history.push('/')
     } catch (error) {
       console.error('Error al intentar iniciar sesión:', error);
       setErrorMessage('Error al intentar iniciar sesión.');

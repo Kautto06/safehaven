@@ -108,6 +108,8 @@ export const useAuthStore = () => {
       dispatch(onLogout());
       return;
     }
+
+    dispatch(onChecking())
   
     try {
       // Renueva el token y actualiza el estado de autenticación
