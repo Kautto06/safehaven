@@ -118,10 +118,12 @@ const Home: React.FC = () => {
                   ))}
                 </div>
               </div>
+              
           </div>
       </IonContent>
       <Footer/>
     </IonPage>
+    
   );
 };
 

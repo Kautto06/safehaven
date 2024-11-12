@@ -31,10 +31,15 @@ const DropdownMenu: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                 <IonItem routerLink="/Notificaciones" onClick={onClose}>
                     <IonLabel>Notificaciones</IonLabel>
                 </IonItem>
+                <IonItem routerLink="/Actividades" onClick={onClose}>
+                            <IonLabel>Actividades</IonLabel>
+                </IonItem>
             </IonList>
         </div>
     );
 };
+
+
 
 const Header: React.FC = () => {
     const [showMenu, setShowMenu] = useState(false);
@@ -49,6 +54,10 @@ const Header: React.FC = () => {
     const toggleProfileMenu = () => {
         setShowProfileMenu(!showProfileMenu);
     };
+
+    const handleProfileRedirect = () => {
+    history.push('/perfilusuario'); // Redirige directamente a la página de perfil de usuario
+};
 
     const handleLogout = async () => {
         startLogout(); // Llama a la función para cerrar sesión
@@ -69,7 +78,7 @@ const Header: React.FC = () => {
                     <IonButton onClick={toggleMenu} aria-expanded={showMenu} aria-label="Abrir menú">
                         <IonIcon icon={menuOutline} />
                     </IonButton>
-                    <IonButton onClick={toggleProfileMenu} aria-expanded={showProfileMenu} aria-label="Abrir menú de perfil">
+                    <IonButton onClick={handleProfileRedirect} aria-label="Ir al perfil de usuario">
                         <IonIcon icon={personCircleOutline} />
                     </IonButton>
                     <IonButton routerLink="/Notificaciones" aria-label="Ir a notificaciones">
@@ -81,9 +90,6 @@ const Header: React.FC = () => {
             {showProfileMenu && (
                 <div className="dropdown-menu">
                     <IonList>
-                        <IonItem routerLink="/PerfilUsuario" onClick={() => setShowProfileMenu(false)}>
-                            <IonLabel>Actividades</IonLabel>
-                        </IonItem>
                         <IonItem className='logout-button' onClick={handleLogout} aria-label="Cerrar sesión">
                             <IonIcon icon={logOutOutline} slot="start" />
                             <IonLabel>Cerrar Sesión</IonLabel>

@@ -1,14 +1,15 @@
 .header-title {
     text-align: center;
-    flex: 1;
+    flex: 0;
 }
 
 .header-logo {
     width: 160px; 
     height: 50px;
-    padding: 3px;
-    display: block; /* Asegura que la imagen se centre */
-    margin: 0 auto; /* Centra la imagen horizontalmente */
+    padding: 3px; /* Revisa si este padding está agregando espacio extra */
+    display: block;
+    margin: 0 auto;
+    object-fit: contain; /* Asegura que la imagen no se distorsione */
 }
 
 .dropdown-menu {
@@ -41,8 +42,11 @@
 }
 .logo-button {
     cursor: pointer; /* Cambia el cursor al pasar sobre el logo */
-    display: flex; /* Alinea los elementos dentro del div */
-    align-items: center; /* Centra verticalmente */
+    display: inline-block; /* Hace que el botón se ajuste al tamaño del contenido (la imagen) */
+    width: auto; /* El contenedor debe tener el tamaño exacto de la imagen */
+    height: auto; /* El contenedor debe tener el tamaño exacto de la imagen */
+    padding: 0; /* Elimina cualquier relleno adicional que pueda afectar el tamaño */
+    text-align: center; /* Centra el contenido (la imagen) dentro del botón */
 }
 
 .logout-button{
@@ -53,6 +57,4 @@
     margin: 0; /* Elimina el margen para evitar desalineación */
     flex: 1; /* Ocupa todo el espacio disponible */
 }
-
-
 
