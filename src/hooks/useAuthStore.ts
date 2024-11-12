@@ -57,6 +57,10 @@ export const useAuthStore = () => {
         birthday: data.birthday,
         phone: data.phone
       });
+
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('email', data.email);
+      localStorage.setItem('token-init-date', new Date().getTime().toString());
   
       // Despachar acción onLogin con la información del usuario
       dispatch(onLogin({
@@ -84,9 +88,7 @@ export const useAuthStore = () => {
       const { data } = await pageApi.post('/auth/nuevo', { email, password, phone, birthday, gender,nombre,apellidos });
 
       // Guardar el token y el email en localStorage
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('email', data.email);
-      localStorage.setItem('token-init-date', new Date().getTime().toString());
+      
 
       // Despachar la acción de onLogin con el email y nombre del usuario
       dispatch(onLogin({  name: data.nombre, lastName: data.apellidos ,email: data.email, birthday:data.birthday, phone:data.phone}));

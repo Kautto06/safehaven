@@ -16,12 +16,6 @@ const Login: React.FC = () => {
   const { startLogin, status, errorMessage: authErrorMessage } = useAuthStore();
 
   useEffect(() => {
-    if (status === 'authenticated') {
-      history.push('/');
-    }
-  }, [status, history]);
-
-  useEffect(() => {
     if (authErrorMessage) {
       setErrorMessage(authErrorMessage);
       setShowAlert(true);
