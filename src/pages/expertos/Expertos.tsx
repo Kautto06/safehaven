@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 
 import { IonPage, IonHeader, IonContent, IonImg, IonButton, IonIcon, IonPopover, IonList, IonItem, IonLabel, IonToast } from '@ionic/react';
 import { callOutline, arrowBackOutline, arrowForwardOutline, funnelOutline,filterOutline } from 'ionicons/icons';
-import '../assets/Expertos.css';
-import logo from '../assets/Logos/logoNoBackground.png';
-import profile from '../assets/images/profile.svg';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import '../../assets/expertos/Expertos.css';
+import logo from '../../assets/Logos/logoNoBackground.png';
+import profile from '../../assets/images/profile.svg';
+import { Footer, Header } from '../../components';
 
-const Expertos: React.FC = () => {
+
+export const Expertos: React.FC = () => {
   const [showPopover, setShowPopover] = useState(false);
   const [popoverEvent, setPopoverEvent] = useState<any | undefined>(undefined);
   const [showToast, setShowToast] = useState(false);
@@ -117,5 +117,3 @@ const Expertos: React.FC = () => {
     </IonPage>
   );
 };
-
-export default Expertos;

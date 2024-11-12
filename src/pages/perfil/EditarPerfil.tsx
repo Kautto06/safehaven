@@ -1,13 +1,12 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../store/store';
+import { RootState } from '../../store/store';
 import { useState } from 'react';
 import { IonContent, IonPage, IonButton, IonIcon, IonImg, IonSpinner } from '@ionic/react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import pageApi from '../api/backend';
-import { useAuthStore } from '../hooks/useAuthStore';
+import pageApi from '../../api/backend';
+import { useAuthStore } from '../../hooks/auth/useAuthStore';
+import { Footer, Header } from '../../components';
 
-const EditProfile: React.FC = () => {
+export const EditProfile: React.FC = () => {
   // Accedemos al usuario desde el estado de Redux
   const { user, status} = useAuthStore();
 
@@ -120,4 +119,3 @@ const EditProfile: React.FC = () => {
   );
 };
 
-export default EditProfile;

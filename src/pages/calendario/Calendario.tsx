@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { IonDatetime, IonButton, IonIcon, IonPage, IonContent, IonItem, IonInput } from '@ionic/react';
 import { arrowBack, arrowForward } from 'ionicons/icons';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import '../assets/Calendario.css'
+import '../../assets/calendario/Calendario.css';
+import { Footer, Header } from '../../components';
 
-const CalendarComponent: React.FC = () => {
+export const CalendarComponent: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date()); // Fecha actual
   const [calendarDays, setCalendarDays] = useState<Date[]>([]); // Días visibles en el calendario
 
@@ -151,5 +150,3 @@ const CalendarComponent: React.FC = () => {
     </IonPage>
   );
 };
-
-export default CalendarComponent;

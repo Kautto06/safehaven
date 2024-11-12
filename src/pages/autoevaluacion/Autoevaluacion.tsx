@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { IonContent, IonPage, IonButton, IonAlert } from '@ionic/react';
-import Header from '../components/Header'; // Importar el header
-import Footer from '../components/Footer';
-import '../assets/Autoevaluacion.css';
+import '../../assets/autoevaluacion/Autoevaluacion.css';
+import preguntasData from '../../data/preguntas.json';
+import { Footer, Header } from '../../components';
 
-// Importar el archivo JSON directamente
-import preguntasData from '../data/preguntas.json';
-
-const Autoevaluacion: React.FC = () => {
+export const Autoevaluacion: React.FC = () => {
   const [questions, setQuestions] = useState<any[]>([]); // Estado para las preguntas
   const [formData, setFormData] = useState<{ [key: string]: string }>({});
   const [showAlert, setShowAlert] = useState(false);
@@ -148,4 +145,4 @@ const Autoevaluacion: React.FC = () => {
   );
 };
 
-export default Autoevaluacion;
+

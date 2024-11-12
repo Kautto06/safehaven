@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { IonContent, IonInputPasswordToggle, IonPage, IonButton, IonInput, IonAlert } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
-import '../assets/Login.css';
-import logo from '../assets/logos/logoNoBackground.png';
-import { useAuthStore } from '../hooks/useAuthStore'; 
+import '../../assets/auth/Login.css';
+import logo from '../../assets/logos/logoNoBackground.png';
+import { useAuthStore } from '../../hooks';
 
-const Login: React.FC = () => {
+
+export const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -107,4 +108,3 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;

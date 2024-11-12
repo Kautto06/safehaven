@@ -6,19 +6,18 @@ import 'swiper/css/navigation';
 
 import { Navigation, Pagination } from 'swiper/modules';
 import { useHistory } from 'react-router-dom';
-import '../assets/Home.css';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import '../../assets/common/Home.css';
 
 // Importar imágenes
-import actividadesImg from '../assets/images/actividades.jpg';
-import autoevaluacionImg from '../assets/images/autoevaluacion.jpg';
-import calendarioImg from '../assets/images/calendario.jpg';
-import denunciaImg from '../assets/images/denuncia.jpg';
-import expertosImg from '../assets/images/expertos.jpg';
-import foroImg from '../assets/images/foro.jpg';
+import actividadesImg from '../../assets/images/actividades.jpg';
+import autoevaluacionImg from '../../assets/images/autoevaluacion.jpg';
+import calendarioImg from '../../assets/images/calendario.jpg';
+import denunciaImg from '../../assets/images/denuncia.jpg';
+import expertosImg from '../../assets/images/expertos.jpg';
+import foroImg from '../../assets/images/foro.jpg';
+import { Footer, Header } from '../../components';
 
-const Home: React.FC = () => {
+export const Home: React.FC = () => {
   const history = useHistory();
 
   const secciones = [
@@ -127,4 +126,3 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;

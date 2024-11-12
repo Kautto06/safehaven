@@ -1,9 +1,9 @@
 import React, { useState,useEffect } from 'react';
 import { IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, IonList, IonItem, IonLabel } from '@ionic/react';
 import { menuOutline, personCircleOutline, notifications, logOutOutline } from 'ionicons/icons';
-import '../assets/header.css'; 
-import logo from '../assets/logos/logoNoBackground.png';
-import { useAuthStore } from '../hooks/useAuthStore'; 
+import '../../assets/common/header.css';
+import logo from '../../assets/logos/logoNoBackground.png';
+import { useAuthStore } from '../../hooks/auth/useAuthStore'; 
 import { useHistory } from 'react-router-dom';
 
 
@@ -43,7 +43,7 @@ const DropdownMenu: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
 
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
     const [showMenu, setShowMenu] = useState(false);
     const [showProfileMenu, setShowProfileMenu] = useState(false);
     const { startLogout } = useAuthStore();
@@ -59,8 +59,8 @@ const Header: React.FC = () => {
 
 
     const handleProfileRedirect = () => {
-    history.push('/perfilusuario'); // Redirige directamente a la página de perfil de usuario
-};
+        history.push('/perfilusuario'); // Redirige directamente a la página de perfil de usuario
+    };
 
     const handleLogout = async () => {
         startLogout(); // Llama a la función para cerrar sesión
@@ -103,5 +103,3 @@ const Header: React.FC = () => {
         </IonHeader>
     );
 };
-
-export default Header;

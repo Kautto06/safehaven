@@ -1,11 +1,11 @@
 import React from 'react';
 import { IonContent, IonPage, IonTitle, IonButton, IonInput, IonGrid, IonRow, IonCol, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonIcon } from '@ionic/react';
 import { informationCircleOutline } from 'ionicons/icons';
-import Header from '../components/Header'; // Asegúrate de que la ruta sea la correcta
-import Footer from '../components/Footer';
-import '../assets/Actividades.css';
 
-const Actividades: React.FC = () => {
+import '../../assets/actividades/Actividades.css';
+import { Footer,Header } from '../../components';
+
+export const Actividades: React.FC = () => {
   return (
     <IonPage>
       <Header /> {/* Importa el componente de tu header aquí */}
@@ -45,4 +45,3 @@ const Actividades: React.FC = () => {
   );
 };
 
-export default Actividades;

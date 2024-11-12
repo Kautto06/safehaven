@@ -1,12 +1,11 @@
 // src/pages/AutoevaluacionInfo.tsx
 import React from 'react';
 import { IonContent, IonPage, IonButton } from '@ionic/react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import '../assets/InfoAutoevaluacion.css'
+import '../../assets/autoevaluacion/InfoAutoevaluacion.css';
 import { useHistory } from 'react-router';
+import { Footer, Header } from '../../components';
 
-const AutoevaluacionInfo: React.FC = () => {
+export const AutoevaluacionInfo: React.FC = () => {
     const history = useHistory();
     return (
     <IonPage>
@@ -41,4 +40,3 @@ const AutoevaluacionInfo: React.FC = () => {
   );
 };
 
-export default AutoevaluacionInfo;

@@ -1,10 +1,9 @@
 import React from 'react';
-import Header from '../components/Header'; // Asumiendo que ya tienes el Header creado
-import Footer from '../components/Footer'; // Asumiendo que ya tienes el Footer creado
-import '../assets/InfoDenuncia.css'; // Importar los estilos
+import '../../assets/denuncia/InfoDenuncia.css'; // Importar los estilos
 import { IonPage } from '@ionic/react';
+import { Footer, Header } from '../../components';
 
-const InformativaDenuncia: React.FC = () => {
+export const InformativaDenuncia: React.FC = () => {
   return (
     <IonPage>
         <div className="informativa-body">
@@ -67,4 +66,3 @@ const InformativaDenuncia: React.FC = () => {
   );
 };
 
-export default InformativaDenuncia;

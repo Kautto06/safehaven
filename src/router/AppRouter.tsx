@@ -1,23 +1,14 @@
 import { IonRouterOutlet, IonAlert } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import { Route, Redirect, useLocation } from "react-router";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import { IonReactRouter } from "@ionic/react-router";
-import Expertos from "../pages/Expertos";
-import Foro from "../pages/Foro";
-import Notificaciones from "../pages/Notificaciones";
-import Denuncia from "../pages/Denuncia";
-import Actividades from "../pages/Actividades";
-import Autoevaluacion from "../pages/Autoevaluacion";
-import Calendario from "../pages/Calendario";
-import Home from "../pages/Home";
-import PerfilUsuario from "../pages/PerfilUsuario";
-import EditarPerfil from "../pages/EditarPerfil";
 
-import { useAuthStore } from '../hooks/useAuthStore';
-import AutoevaluacionInfo from "../pages/InfoAutoevaluacion";
-import InformativaDenuncia from "../pages/InfoDenuncia";
+import { IonReactRouter } from "@ionic/react-router";
+import { useAuthStore } from "../hooks";
+import {Expertos,EditProfile, Home, UserProfile, CalendarComponent, Autoevaluacion, InformativaDenuncia, Actividades, Denuncia, Notificaciones, Foro, Login, Register, AutoevaluacionInfo, } from '../pages';
+
+
+
+
 
 
 const AppRouter: React.FC = () => {
@@ -52,9 +43,9 @@ const AppRouter: React.FC = () => {
               <Route exact path="/denuncia" component={InformativaDenuncia}/>
               <Route exact path="/autoevaluacion" component={AutoevaluacionInfo}/>
               <Route exact path="/autoevaluacion/formulario" component={Autoevaluacion} />
-              <Route exact path="/calendario" component={Calendario} />
-              <Route exact path="/PerfilUsuario" component={PerfilUsuario} />
-              <Route exact path="/EditarPerfil" component={EditarPerfil} />
+              <Route exact path="/calendario" component={CalendarComponent} />
+              <Route exact path="/PerfilUsuario" component={UserProfile} />
+              <Route exact path="/EditarPerfil" component={EditProfile} />
               <Route exact path="/" component={Home} />
               
               <Redirect to= {location.pathname}/>

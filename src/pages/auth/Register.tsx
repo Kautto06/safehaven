@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { IonPage, IonContent, IonInput, IonAlert, IonDatetime, IonSelect, IonSelectOption, IonCheckbox, IonInputPasswordToggle, IonItem, IonLabel } from '@ionic/react';
-import '../assets/Register.css';
+import '../../assets/auth/Register.css';
 import { useHistory } from 'react-router-dom';
-import { useAuthStore } from '../hooks/useAuthStore'; // Importa el hook personalizado de autenticación
+import { useAuthStore } from '../../hooks';
 
-const Register: React.FC = () => {
+export const Register: React.FC = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -208,4 +208,4 @@ const Register: React.FC = () => {
   );
 };
 
-export default Register;
+

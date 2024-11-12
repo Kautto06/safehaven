@@ -6,12 +6,11 @@ import {
   IonIcon,
   IonImg,
 } from '@ionic/react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import '../assets/Notificaciones.css';
+import '../../assets/notificaciones/Notificaciones.css';
 import { chevronForwardOutline, chevronBackOutline } from 'ionicons/icons';
+import { Footer, Header } from '../../components';
 
-const Notificaciones: React.FC = () => {
+export const Notificaciones: React.FC = () => {
     const [notifications, setNotifications] = useState(
         Array(5).fill({
           title: "Title",
@@ -79,4 +78,3 @@ const Notificaciones: React.FC = () => {
     );
 };
 
-export default Notificaciones;

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import pageApi from '../api/backend'; // Tu instancia de axios para la API
-import { clearErrorMessage, onChecking, onLogin, onLogout } from '../store/auth/authSlice'; // Importar tus acciones y reducers
-import { RootState } from '../store/store'; // Importar RootState desde tu configuración de Redux
+import pageApi from '../../api/backend'; // Tu instancia de axios para la API
+import { clearErrorMessage, onChecking, onLogin, onLogout } from '../../store/auth/authSlice'; // Importar tus acciones y reducers
+import { RootState } from '../../store/store'; // Importar RootState desde tu configuración de Redux
 import { useState } from 'react'; // Importar useState para manejar el estado
 
 // Tipos para los datos de login y registro

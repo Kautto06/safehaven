@@ -1,18 +1,17 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../store/store';
+import { RootState } from '../../store/store';
 import React, { useState } from 'react';
 import { IonContent, IonPage, IonButton, IonIcon, IonImg, IonSpinner } from '@ionic/react';
 import { createOutline} from 'ionicons/icons';
 
-import { useAuthStore } from '../hooks/useAuthStore'; 
+import { useAuthStore } from '../../hooks/auth/useAuthStore'; 
 import { useHistory } from 'react-router-dom';
 
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import profile from '../assets/images/profile.svg';
-import '../assets/PerfilUsuario.css';
+import profile from '../../assets/images/profile.svg';
+import '../../assets/perfil/PerfilUsuario.css';
+import { Footer, Header } from '../../components';
 
-const UserProfile: React.FC = () => {
+export const UserProfile: React.FC = () => {
   const { user, status} = useAuthStore();
   const [showMenu, setShowMenu] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -82,4 +81,3 @@ const UserProfile: React.FC = () => {
   );
 };
 
-export default UserProfile;

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { IonFooter, IonToolbar, IonTitle, IonText } from '@ionic/react';
 import { IonIcon } from '@ionic/react';
 import { logoFacebook, logoTwitter, logoInstagram } from 'ionicons/icons';
-import '../assets/Footer.css';
+import '../../assets/common/Footer.css';
 
-const Footer: React.FC = () => {
+export const Footer: React.FC = () => {
   const [isAtBottom, setIsAtBottom] = useState(false);
 
   useEffect(() => {
@@ -59,4 +59,4 @@ const Footer: React.FC = () => {
   );
 };
 
-export default Footer;
+

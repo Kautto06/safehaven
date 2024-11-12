@@ -14,13 +14,15 @@ import {
   IonItem,
   IonLabel,
 } from '@ionic/react';
-import Header from '../components/Header'; // Asumiendo que ya tienes el Header creado
-import FooterDenuncia from '../components/FooterDenuncia'; // Asumiendo que ya tienes el Footer creado
-import '../assets/Denuncia.css'; // Importar los estilos
-import Footer from '../components/Footer';
+ // Asumiendo que ya tienes el Footer creado
+import '../../assets/denuncia/Denuncia.css'; // Importar los estilos
+import { Footer, FooterDenuncia, Header } from '../../components';
 
 
-const Denuncia: React.FC = () => {
+
+
+
+export const Denuncia: React.FC = () => {
   const [violenceType, setViolenceType] = useState<string | undefined>(undefined);
   const [incidentLocation, setIncidentLocation] = useState<string>('');
   const [incidentDescription, setIncidentDescription] = useState<string>('');
@@ -128,5 +130,3 @@ const Denuncia: React.FC = () => {
     </IonPage>
   );
 };
-
-export default Denuncia

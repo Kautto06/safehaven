@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonButton, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonIcon, IonImg } from '@ionic/react';
 import { thumbsUpOutline, createOutline, chevronBackOutline, chevronForwardOutline, filterOutline } from 'ionicons/icons';
-import Header from '../components/Header';
-import '../assets/Foro.css'
-import Footer from '../components/Footer';
+import '../../assets/foro/Foro.css'
+import { Footer, Header } from '../../components';
 
 
-const Foro: React.FC = () => {
+
+export const Foro: React.FC = () => {
   const [likes, setLikes] = useState<number[]>(Array(4).fill(10)); // Inicializa con 10 likes en cada publicación
   const [liked, setLiked] = useState<boolean[]>(Array(4).fill(false)); // Estado para indicar si se ha dado "like"
 
@@ -80,4 +80,3 @@ const Foro: React.FC = () => {
   );
 };
 
-export default Foro;
