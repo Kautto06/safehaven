@@ -13,6 +13,8 @@ import Autoevaluacion from "../pages/Autoevaluacion";
 import Calendario from "../pages/Calendario";
 import Home from "../pages/Home";
 import PerfilUsuario from "../pages/PerfilUsuario";
+import EditarPerfil from "../pages/EditarPerfil";
+
 import { useAuthStore } from '../hooks/useAuthStore';
 import AutoevaluacionInfo from "../pages/InfoAutoevaluacion";
 import InformativaDenuncia from "../pages/InfoDenuncia";
@@ -51,9 +53,10 @@ const AppRouter: React.FC = () => {
               <Route exact path="/autoevaluacion/formulario" component={Autoevaluacion} />
               <Route exact path="/calendario" component={Calendario} />
               <Route exact path="/PerfilUsuario" component={PerfilUsuario} />
+              <Route exact path="/EditarPerfil" component={EditarPerfil} />
               <Route exact path="/" component={Home} />
-              <Route exact path="/denuncia" component={InformativaDenuncia}/>
-              <Redirect to={location.pathname} />
+              
+              <Redirect to="/" />
             </>
           ) : (
             <>

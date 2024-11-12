@@ -5,7 +5,7 @@ const { VITE_API_URL } = getenv();
 
 
 const pageApi = axios.create({
-    baseURL: VITE_API_URL
-})
+    baseURL: 'http://localhost:8000/api',
+});
 
 export default pageApi;

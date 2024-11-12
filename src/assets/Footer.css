@@ -49,17 +49,4 @@
         align-items: center; /* Centrar los elementos */
         text-align: center;
     }
-
-    .footer-section {
-        margin-bottom: 15px; /* Añadir espacio entre las secciones */
-    }
-
-    .social-icons {
-        flex-direction: row; /* Asegura que los iconos sociales estén en fila en móviles */
-    }
-
-    .social-icon {
-        font-size: 20px; /* Reducir el tamaño de los iconos en móviles */
-        margin: 0 8px; /* Reducir el espacio entre iconos */
-    }
 }

@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IonFooter, IonToolbar, IonTitle, IonText } from '@ionic/react';
 import { IonIcon } from '@ionic/react';
 import { logoFacebook, logoTwitter, logoInstagram } from 'ionicons/icons';
 import '../assets/Footer.css';
 
 const Footer: React.FC = () => {
+  const [isAtBottom, setIsAtBottom] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+        const bottom = window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight;
+        setIsAtBottom(bottom);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+    };
+}, []);
+
+
+
+
+
   return (
   <IonFooter>
     <IonToolbar className="footer-toolbar">

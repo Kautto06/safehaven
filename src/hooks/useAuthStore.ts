@@ -47,9 +47,13 @@ export const useAuthStore = () => {
   
     try {
       const { data } = await pageApi.post('/auth/login', { email, password });
-  
+
+           
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('email', data.email);
+      localStorage.setItem('token-init-date', new Date().getTime().toString());
       console.log('Respuesta de la API:', data);
-      // Verifica los datos antes de enviarlos a Redux
+      
       console.log('Datos de usuario antes de despachar onLogin:', {
         name: data.nombre,
         lastName: data.apellidos,
@@ -67,8 +71,8 @@ export const useAuthStore = () => {
         name: data.nombre,
         lastName: data.apellidos,
         email: data.email,
-        birthday: data.birthday, // Asegúrate de incluir el campo birthday
-        phone: data.phone, // Asegúrate de incluir el campo phone
+        birthday: data.birthday, 
+        phone: data.phone, 
       }));
   
     } catch (error: any) {
@@ -76,7 +80,9 @@ export const useAuthStore = () => {
       setTimeout(() => {
         dispatch(clearErrorMessage());
       }, 10);
+
     }
+
   };
 
   // Función para registrar un nuevo usuario
@@ -87,8 +93,12 @@ export const useAuthStore = () => {
       console.log(gender)
       const { data } = await pageApi.post('/auth/nuevo', { email, password, phone, birthday, gender,nombre,apellidos });
 
+<<<<<<< HEAD
       // Guardar el token y el email en localStorage
       
+=======
+
+>>>>>>> 40db211afed4e9aeb4c58924b11934ad351d7556
 
       // Despachar la acción de onLogin con el email y nombre del usuario
       dispatch(onLogin({  name: data.nombre, lastName: data.apellidos ,email: data.email, birthday:data.birthday, phone:data.phone}));

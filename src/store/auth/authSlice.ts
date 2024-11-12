@@ -21,6 +21,7 @@ const initialState: AuthState = {
   status: 'checking', // puede ser 'checking', 'authenticated', 'not-authenticated'
   user: {}, // Aquí irá la información del usuario autenticado
   errorMessage: undefined, // Mensaje de error en caso de que falle el login o logout
+  
 };
 
 export const authSlice = createSlice({

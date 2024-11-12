@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, IonList, IonItem, IonLabel } from '@ionic/react';
 import { menuOutline, personCircleOutline, notifications, logOutOutline } from 'ionicons/icons';
 import '../assets/header.css'; 
 import logo from '../assets/logos/logoNoBackground.png';
 import { useAuthStore } from '../hooks/useAuthStore'; 
 import { useHistory } from 'react-router-dom';
+
+
 
 const DropdownMenu: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     return (
@@ -31,10 +33,15 @@ const DropdownMenu: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                 <IonItem routerLink="/Notificaciones" onClick={onClose}>
                     <IonLabel>Notificaciones</IonLabel>
                 </IonItem>
+                <IonItem routerLink="/Actividades" onClick={onClose}>
+                            <IonLabel>Actividades</IonLabel>
+                </IonItem>
             </IonList>
         </div>
     );
 };
+
+
 
 const Header: React.FC = () => {
     const [showMenu, setShowMenu] = useState(false);
@@ -42,13 +49,18 @@ const Header: React.FC = () => {
     const { startLogout } = useAuthStore();
     const history = useHistory(); // Usar el hook useHistory para redirigir
 
+
+
     const toggleMenu = () => {
-        setShowMenu(!showMenu);
+        if (!showMenu) {
+            setShowMenu(true);
+        }
     };
 
-    const toggleProfileMenu = () => {
-        setShowProfileMenu(!showProfileMenu);
-    };
+
+    const handleProfileRedirect = () => {
+    history.push('/perfilusuario'); // Redirige directamente a la página de perfil de usuario
+};
 
     const handleLogout = async () => {
         startLogout(); // Llama a la función para cerrar sesión
@@ -61,7 +73,7 @@ const Header: React.FC = () => {
         <IonHeader>
             <IonToolbar className='cabecera'>
                 <IonTitle className="header-title">
-                    <div className="logo-button" onClick={() => (window.location.href = '/')}>
+                    <div className="logo-button" onClick={() => (window.location.href = '/Home')}>
                         <img src={logo} alt="Logo" className="header-logo" />
                     </div>
                 </IonTitle>
@@ -69,7 +81,7 @@ const Header: React.FC = () => {
                     <IonButton onClick={toggleMenu} aria-expanded={showMenu} aria-label="Abrir menú">
                         <IonIcon icon={menuOutline} />
                     </IonButton>
-                    <IonButton onClick={toggleProfileMenu} aria-expanded={showProfileMenu} aria-label="Abrir menú de perfil">
+                    <IonButton onClick={handleProfileRedirect} aria-label="Ir al perfil de usuario">
                         <IonIcon icon={personCircleOutline} />
                     </IonButton>
                     <IonButton routerLink="/Notificaciones" aria-label="Ir a notificaciones">
@@ -81,9 +93,6 @@ const Header: React.FC = () => {
             {showProfileMenu && (
                 <div className="dropdown-menu">
                     <IonList>
-                        <IonItem routerLink="/PerfilUsuario" onClick={() => setShowProfileMenu(false)}>
-                            <IonLabel>Actividades</IonLabel>
-                        </IonItem>
                         <IonItem className='logout-button' onClick={handleLogout} aria-label="Cerrar sesión">
                             <IonIcon icon={logOutOutline} slot="start" />
                             <IonLabel>Cerrar Sesión</IonLabel>

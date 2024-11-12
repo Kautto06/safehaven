@@ -1,0 +1,156 @@
+/* Contenedor de IonContent que ocupa toda la pantalla */
+
+.profile-body {
+    background: #F5F5DC;
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+    margin: 0; /* Elimina márgenes innecesarios */
+    padding: 0; /* Elimina el padding si lo hay */
+  }
+  
+  /* Recuadro blanco que contiene los datos del usuario */
+  .user-profile-content {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 800px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    margin: 0 auto; /* Esto centra el contenedor horizontalmente */
+  }
+  
+  .user-profile-content:hover {
+    transform: scale(1.05); /* Aumenta el tamaño del recuadro */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aumenta la sombra al pasar el ratón */
+  }
+  
+  h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #5C8268; /* Similar al color del título */
+    margin-bottom: 20px;
+    text-transform: uppercase; /* Mayúsculas para más impacto */
+  }
+  
+  .profile-detail {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .profile-detail p {
+    font-size: 1.2em;
+    color: #4A6651;
+    margin: 10px 0;
+  }
+  
+  .profile-detail p span {
+    font-weight: bold;
+    color: #3C574F; /* Similar al color del título */
+  }
+  
+  .profile-image {
+    width: 120px;
+    height: 120px;
+    
+    margin-bottom: 20px;
+    object-fit: cover;
+    
+    align-self:  center;
+  }
+  
+  .edit-profile-btn {
+    margin-top: 20px;
+    padding: 12px;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2em;
+    }
+  
+    .user-profile-content {
+      padding: 20px;
+    }
+  
+    .profile-detail p {
+      font-size: 1.1em;
+    }
+  
+    .profile-image {
+      width: 75px;
+      height: 75px;
+    }
+  }
+  
+  .logout-btn {
+    background-color: #d9534f;  /* Rojo para indicar una acción destructiva */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    width: 100%;
+    text-align: center;
+    border-radius: 8px;
+    margin-top: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .logout-btn:hover {
+    background-color: #c9302c;  /* Cambio de color al pasar el ratón */
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño del botón al pasar el ratón */
+  }
+  
+  .logout-btn:focus {
+    outline: none; /* Elimina el borde azul al hacer clic */
+  }
+
+  .edit-profile-btn {
+    background-color: #5C8268;  /* Color verde para indicar acción positiva */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    width: 100%;
+    text-align: center;
+    border-radius: 8px;
+    margin-top: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .edit-profile-btn:hover {
+    background-color: #4d6e56;  /* Cambio de color al pasar el ratón */
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño del botón al pasar el ratón */
+  }
+  
+  .edit-profile-btn:focus {
+    outline: none; /* Elimina el borde azul al hacer clic */
+  }
+  
+  /* Estilo para el icono dentro del botón de editar */
+  .edit-icon {
+    margin-right: 10px; /* Espacio entre el icono y el texto */
+  }
