@@ -27,9 +27,6 @@ const DropdownMenu: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                 <IonItem routerLink="/calendario" onClick={onClose}>
                     <IonLabel>Calendario de actividades</IonLabel>
                 </IonItem>
-                <IonItem routerLink="/actividades" onClick={onClose}>
-                    <IonLabel>Actividades</IonLabel>
-                </IonItem>
                 <IonItem routerLink="/notificaciones" onClick={onClose}>
                     <IonLabel>Notificaciones</IonLabel>
                 </IonItem>
@@ -52,9 +49,7 @@ export const Header: React.FC = () => {
 
 
     const toggleMenu = () => {
-        if (!showMenu) {
-            setShowMenu(true);
-        }
+        setShowMenu(!showMenu); // Alterna entre true y false
     };
 
 

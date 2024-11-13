@@ -1,14 +1,18 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { useState } from 'react';
 import { IonContent, IonPage, IonButton, IonIcon, IonImg, IonSpinner } from '@ionic/react';
 import pageApi from '../../api/backend';
 import { useAuthStore } from '../../hooks/auth/useAuthStore';
 import { Footer, Header } from '../../components';
+import { UseDispatch } from 'react-redux';
+import { updateUser } from '../../store/auth/authSlice';
+
 
 export const EditProfile: React.FC = () => {
   // Accedemos al usuario desde el estado de Redux
   const { user, status} = useAuthStore();
+  const dispatch =useDispatch();
 
   if (status !== 'authenticated' || !user || !('name' in user)) {
     return (
@@ -63,14 +67,26 @@ export const EditProfile: React.FC = () => {
       // Enviar la solicitud al backend con el token y los datos actualizados
       const response = await pageApi.put(
         '/user/update',
-        { nombre: name, apellidos: lastName, phone },
+        { nombre: name, apellidos: lastName, phone, email:localStorage.getItem("email") },
         { headers: { 'x-token': token } } // Asegúrate de incluir el token en los headers
       );
+      
+      
   
       const data = response.data;
   
       if (data.ok) {
-        console.log('Usuario actualizado:', data.user);
+        const aux={
+          name,
+          lastName,
+          phone,
+          email:user.email,
+          gender:user.gender,
+          birthday:user.birthday
+        }
+        dispatch(updateUser(aux));
+
+        console.log('Usuario actualizado:', user);
       } else {
         console.log('Error al actualizar:', data.msg);
       }
