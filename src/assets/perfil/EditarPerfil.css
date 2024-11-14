@@ -1,0 +1,148 @@
+/* Contenedor de IonContent para el formulario de edición de perfil */
+.edit-profile-body {
+    background: #F5F5DC;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Recuadro que contiene el formulario de edición */
+  .edit-profile-content {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 800px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    margin: 0 auto;
+  }
+  
+  .edit-profile-content:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Estilo del título */
+  h2 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #5C8268;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  
+  /* Estilos para el formulario y sus campos */
+  .edit-profile-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .edit-profile-form label {
+    font-size: 1.2em;
+    color: #4A6651;
+    margin-top: 10px;
+    text-align: left;
+  }
+  
+  .edit-profile-form input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+  }
+  
+  /* Botones de "Guardar Cambios" y "Volver" */
+  .button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .save-button {
+    background-color: #5C8268;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1.2em;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .save-button:hover {
+    background-color: #4d6e56;
+    transform: scale(1.05);
+  }
+  
+  .save-button:focus {
+    outline: none;
+  }
+  
+  /* Botón de "Volver" */
+  .cancel-button {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1.2em;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .cancel-button:hover {
+    background-color: #c9302c;
+    transform: scale(1.05);
+  }
+  
+  .cancel-button:focus {
+    outline: none;
+  }
+  
+  /* Mensaje de éxito */
+  .success-message {
+    color: green;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  /* Contenedor de carga */
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  /* Estilos responsivos para dispositivos móviles */
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 1.8em;
+    }
+  
+    .edit-profile-content {
+      padding: 20px;
+    }
+  
+    .edit-profile-form label {
+      font-size: 1.1em;
+    }
+  
+    .button-group button {
+      font-size: 1em;
+      padding: 10px;
+    }
+  }
+  

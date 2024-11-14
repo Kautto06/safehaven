@@ -154,3 +154,9 @@
   .edit-icon {
     margin-right: 10px; /* Espacio entre el icono y el texto */
   }
+
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+  }
