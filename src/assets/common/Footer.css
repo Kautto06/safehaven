@@ -1,8 +1,11 @@
-/* Estilo general para el footer */
 .footer-toolbar {
     --background: #A9C5A0; /* Mismo color de fondo que el header */
     color: rgb(37, 35, 35); /* Color del texto */
     padding: 10px 0; /* Reducir el padding para disminuir la altura */
+    bottom: 0;
+    position: sticky;
+    width: 100%;
+    background-color: #333; /* Ajuste del color de fondo a oscuro para el footer */
 }
 
 .footer-content {
@@ -21,6 +24,7 @@
     text-align: center; /* Asegura que el contenido esté centrado */
     font-weight: bold; /* Poner el texto en negrita */
     font-size: 1rem; /* Tamaño de la fuente */
+    color: white; /* Color de texto blanco para mayor contraste */
 }
 
 .social-icons {
@@ -33,7 +37,7 @@
 .social-icon {
     font-size: 24px; /* Tamaño del icono */
     margin: 0 10px; /* Espacio entre los iconos */
-    color: rgb(37, 35, 35); /* Color de los iconos */
+    color: white; /* Color de los iconos */
     transition: color 0.3s ease;
     cursor: pointer; /* Cambia el cursor a pointer al pasar por encima */
 }
@@ -49,4 +53,57 @@
         align-items: center; /* Centrar los elementos */
         text-align: center;
     }
+    
+    .footer-section {
+        margin-bottom: 15px; /* Separar más las secciones en móviles */
+    }
+}
+
+/* Estilo para el fondo oscuro en el footer */
+#footer {
+    background-color: #333; /* Fondo oscuro para el footer */
+    color: rgb(15, 15, 15); /* Asegura que el texto sea blanco */
+    padding: 10px 0; /* Espaciado en el footer */
+    bottom: 0;
+    position: sticky;
+    width: 100%;
+}
+
+/* Para los iconos sociales, mejorar la visibilidad */
+#footer .social-icons a {
+    font-size: 20px;
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+#footer .social-icons a:hover {
+    color: #FFD700; /* Resaltar el color dorado en hover */
+}
+
+/* Para que el contenido del footer esté centrado */
+#footer .container-fluid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+#footer .container-fluid .ms-auto {
+    text-align: right; /* Alinea los textos de contacto a la derecha */
+}
+
+#footer .container-fluid .social-links {
+    display: flex;
+    align-items: center;
+}
+
+#footer .container-fluid .social-links a {
+    color: white;
+    font-size: 24px;
+    margin: 0 10px;
+}
+
+#footer .container-fluid .social-links a:hover {
+    color: #FFD700;
 }

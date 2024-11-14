@@ -117,10 +117,11 @@ export const Home: React.FC = () => {
                   ))}
                 </div>
               </div>
-              
+             
           </div>
+          <Footer/>
       </IonContent>
-      <Footer/>
+      
     </IonPage>
     
   );
