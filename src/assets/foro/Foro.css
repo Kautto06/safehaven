@@ -172,33 +172,55 @@ h1 {
 }
 
 .pagination {
-  text-align: center;
-  margin-top: 20px;
+  display: flex;
+  justify-content: center; /* Centra los elementos de la paginación */
+  margin-top: 30px;
+  padding: 10px 0;
 }
 
 .pagination-link {
-  margin: 0 5px;
-  --background: grey;
-  color: white;
-  border-radius: 8px;
-  padding: 10px 15px;
+  background-color: #5C8268; /* Color de fondo */
+  color: white; /* Color del texto */
+  border-radius: 20px; /* Bordes redondeados */
+  padding: 12px 20px; /* Espaciado interior */
+  margin: 0 8px; /* Espaciado entre los enlaces */
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  margin-bottom: 50px;
+  font-size: 1.1em; /* Tamaño de fuente */
+  font-weight: bold; /* Negrita para resaltar el texto */
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Animación de transición */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidad */
 }
 
 .pagination-link:hover {
-  --background: #2f3136;
-  color: white;
+  background-color: #4A7D65; /* Color de fondo cuando se pasa el ratón */
+  transform: translateY(-3px); /* Efecto de elevar el botón */
 }
 
 .pagination-link.active {
-  --background: #585a59;
-  color: white;
+  background-color: #A9C5A0; /* Color de fondo cuando está activo */
+  color: #fff; /* Asegura que el texto sea blanco */
+  transform: scale(1.05); /* Efecto de aumentar el tamaño */
+  box-shadow: 0 6px 12px rgba(192, 80, 80, 0.2); /* Sombra más grande cuando está activo */
+}
+
+.pagination-link.disabled {
+  background-color: #d3d3d3; /* Color gris para el enlace deshabilitado */
+  cursor: not-allowed; /* Cambia el cursor para indicar que no es interactivo */
+  color: #a0a0a0; /* Texto gris para los enlaces deshabilitados */
+  box-shadow: none; /* Elimina la sombra */
 }
 
 .pagination-link ion-icon {
-  vertical-align: middle;
+  vertical-align: middle; /* Alineación vertical de los iconos */
+  margin-left: 5px;
+  font-size: 1.3em; /* Tamaño del icono */
+}
+
+/* Estilos para los iconos de "Siguiente" y "Anterior" */
+.pagination-link .prev,
+.pagination-link .next {
+  font-size: 1.4em; /* Tamaño del icono */
 }
 
 .create-post-container {
@@ -221,4 +243,46 @@ h1 {
 
 .create-post-button:hover { /* Color de fondo al pasar el ratón */
     transform: scale(1.05) !important; /* Aumenta el tamaño del botón al pasar el ratón */
+}
+
+.forum-item {
+  position: relative; /* Necesario para el posicionamiento absoluto de los likes */
+  margin-bottom: 20px; /* Espacio entre las publicaciones */
+}
+
+.likes-count {
+  position: absolute;
+  bottom: 15px; /* Distancia desde la parte inferior */
+  right: 20px; /* Posicionar a la derecha */
+  font-size: 14px;
+  color: #5C8268; /* Color más llamativo para los likes */
+  display: flex;
+  align-items: center;
+  padding: 6px 12px; /* Espaciado interior para dar un poco de margen */
+  background-color: rgba(92, 130, 104, 0.1); /* Fondo suave con transparencia */
+  border-radius: 20px; /* Bordes redondeados */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Animaciones suaves */
+}
+
+.likes-count:hover {
+  background-color: rgba(92, 130, 104, 0.3); /* Cambio de fondo al pasar el ratón */
+  transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el ratón */
+}
+
+.likes-count .ion-icon {
+  margin-right: 8px; /* Espacio entre el icono y el texto */
+  font-size: 1.3em; /* Tamaño mayor para hacer el icono más visible */
+  color: #5C8268; /* Color del icono */
+  transition: color 0.3s ease; /* Transición suave para el color del icono */
+}
+
+.likes-count:hover .ion-icon {
+  color: #4A7D65; /* Cambio de color del icono al pasar el ratón */
+}
+
+.likes-count span {
+  font-weight: bold; /* Resalta el número de likes */
+  color: #4A6651; /* Color del texto */
+  font-size: 1em; /* Ajusta el tamaño de la fuente */
 }

@@ -50,6 +50,7 @@ export const Header: React.FC = () => {
 
     const toggleMenu = () => {
         setShowMenu(!showMenu); // Alterna entre true y false
+        console.log("showMenu:", !showMenu);
     };
 
 

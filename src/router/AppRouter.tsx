@@ -5,7 +5,7 @@ import { Route, Redirect, useLocation } from "react-router";
 import { IonReactRouter } from "@ionic/react-router";
 import { useAuthStore } from "../hooks";
 import {Expertos,EditProfile, Home, UserProfile, CalendarComponent, Autoevaluacion, InformativaDenuncia, Actividades, Denuncia, Notificaciones, Foro, Login, Register, AutoevaluacionInfo, } from '../pages';
-
+import DetallePost from '../pages/foro/DetallePost';
 
 
 
@@ -46,6 +46,7 @@ const AppRouter: React.FC = () => {
               <Route exact path="/calendario" component={CalendarComponent} />
               <Route exact path="/perfilUsuario" component={UserProfile} />
               <Route exact path="/editarPerfil" component={EditProfile} />
+              <Route exact path="/detalle/:id" component={DetallePost} />
               <Route exact path="/" component={Home} />
               
               <Redirect to= {location.pathname}/>
