@@ -113,6 +113,7 @@ h1 {
 
 .forum-text {
   flex: 1;
+  text-overflow: ellipsis;
 }
 
 .forum-text p {

@@ -132,6 +132,7 @@ export const Foro: React.FC = () => {
             >
               Siguiente <span className="pagination-icon">→</span>
             </button>
+            
           </div>
           <Footer />
       </IonContent>
