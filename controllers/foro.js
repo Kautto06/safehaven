@@ -1,5 +1,5 @@
 const { ejecutarConsulta } = require('../database/config'); // Importa tu configuración de conexión a la base de datos
-
+const mysql = require('mysql');
 // Controlador para obtener todos los expertos
 const obtenerForoHome = async (req, res) => {
     try {
@@ -81,10 +81,13 @@ const obtenerForoPaginado = async (req, res) => {
     }
 };
 
+
+
 const obtenerDetallesPost = async (req, res) => {
     const postId = req.params.id; // Obtener el ID del post desde los parámetros de la URL
   
     try {
+
         const query = `
         SELECT 
           p.Titulo AS Titulo,
@@ -93,9 +96,11 @@ const obtenerDetallesPost = async (req, res) => {
           CONCAT(u.nombre, ' ', u.apellidos) AS autor
         FROM publicación p
         JOIN usuarios u ON p.ID_Usuario = u.email
-        WHERE p.ID = ${postId}  
+        WHERE p.ID = ?  
       `;
-      const result = await ejecutarConsulta(query, [postId]);
+      const values = [postId];
+      const formattedQuery = mysql.format(query, values);
+      const result = await ejecutarConsulta(formattedQuery);
 
       // Agregar un console.log para ver lo que devuelve la consulta
       console.log(result); // Verifica el resultado de la consulta
@@ -161,7 +166,46 @@ const obtenerDetallesPost = async (req, res) => {
       res.status(500).json({ message: "Error al disminuir los likes" });
     }
   };
+
+  const crearPublicacion = async (req, res = response) => {
+    const { Titulo, Contenido, ID_Usuario } = req.body;
+
+    try {
+        // Verificamos que el ID_Usuario (correo electrónico) sea una cadena válida
+        if (typeof ID_Usuario !== 'string' || !ID_Usuario.includes('@')) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'El ID del usuario debe ser un correo electrónico válido'
+            });
+        }
+
+        // Realizamos la inserción de la nueva publicación
+        const insertQuery = `
+            INSERT INTO publicación (Titulo, Contenido, ID_Usuario, Likes)
+            VALUES ('${Titulo}', '${Contenido}', '${ID_Usuario}', 0)
+        `;
+
+        await ejecutarConsulta(insertQuery);
+
+        res.status(201).json({
+            ok: true,
+            msg: 'Publicación creada correctamente',
+            Titulo,
+            Contenido,
+            ID_Usuario,
+            Likes: 0,
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Por favor hable con el administrador'
+        });
+    }
+}
+
   
 module.exports = {
-    obtenerForoHome,obtenerForoPaginado,obtenerDetallesPost,manejarLikeIncrement,manejarLikeDecrement,
+    obtenerForoHome,obtenerForoPaginado,obtenerDetallesPost,manejarLikeIncrement,manejarLikeDecrement,crearPublicacion
 };
