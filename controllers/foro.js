@@ -87,6 +87,7 @@ const obtenerDetallesPost = async (req, res) => {
     try {
         const query = `
         SELECT 
+          p.Titulo AS Titulo,
           p.Contenido AS Contenido,
           p.Likes,
           CONCAT(u.nombre, ' ', u.apellidos) AS autor
@@ -110,38 +111,57 @@ const obtenerDetallesPost = async (req, res) => {
     }
   };
 
-  const manejarLike = async (req, res) => {
-    const postId = req.params.id; // Obtener el ID de la publicación desde los parámetros de la URL
-  
+  const manejarLikeIncrement = async (req, res) => {
+    const postId = req.params.id;
     try {
-      // Incrementar el número de likes en la base de datos
       const queryUpdate = `
         UPDATE publicación
         SET Likes = Likes + 1
-         WHERE ID = ${postId} 
+        WHERE ID = ${postId}
       `;
-      
-      await ejecutarConsulta(queryUpdate, [postId]); // Ejecuta la consulta de actualización
+      await ejecutarConsulta(queryUpdate);  // Ejecuta la consulta para incrementar
   
-      // Obtener el número actualizado de likes
-      const querySelect = `
-        SELECT Likes
-        FROM publicación
-         WHERE ID = ${postId} 
-      `;
-      
-      const result = await ejecutarConsulta(querySelect, [postId]);
+      // Recupera el número actualizado de likes
+      const querySelect = `SELECT Likes FROM publicación WHERE ID = ${postId}`;
+      const result = await ejecutarConsulta(querySelect);
   
       if (result.length === 0) {
         return res.status(404).json({ message: "Post no encontrado" });
       }
   
-      res.json({ Likes: result[0].Likes }); // Retorna el número actualizado de likes
+      res.json({ Likes: result[0].Likes });  // Retorna el número actualizado de likes
     } catch (error) {
-      console.error("Error al dar like al post:", error);
-      res.status(500).json({ message: "Error al dar like al post" });
+      console.error("Error al incrementar los likes:", error);
+      res.status(500).json({ message: "Error al incrementar los likes" });
     }
   };
+  
+  // Función para disminuir el like
+  const manejarLikeDecrement = async (req, res) => {
+    const postId = req.params.id;
+    try {
+      const queryUpdate = `
+        UPDATE publicación
+        SET Likes = Likes - 1
+        WHERE ID = ${postId}
+      `;
+      await ejecutarConsulta(queryUpdate);  // Ejecuta la consulta para decrementar
+  
+      // Recupera el número actualizado de likes
+      const querySelect = `SELECT Likes FROM publicación WHERE ID = ${postId}`;
+      const result = await ejecutarConsulta(querySelect);
+  
+      if (result.length === 0) {
+        return res.status(404).json({ message: "Post no encontrado" });
+      }
+  
+      res.json({ Likes: result[0].Likes });  // Retorna el número actualizado de likes
+    } catch (error) {
+      console.error("Error al disminuir los likes:", error);
+      res.status(500).json({ message: "Error al disminuir los likes" });
+    }
+  };
+  
 module.exports = {
-    obtenerForoHome,obtenerForoPaginado,obtenerDetallesPost,manejarLike
+    obtenerForoHome,obtenerForoPaginado,obtenerDetallesPost,manejarLikeIncrement,manejarLikeDecrement,
 };
