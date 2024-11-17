@@ -8,6 +8,7 @@ const DetallePost: React.FC = () => {
   const { id } = useParams<{ id: string }>(); // Obtiene el ID del post desde la URL
   const [post, setPost] = useState<any>(null); // El post detallado
   const [likes, setLikes] = useState<number>(0); // Los likes de la publicación
+  const [hasLiked, setHasLiked] = useState<boolean>(false); // Para controlar si el usuario ya dio like
 
   useEffect(() => {
     const fetchPostDetails = async () => {
@@ -25,8 +26,15 @@ const DetallePost: React.FC = () => {
 
   const handleLike = async () => {
     try {
-      const response = await pageApi.post(`/foro/like/${id}`); // Llama a la API para incrementar el like
-      setLikes(response.data.Likes); // Actualiza el número de likes
+      // Si ya se ha dado like, disminuirlo
+      if (hasLiked) {
+        const response = await pageApi.post(`/foro/like/remove/${id}`); // Llamada a API para disminuir los likes
+        setLikes(response.data.Likes); // Actualiza los likes
+      } else {
+        const response = await pageApi.post(`/foro/like/${id}`); // Llamada a la API para incrementar los likes
+        setLikes(response.data.Likes); // Actualiza los likes
+      }
+      setHasLiked(!hasLiked); // Cambia el estado de "like" para alternar entre dar like y quitarlo
     } catch (error) {
       console.error("Error al dar like", error);
     }
@@ -48,7 +56,7 @@ const DetallePost: React.FC = () => {
         <p>{post.Contenido}</p>
         <p><strong>Autor:</strong> {post.autor}</p>
         
-        <IonButton onClick={handleLike}>
+        <IonButton onClick={handleLike} disabled={hasLiked}>
           <IonIcon icon={thumbsUpOutline} /> {likes} Likes
         </IonButton>
       </IonContent>
