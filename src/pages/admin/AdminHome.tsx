@@ -1,18 +1,22 @@
 import React from "react";
 import { IonPage } from "@ionic/react";
 import '../../assets/admin/AdminHome.css'
-import logo from '../../assets/logos/logoNoBackground.png'
+import logo from '../../assets/logos/logoNoBackground.svg'
 
 export const AdminPage: React.FC = () => {
   const sections = [
     { title: "Denuncias Anónimas", description: "Revisar y clasificar denuncias", route: "/admin/denuncias" },
     { title: "Test de Autoevaluación", description: "Gestionar preguntas y estadísticas", route: "/admin/test" },
     { title: "Foro de Apoyo", description: "Moderación del foro", route: "/admin/foro" },
-    { title: "Atención en Línea", description: "Gestionar disponibilidad de profesionales", route: "/admin/atencion" },
-    { title: "Calendario de Eventos", description: "Administrar eventos", route: "/admin/calendario" },
-    { title: "Notificaciones", description: "Personalizar notificaciones", route: "/admin/notificaciones" },
+    { title: "Expertos", description: "Gestionar disponibilidad de profesionales", route: "/admin/expertos" },
+    { title: "Calendario de Eventos", description: "Administrar eventos", route: "/admin/eventos" },
     { title: "Tu Actividad", description: "Ver estadísticas globales de actividad", route: "/admin/actividad" },
   ];
+
+  const handleLogout = () => {
+    // Aquí puedes implementar la lógica para salir del modo admin y redirigir al home
+    window.location.href = "/";  // Redirige a la página principal
+  };
 
   return (
     <IonPage>
@@ -33,8 +37,14 @@ export const AdminPage: React.FC = () => {
             ))}
           </div>
         </main>
+
+        {/* Botón para volver al inicio y salir del modo admin */}
+        <div className="admin-logout-container">
+          <button className="admin-logout-button" onClick={handleLogout}>
+            Volver al Inicio
+          </button>
+        </div>
       </div>
     </IonPage>
   );
 };
-

@@ -1,0 +1,123 @@
+.events-admin-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  overflow-y: auto; /* Permite el desplazamiento vertical */
+  height: 100vh; 
+  background-color: #F5F5DC;
+}
+
+.events-admin-header {
+  background-color: #2c3e50;
+  color: white;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 40 px;
+}
+
+.events-admin-description {
+  font-size: 1.2rem;
+  color: white;
+}
+
+.events-admin-back-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.events-admin-list {
+  margin-top: 20px;
+}
+
+.events-admin-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.events-admin-card-header {
+  font-weight: bold;
+}
+
+.events-admin-card-content {
+  margin-top: 10px;
+}
+
+.events-admin-card-actions .events-admin-button {
+  padding: 8px 12px;
+  margin-right: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.events-admin-card-actions .events-admin-button.danger {
+  background-color: #dc3545;
+}
+
+.events-admin-add-button {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.events-admin-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.events-admin-popup-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 5px;
+  width: 500px; /* Ancho mayor */
+  height: auto; /* Ajuste automático de altura */
+  text-align: center;
+  max-width: 90%; /* Para que se ajuste en pantallas pequeñas */
+}
+
+.events-admin-popup input,
+.events-admin-popup textarea {
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem; /* Aumentar el tamaño de la fuente */
+}
+
+.events-admin-button {
+  padding: 12px 25px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 5px; /* Más espacio entre los botones */
+  font-size: 1rem;
+}
+
+.events-admin-button.success {
+  background-color: #007bff;
+}
+
+.events-admin-button.danger {
+  background-color: #dc3545;
+}

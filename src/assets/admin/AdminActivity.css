@@ -1,0 +1,104 @@
+.activity-admin-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  overflow-y: auto; /* Permite el desplazamiento vertical */
+  height: 100vh; 
+  background-color: #F5F5DC;
+}
+
+.activity-admin-header {
+  background-color: #2c3e50;
+  color: white;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 40 px;
+}
+
+.activity-admin-header h1 {
+  font-size: 2.5rem;
+  color: white;
+  font-weight: bold;
+}
+
+.activity-admin-description {
+  font-size: 1.1rem;
+  color: white;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.back-button:hover {
+  background-color: #0056b3; /* Efecto hover en el botón */
+}
+
+.activity-admin-stats {
+  margin-top: 40px;
+}
+
+.activity-admin-stat-card {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.activity-admin-stat-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Efecto hover para tarjetas de estadísticas */
+}
+
+.activity-admin-stat-card strong {
+  font-size: 1.2rem;
+  color: #343a40;
+}
+
+.activity-admin-stat-card span {
+  font-size: 1.1rem;
+  color: #495057;
+}
+
+.activity-admin-list {
+  margin-top: 50px;
+}
+
+.activity-admin-card {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.activity-admin-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Efecto hover para tarjetas de actividad */
+}
+
+.activity-admin-card-header {
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #007bff;
+}
+
+.activity-admin-card-header span {
+  font-weight: normal;
+  font-size: 1rem;
+  color: #868e96;
+}
+
+.activity-admin-card-content {
+  margin-top: 10px;
+}
+
+.activity-admin-card-content p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #495057;
+}
+
+.activity-admin-card-content p strong {
+  color: #007bff;
+}

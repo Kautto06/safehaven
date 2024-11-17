@@ -1,12 +1,14 @@
 /* Página del administrador */
 .admin-page {
     font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
+    background-color: #F5F5DC;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow-y: auto; /* Permite el desplazamiento vertical */
+    height: 100vh; 
   }
 
   .admin-icon {
@@ -96,5 +98,26 @@
     .admin-card-description {
       font-size: 0.9rem;
     }
+  }
+  
+  .admin-logout-container {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .admin-logout-button {
+    padding: 12px 20px;
+    background-color: #dc3545; /* Rojo para indicar acción de salida */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .admin-logout-button:hover {
+    background-color: #c82333; /* Cambio de color al pasar el ratón */
   }
   

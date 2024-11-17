@@ -12,4 +12,10 @@ export * from './foro/Foro';
 export * from './notificaciones/Notificaciones';
 export * from './perfil/EditarPerfil';
 export * from './perfil/PerfilUsuario';
-export * from './admin/AdminHome';
+export * from './admin/AdminDenuncia';
+export * from './admin/AdminHome'
+export * from './admin/AdminTestAutoevaluacion'
+export * from './admin/AdminForo'
+export * from './admin/AdminExpertos'
+export * from './admin/AdminEventos'
+export * from './admin/AdminActividades'

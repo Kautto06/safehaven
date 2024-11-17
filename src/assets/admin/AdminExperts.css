@@ -1,0 +1,196 @@
+.experts-admin-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    overflow-y: auto; /* Permite el desplazamiento vertical */
+    height: 100vh; 
+    background-color: #F5F5DC;
+  }
+  
+  .experts-admin-header {
+    background-color: #2c3e50;
+    color: white;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 40 px;
+  }
+  
+  .experts-admin-header h1 {
+    font-size: 1.8rem;
+    color: white;
+  }
+  
+  .experts-admin-intro p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: white;
+  }
+  
+
+  .experts-admin-add-button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .experts-admin-add-button:hover {
+    background-color: #218838;
+  }
+  
+  .experts-admin-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .experts-admin-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: calc(33.333% - 20px);
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .experts-admin-image-wrapper {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .experts-admin-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  
+  .experts-admin-info h3 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: #333;
+  }
+  
+  .experts-admin-info p {
+    font-size: 0.9rem;
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  .experts-admin-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  .experts-admin-edit-button,
+  .experts-admin-delete-button {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .experts-admin-edit-button {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .experts-admin-edit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .experts-admin-delete-button {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  .experts-admin-delete-button:hover {
+    background-color: #c82333;
+  }
+  
+  .experts-admin-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .experts-admin-add-popup,
+  .experts-admin-confirmation-popup {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+  }
+  
+  .experts-admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+  }
+  
+  .experts-admin-form input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .experts-admin-form-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .experts-admin-submit-button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .experts-admin-submit-button:hover {
+    background-color: #218838;
+  }
+  
+  .experts-admin-cancel-button {
+    background-color: #6c757d;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .experts-admin-cancel-button:hover {
+    background-color: #5a6268;
+  }
+  
