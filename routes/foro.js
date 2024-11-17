@@ -7,7 +7,8 @@ const foroController = require('../controllers/foro');
 router.get('/ordenar', foroController.obtenerForoPaginado);
 
 // Ruta para obtener los detalles de un post específico
-router.get('/foro/detalles/:id', foroController.obtenerDetallesPost);  // Usamos el controlador directamente
+router.get('/detalles/:id', foroController.obtenerDetallesPost);  // Usamos el controlador directamente
+router.post('/like/:id', foroController.manejarLike);
 
 // Ruta para la página principal del foro
 router.get('/', foroController.obtenerForoHome);

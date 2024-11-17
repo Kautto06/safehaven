@@ -85,15 +85,14 @@ const obtenerDetallesPost = async (req, res) => {
     const postId = req.params.id; // Obtener el ID del post desde los parámetros de la URL
   
     try {
-      const query = `
+        const query = `
         SELECT 
-          p.Titulo AS Titulo,
           p.Contenido AS Contenido,
           p.Likes,
           CONCAT(u.nombre, ' ', u.apellidos) AS autor
         FROM publicación p
         JOIN usuarios u ON p.ID_Usuario = u.email
-        WHERE p.ID = ?
+        WHERE p.ID = ${postId}  
       `;
       const result = await ejecutarConsulta(query, [postId]);
 
@@ -111,7 +110,38 @@ const obtenerDetallesPost = async (req, res) => {
     }
   };
 
-
+  const manejarLike = async (req, res) => {
+    const postId = req.params.id; // Obtener el ID de la publicación desde los parámetros de la URL
+  
+    try {
+      // Incrementar el número de likes en la base de datos
+      const queryUpdate = `
+        UPDATE publicación
+        SET Likes = Likes + 1
+         WHERE ID = ${postId} 
+      `;
+      
+      await ejecutarConsulta(queryUpdate, [postId]); // Ejecuta la consulta de actualización
+  
+      // Obtener el número actualizado de likes
+      const querySelect = `
+        SELECT Likes
+        FROM publicación
+         WHERE ID = ${postId} 
+      `;
+      
+      const result = await ejecutarConsulta(querySelect, [postId]);
+  
+      if (result.length === 0) {
+        return res.status(404).json({ message: "Post no encontrado" });
+      }
+  
+      res.json({ Likes: result[0].Likes }); // Retorna el número actualizado de likes
+    } catch (error) {
+      console.error("Error al dar like al post:", error);
+      res.status(500).json({ message: "Error al dar like al post" });
+    }
+  };
 module.exports = {
-    obtenerForoHome,obtenerForoPaginado,obtenerDetallesPost
+    obtenerForoHome,obtenerForoPaginado,obtenerDetallesPost,manejarLike
 };
