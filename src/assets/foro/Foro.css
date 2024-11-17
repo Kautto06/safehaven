@@ -113,6 +113,7 @@ h1 {
 
 .forum-text {
   flex: 1;
+  text-overflow: ellipsis;
 }
 
 .forum-text p {
@@ -285,4 +286,19 @@ h1 {
   font-weight: bold; /* Resalta el número de likes */
   color: #4A6651; /* Color del texto */
   font-size: 1em; /* Ajusta el tamaño de la fuente */
+}
+
+.create-post-button {
+  background-color: #4A6651; /* Color primario de Ionic */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.create-post-button:hover {
+  background-color: #3171e0; /* Color de hover */
 }
