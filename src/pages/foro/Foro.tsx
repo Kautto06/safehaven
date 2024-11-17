@@ -68,6 +68,12 @@ export const Foro: React.FC = () => {
       <IonContent className='forum-body'>
         <main>
           <h1>Foro</h1>
+          <button 
+              className="create-post-button" 
+              onClick={() => history.push('/crearPublicacion')}
+            >
+              Crear publicación
+        </button>
           <div className="header-right">
             <span>Publicaciones {orderBy === 'popular' ? 'más populares' : 'más recientes'}</span>
             <IonButton fill="clear" className="sort-button-forum" onClick={handleOrderChange}>

@@ -9,7 +9,10 @@ export * from './denuncia/Denuncia';
 export * from './denuncia/InfoDenuncia';
 export * from './expertos/Expertos';
 export * from './foro/Foro';
+export * from './foro/DetallePost';
+export * from './foro/crearPublicacion';
 export * from './notificaciones/Notificaciones';
 export * from './perfil/EditarPerfil';
 export * from './perfil/PerfilUsuario';
 export * from './admin/AdminHome';
+

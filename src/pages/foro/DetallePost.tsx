@@ -7,7 +7,7 @@ import { IonContent, IonPage, IonImg, IonIcon } from '@ionic/react';
 import '../../assets/foro/detallePost.css';
 import { Footer, Header } from '../../components';
 
-const DetallePost: React.FC = () => {
+export const DetallePost: React.FC = () => {
   const { id } = useParams<{ id: string }>(); // Obtiene el ID del post desde la URL
   const [post, setPost] = useState<any>(null); // El post detallado
   const [likes, setLikes] = useState<number>(0); // Los likes de la publicación
@@ -86,4 +86,4 @@ const DetallePost: React.FC = () => {
   );
 };
 
-export default DetallePost;
+
