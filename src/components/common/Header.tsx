@@ -36,6 +36,9 @@ const DropdownMenu: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                 <IonItem routerLink="/actividades" onClick={onClose}>
                             <IonLabel>Actividades</IonLabel>
                 </IonItem>
+                <IonItem routerLink="/admin" onClick={onClose}>
+                            <IonLabel>Modo Admin</IonLabel>
+                </IonItem>
             </IonList>
         </div>
     );

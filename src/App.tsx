@@ -6,7 +6,6 @@ import AppRouter from './router/AppRouter';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
-import Register from './pages/auth/Register';
 setupIonicReact();
 
 const App: React.FC = () => (

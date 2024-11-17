@@ -12,3 +12,4 @@ export * from './foro/Foro';
 export * from './notificaciones/Notificaciones';
 export * from './perfil/EditarPerfil';
 export * from './perfil/PerfilUsuario';
+export * from './admin/AdminHome';
