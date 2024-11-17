@@ -114,98 +114,42 @@
 
 
 /* Estilo para la sección subdividida */
-.content-section {
-  display: flex;
-  justify-content: space-between;
-  padding: 40px 20px;
-}
-
-/* Estilo para la sección del foro */
-.forum-section {
-  flex: 1;
-  padding-right: 20px;
-}
-
-.forum-posts {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.forum-post {
-  display: flex;
-  align-items: center;
-  background-color: #f0f0f0;
-  padding: 15px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.forum-post:hover {
-  transform: scale(1.01);
-}
-
-.forum-image {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-right: 15px;
-}
-
-.post-details {
-  display: flex;
-  flex-direction: column;
-}
-
-.post-details h3 {
-  font-size: 1.2em;
-  margin: 0;
-}
-
-.post-details p {
-  font-size: 0.9em;
-  color: #666;
-}
-
-
 /* Estilo para la sección subdividida */
 .content-section {
   display: flex;
   justify-content: space-between;
   padding: 40px 20px;
+  gap: 20px; /* Espacio entre las dos secciones */
 }
 
-/* Sección izquierda - Foro */
+/* Sección izquierda - Foro y expertos */
 .forum-section, .experts-section {
   flex: 1;
-  margin-bottom: 40px; /* Asegura que ambas secciones tengan el mismo margen inferior */
   display: flex;
-  flex-direction: column; /* Alinea las publicaciones verticalmente */
+  flex-direction: column; /* Alinea verticalmente las publicaciones */
   gap: 20px; /* Espacio entre publicaciones dentro de la misma sección */
 }
 
-
-/* Estilo para los contenedores de los posts del foro y de los expertos */
+/* Aseguramos que las publicaciones tengan el mismo tamaño y se alineen */
 .forum-post, .expert-item {
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Asegura que los elementos dentro de cada post se distribuyan bien */
   background-color: #f0f0f0;
   padding: 15px;
   border-radius: 10px;
   cursor: pointer;
   transition: transform 0.3s ease;
-  margin-bottom: 40px; /* Espacio entre publicaciones del foro y expertos */
+  margin-bottom: 20px; /* Espacio entre los items */
+  height: 150px; /* Asegura que todas las publicaciones tengan la misma altura */
 }
-
-
 
 /* Alineación uniforme cuando se amplía el contenido */
 .forum-post:hover, .expert-item:hover {
   transform: scale(1.02);
 }
 
+/* Estilos para las imágenes de los posts de foro y los expertos */
 .forum-image, .expert-image {
   width: 80px;
   height: 80px;
@@ -213,6 +157,7 @@
   border-radius: 50%;
   margin-right: 15px;
 }
+
 /* Detalles de los posts del foro y expertos */
 .post-details, .expert-details {
   display: flex;
@@ -221,9 +166,7 @@
   flex-grow: 1; /* Permite que el texto ocupe el mismo espacio en todos los elementos */
 }
 
-
-
-
+/* Asegurar que el texto del foro y los expertos se ajuste de manera consistente */
 .post-details h3, .expert-details h3 {
   font-size: 1.2em;
   margin: 0;
@@ -233,19 +176,14 @@
   font-size: 0.9em;
   color: #666;
   margin: 0; /* Asegurarse de que no haya márgenes extra */
-}
-
-/* Asegurar consistencia en el tamaño de los textos */
-.post-details p, .expert-details p {
   flex-grow: 1; /* Asegura que el párrafo use todo el espacio disponible */
   display: flex;
   align-items: center; /* Centra verticalmente el texto si es necesario */
 }
 
+/* Acentúa el rol del experto */
 .expert-details p:nth-child(2) {
-  font-weight: bold; /* Acentúa el rol del experto */
+  font-weight: bold;
 }
-
-
 
   

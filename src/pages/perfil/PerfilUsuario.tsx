@@ -1,5 +1,4 @@
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
+
 import React, { useState } from 'react';
 import { IonContent, IonPage, IonButton, IonIcon, IonImg, IonSpinner } from '@ionic/react';
 import { createOutline} from 'ionicons/icons';
