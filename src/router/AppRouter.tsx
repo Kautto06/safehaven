@@ -4,10 +4,6 @@ import { Route, Redirect, useLocation } from "react-router";
 
 import { IonReactRouter } from "@ionic/react-router";
 import { useAuthStore } from "../hooks";
-import {Expertos,EditProfile, Home, UserProfile, CalendarComponent, Autoevaluacion, InformativaDenuncia, Actividades, Denuncia, Notificaciones, Foro, Login, Register, AutoevaluacionInfo,DetallePost,CrearPublicacion } from '../pages';
-
-
-
 
 import {
   Expertos,
@@ -33,6 +29,7 @@ import {
   CrearPublicacion,
   DetallePost
 } from '../pages';
+
 import { AdminDenuncias } from "../pages/admin/AdminDenuncia";
 
 
