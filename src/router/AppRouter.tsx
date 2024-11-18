@@ -9,6 +9,36 @@ import {Expertos,EditProfile, Home, UserProfile, CalendarComponent, Autoevaluaci
 
 
 
+import {
+  Expertos,
+  EditProfile,
+  Home,
+  UserProfile,
+  CalendarComponent,
+  Autoevaluacion,
+  InformativaDenuncia,
+  Actividades,
+  Denuncia,
+  Notificaciones, 
+  Foro, 
+  Login, 
+  Register, 
+  AutoevaluacionInfo, 
+  AdminPage, 
+  AdminTestAutoevaluacion,  
+  AdminForo,
+  AdminExperts,
+  AdminEvents,
+  ActivityAdmin,
+  CrearPublicacion,
+  DetallePost
+} from '../pages';
+import { AdminDenuncias } from "../pages/admin/AdminDenuncia";
+
+
+
+
+
 
 
 const AppRouter: React.FC = () => {
@@ -47,6 +77,14 @@ const AppRouter: React.FC = () => {
               <Route exact path="/perfilUsuario" component={UserProfile} />
               <Route exact path="/editarPerfil" component={EditProfile} />
               <Route exact path="/detalle/:id" component={DetallePost} />
+              <Route exact path="/crearPublicacion" component={CrearPublicacion} />
+              <Route exact path="/admin" component={AdminPage}/>
+              <Route exact path="/admin/denuncias" component={AdminDenuncias}/>
+              <Route exact path="/admin/test" component={AdminTestAutoevaluacion}/>
+              <Route exact path="/admin/foro" component={AdminForo}/>
+              <Route exact path="/admin/expertos" component={AdminExperts}/>
+              <Route exact path="/admin/eventos" component={AdminEvents}/>
+              <Route exact path="/admin/actividad" component={ActivityAdmin}/>
               <Route exact path="/crearPublicacion" component={CrearPublicacion} />
               <Route exact path="/" component={Home} />
               
