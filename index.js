@@ -13,6 +13,7 @@ app.use('/api/experts',require('./routes/experts'))
 app.use('/api/auth',require('./routes/auth'))
 app.use('/api/user', require('./routes/user'));
 app.use('/api/foro', require('./routes/foro'));
+//app.use('/api/autoEvaluacion', require('./routes/'))
 
 app.listen(process.env.PORT, () => {
     console.log(`Servidor corriendo en puerto ${process.env.PORT}`)

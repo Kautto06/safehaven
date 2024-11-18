@@ -1,4 +1,5 @@
 const { ejecutarConsulta } = require('../database/config'); // Importa tu configuración de conexión a la base de datos
+const mysql = require('mysql');
 
 // Controlador para obtener todos los expertos
 const obtenerForoHome = async (req, res) => {
@@ -83,7 +84,6 @@ const obtenerForoPaginado = async (req, res) => {
 
 const obtenerDetallesPost = async (req, res) => {
     const postId = req.params.id; // Obtener el ID del post desde los parámetros de la URL
-  
     try {
       const query = `
         SELECT 
@@ -95,7 +95,12 @@ const obtenerDetallesPost = async (req, res) => {
         JOIN usuarios u ON p.ID_Usuario = u.email
         WHERE p.ID = ?
       `;
-      const result = await ejecutarConsulta(query, [postId]);
+
+      const values = [postId];
+
+    // Formatea la consulta para evitar problemas con los parámetros
+      const formattedQuery = mysql.format(query, values);
+      const result = await ejecutarConsulta(formattedQuery);
 
       // Agregar un console.log para ver lo que devuelve la consulta
       console.log(result); // Verifica el resultado de la consulta
@@ -111,7 +116,82 @@ const obtenerDetallesPost = async (req, res) => {
     }
   };
 
+  const crearForo = async (req, res) => {
+    const { Contenido, Titulo, ID_Usuario } = req.body;
+  
+    try {
+      const query = `
+        INSERT INTO foro (Contenido, Titulo, ID_Usuario, Fecha_Publicacion)
+        VALUES (?, ?, ?, NOW())
+      `;
+      const values = [Contenido, Titulo, ID_Usuario];
+      const formattedQuery = mysql.format(query, values);
+  
+      const result = await ejecutarConsulta(formattedQuery);
+  
+      res.status(201).json({
+        message: "Publicación creada exitosamente",
+        publicacionId: result.insertId,
+      });
+    } catch (error) {
+      console.error("Error al crear la publicación:", error);
+      res.status(500).json({ message: "Error al crear la publicación" });
+    }
+  };
+  
+  // Eliminar una publicación
+  const eliminarForo = async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      const query = 'DELETE FROM foro WHERE ID = ?';
+      const formattedQuery = mysql.format(query, [id]);
+  
+      const result = await ejecutarConsulta(formattedQuery);
+  
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Publicación no encontrada" });
+      }
+  
+      res.json({ message: "Publicación eliminada exitosamente" });
+    } catch (error) {
+      console.error("Error al eliminar la publicación:", error);
+      res.status(500).json({ message: "Error al eliminar la publicación" });
+    }
+  };
+  
+  // Actualizar una publicación existente
+  const actualizarForo = async (req, res) => {
+    const { id } = req.params;
+    const { Contenido, Titulo, ID_Usuario } = req.body;
+  
+    try {
+      const query = `
+        UPDATE foro
+        SET
+          Contenido = COALESCE(?, Contenido),
+          Titulo = COALESCE(?, Titulo),
+          ID_Usuario = COALESCE(?, ID_Usuario),
+          Fecha_Actualizacion = NOW()
+        WHERE ID = ?
+      `;
+      const values = [Contenido, Titulo, ID_Usuario, id];
+      const formattedQuery = mysql.format(query, values);
+  
+      const result = await ejecutarConsulta(formattedQuery);
+  
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Publicación no encontrada" });
+      }
+  
+      res.json({ message: "Publicación actualizada exitosamente" });
+    } catch (error) {
+      console.error("Error al actualizar la publicación:", error);
+      res.status(500).json({ message: "Error al actualizar la publicación" });
+    }
+  };
+
 
 module.exports = {
-    obtenerForoHome,obtenerForoPaginado,obtenerDetallesPost
+    obtenerForoHome,obtenerForoPaginado,obtenerDetallesPost,crearForo,actualizarForo,eliminarForo
 };
