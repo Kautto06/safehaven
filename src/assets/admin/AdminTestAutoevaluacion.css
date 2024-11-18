@@ -12,6 +12,7 @@
     padding: 20px;
     max-height: 100vh;
     overflow-y: auto;  /* Permite el desplazamiento vertical */
+    height: 100vh; 
     background-color: #F5F5DC;
   }
   
@@ -28,6 +29,7 @@
     margin-bottom: 20px;
   }
   
+  .input-question-new,
   .input-question,
   .input-edit-question {
     padding: 10px;
@@ -46,7 +48,7 @@
     margin-top: 10px;
   }
   
-  .add-question-button {
+  .add-question-button-new {
     background-color: green;
     color: white;
   }
@@ -61,15 +63,64 @@
     color: white;
   }
   
-  .save-button-test {
-    background-color: blue;
-    color: white;
-  }
-  
-  .cancel-button-test {
-    background-color: gray;
-    color: white;
-  }
+  /* Estilo para el formulario de edición */
+.edit-question-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px; /* Limita el ancho del formulario */
+  margin: 20px auto; /* Centra el formulario */
+}
+
+/* Estilo para el input de la pregunta */
+.input-question {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 350px; /* Limita el tamaño del input */
+  box-sizing: border-box; /* Asegura que el padding no afecte al tamaño total */
+}
+
+/* Estilo para el botón de guardar */
+.save-button-test {
+  padding: 10px 20px;
+  background-color: #28a745; /* Verde */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.save-button-test:hover {
+  background-color: #218838; /* Un verde más oscuro */
+}
+
+/* Estilo para el botón de cancelar */
+.cancel-button-test {
+  padding: 10px 20px;
+  background-color: #dc3545; /* Rojo */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-button-test:hover {
+  background-color: #c82333; /* Un rojo más oscuro */
+}
   
   .question-list {
     margin-top: 30px;
@@ -107,4 +158,259 @@
   .question-card input {
     width: 100%;
   }
+
+ /* Estilo del contenedor del modal 
+
+/* Estilo del contenedor del modal */
+.options-modal-content {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 600px;
+  overflow-y: auto; 
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.options-modal-content h2 {
+  text-align: center;
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.option-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f7f7f7;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.option-item:hover {
+  background-color: #eaeaea;
+}
+
+.option-item span {
+  font-size: 1.1em;
+  color: #444;
+  flex-grow: 1;
+  text-align: left;
+}
+
+.option-item button {
+  background-color: #007bff;  /* Cambiado al azul original */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}
+
+.option-item button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo del contenedor de agregar opción */
+.add-option {
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-between;
+}
+
+.add-option input {
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 1.1em;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  transition: border 0.3s ease;
+}
+
+.add-option input:focus {
+  border: 1px solid #007bff;
+  outline: none;
+}
+
+.add-option button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 15px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}
+
+.add-option button:hover {
+  background-color: #218838;
+}
+
+/* Estilo de los botones de editar y eliminar opción */
+.option-item button.edit-btn {
+  background-color: #fd7e14; /* Naranja */
+  color: white;
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}
+
+.option-item button.edit-btn:hover {
+  background-color: #e66a00; /* Naranja más oscuro */
+}
+
+.option-item button.delete-btn {
+  background-color: #dc3545; /* Rojo */
+  color: white;
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}
+
+.option-item button.delete-btn:hover {
+  background-color: #c82333; /* Rojo más oscuro */
+}
+
+/* Estilo para el modal de editar opción */
+.edit-option-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.edit-option-modal input {
+  padding: 10px;
+  font-size: 1.1em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.edit-option-modal input:focus {
+  border-color: #fd7e14; /* Naranja para resaltar el campo */
+  outline: none;
+}
+
+.edit-option-modal button.save-btn {
+  background-color: #fd7e14; /* Naranja */
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.edit-option-modal button.save-btn:hover {
+  background-color: #e66a00; /* Naranja más oscuro */
+}
+
+.edit-option-modal button.cancel-btn {
+  background-color: #dc3545; /* Rojo */
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.edit-option-modal button.cancel-btn:hover {
+  background-color: #c82333; /* Rojo más oscuro */
+}
+
+.edit-option-form-container {
+  display: flex;
+  justify-content: center;  /* Centrado horizontal */
+  align-items: center;      /* Centrado vertical */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);  /* Fondo semi-transparente */
+  z-index: 9999;  /* Asegura que el modal esté por encima de otros elementos */
+}
+
+.edit-option-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espacio entre el input y los botones */
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 300px; /* Ancho fijo para el formulario */
+  margin-top: 20px;
+  max-width: 100%; /* Asegura que no sobrepase el ancho de la pantalla */
+}
+
+.input-option {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px; /* Espacio debajo del input */
+}
+
+.input-option:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Botón de guardar (verde) */
+.save-option-button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.save-option-button:hover {
+  background-color: darkgreen;
+}
+
+/* Botón de cancelar (gris) */
+.cancel-option-button {
+  background-color: gray;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.cancel-option-button:hover {
+  background-color: darkgray;
+}
+
+
+
+  
   

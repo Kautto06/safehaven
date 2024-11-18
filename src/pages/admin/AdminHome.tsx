@@ -2,8 +2,10 @@ import React from "react";
 import { IonPage } from "@ionic/react";
 import '../../assets/admin/AdminHome.css'
 import logo from '../../assets/logos/logoNoBackground.svg'
+import { useHistory } from "react-router";
 
 export const AdminPage: React.FC = () => {
+  const history = useHistory()
   const sections = [
     { title: "Denuncias Anónimas", description: "Revisar y clasificar denuncias", route: "/admin/denuncias" },
     { title: "Test de Autoevaluación", description: "Gestionar preguntas y estadísticas", route: "/admin/test" },
@@ -15,7 +17,7 @@ export const AdminPage: React.FC = () => {
 
   const handleLogout = () => {
     // Aquí puedes implementar la lógica para salir del modo admin y redirigir al home
-    window.location.href = "/";  // Redirige a la página principal
+    history.push('/')  // Redirige a la página principal
   };
 
   return (

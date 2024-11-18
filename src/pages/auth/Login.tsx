@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import '../../assets/auth/Login.css';
 import logo from '../../assets/logos/logoNoBackground.png';
 import { useAuthStore } from '../../hooks';
+import { wineOutline } from 'ionicons/icons';
 
 
 export const Login: React.FC = () => {
@@ -38,7 +39,7 @@ export const Login: React.FC = () => {
     if (!verificarDatos()) return;
     try {
       await startLogin({ email, password });
-      history.push('/')
+      window.location.href = '/'
     } catch (error) {
       console.error('Error al intentar iniciar sesión:', error);
       setErrorMessage('Error al intentar iniciar sesión.');
