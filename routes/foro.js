@@ -3,14 +3,48 @@ const express = require('express');
 const router = express.Router();
 const foroController = require('../controllers/foro');
 
-// Ruta para obtener todas las publicaciones del foro
 router.get('/ordenar', foroController.obtenerForoPaginado);
 
 // Ruta para obtener los detalles de un post específico
-router.get('/detalles/:id', foroController.obtenerDetallesPost);  // Usamos el controlador directamente
-router.post('/like/:id', foroController.manejarLike);
+router.get('/detalles/:id', foroController.obtenerDetallesPost);  
 
-// Ruta para la página principal del foro
+router.post('/like/:id', foroController.manejarLikeIncrement);
+
+// Ruta para eliminar un like
+router.post('/remove/:id', foroController.manejarLikeDecrement);
+
+router.post('/crear', foroController.crearPublicacion);
+
 router.get('/', foroController.obtenerForoHome);
+
+router.post('/crear', [
+    check('Contenido', 'El contenido es obligatorio').not().isEmpty(),
+    check('Titulo', 'El título es obligatorio').not().isEmpty(),
+    check('ID_Usuario', 'El ID del usuario es obligatorio').not().isEmpty(),
+    validarJWT,          
+    validarCampos        
+], foroController.crearForo);
+
+
+router.delete('/eliminar/:id', [
+    check('id')
+        .isInt().withMessage('El ID debe ser un número entero.')
+        .custom(validarPublicacionExistente), 
+    validarJWT,          
+    validarCampos        
+], foroController.eliminarForo);
+
+router.put('/actualizar/:id', [
+    check('id')
+        .isInt().withMessage('El ID debe ser un número entero.')
+        .custom(validarPublicacionExistente), 
+    check('Contenido', 'El contenido es obligatorio').not().isEmpty(),
+    check('Titulo', 'El título es obligatorio').not().isEmpty(),
+    check('ID_Usuario', 'El ID del usuario es obligatorio').not().isEmpty(),
+    validarJWT,          
+    validarCampos        
+], foroController.actualizarForo);
+
+
 
 module.exports = router;

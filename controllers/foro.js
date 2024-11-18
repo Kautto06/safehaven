@@ -1,5 +1,5 @@
 const { ejecutarConsulta } = require('../database/config'); // Importa tu configuración de conexión a la base de datos
-
+const mysql = require('mysql');
 // Controlador para obtener todos los expertos
 const obtenerForoHome = async (req, res) => {
     try {
@@ -81,20 +81,28 @@ const obtenerForoPaginado = async (req, res) => {
     }
 };
 
+
+
 const obtenerDetallesPost = async (req, res) => {
     const postId = req.params.id; // Obtener el ID del post desde los parámetros de la URL
-  
     try {
+
         const query = `
         SELECT 
+          p.Titulo AS Titulo,
           p.Contenido AS Contenido,
           p.Likes,
           CONCAT(u.nombre, ' ', u.apellidos) AS autor
         FROM publicación p
         JOIN usuarios u ON p.ID_Usuario = u.email
-        WHERE p.ID = ${postId}  
+        WHERE p.ID = ?  
       `;
-      const result = await ejecutarConsulta(query, [postId]);
+
+      const values = [postId];
+
+    // Formatea la consulta para evitar problemas con los parámetros
+      const formattedQuery = mysql.format(query, values);
+      const result = await ejecutarConsulta(formattedQuery);
 
       // Agregar un console.log para ver lo que devuelve la consulta
       console.log(result); // Verifica el resultado de la consulta
@@ -110,38 +118,172 @@ const obtenerDetallesPost = async (req, res) => {
     }
   };
 
-  const manejarLike = async (req, res) => {
-    const postId = req.params.id; // Obtener el ID de la publicación desde los parámetros de la URL
+  const crearForo = async (req, res) => {
+    const { Contenido, Titulo, ID_Usuario } = req.body;
   
     try {
-      // Incrementar el número de likes en la base de datos
+      const query = `
+        INSERT INTO foro (Contenido, Titulo, ID_Usuario, Fecha_Publicacion)
+        VALUES (?, ?, ?, NOW())
+      `;
+      const values = [Contenido, Titulo, ID_Usuario];
+      const formattedQuery = mysql.format(query, values);
+  
+      const result = await ejecutarConsulta(formattedQuery);
+  
+      res.status(201).json({
+        message: "Publicación creada exitosamente",
+        publicacionId: result.insertId,
+      });
+    } catch (error) {
+      console.error("Error al crear la publicación:", error);
+      res.status(500).json({ message: "Error al crear la publicación" });
+    }
+  };
+  
+  // Eliminar una publicación
+  const eliminarForo = async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      const query = 'DELETE FROM foro WHERE ID = ?';
+      const formattedQuery = mysql.format(query, [id]);
+  
+      const result = await ejecutarConsulta(formattedQuery);
+  
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Publicación no encontrada" });
+      }
+  
+      res.json({ message: "Publicación eliminada exitosamente" });
+    } catch (error) {
+      console.error("Error al eliminar la publicación:", error);
+      res.status(500).json({ message: "Error al eliminar la publicación" });
+    }
+  };
+  
+  // Actualizar una publicación existente
+  const actualizarForo = async (req, res) => {
+    const { id } = req.params;
+    const { Contenido, Titulo, ID_Usuario } = req.body;
+  
+    try {
+      const query = `
+        UPDATE foro
+        SET
+          Contenido = COALESCE(?, Contenido),
+          Titulo = COALESCE(?, Titulo),
+          ID_Usuario = COALESCE(?, ID_Usuario),
+          Fecha_Actualizacion = NOW()
+        WHERE ID = ?
+      `;
+      const values = [Contenido, Titulo, ID_Usuario, id];
+      const formattedQuery = mysql.format(query, values);
+  
+      const result = await ejecutarConsulta(formattedQuery);
+  
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Publicación no encontrada" });
+      }
+  
+      res.json({ message: "Publicación actualizada exitosamente" });
+    } catch (error) {
+      console.error("Error al actualizar la publicación:", error);
+      res.status(500).json({ message: "Error al actualizar la publicación" });
+    }
+  };
+
+  const manejarLikeIncrement = async (req, res) => {
+    const postId = req.params.id;
+    try {
       const queryUpdate = `
         UPDATE publicación
         SET Likes = Likes + 1
-         WHERE ID = ${postId} 
+        WHERE ID = ${postId}
       `;
-      
-      await ejecutarConsulta(queryUpdate, [postId]); // Ejecuta la consulta de actualización
+      await ejecutarConsulta(queryUpdate);  // Ejecuta la consulta para incrementar
   
-      // Obtener el número actualizado de likes
-      const querySelect = `
-        SELECT Likes
-        FROM publicación
-         WHERE ID = ${postId} 
-      `;
-      
-      const result = await ejecutarConsulta(querySelect, [postId]);
+      // Recupera el número actualizado de likes
+      const querySelect = `SELECT Likes FROM publicación WHERE ID = ${postId}`;
+      const result = await ejecutarConsulta(querySelect);
   
       if (result.length === 0) {
         return res.status(404).json({ message: "Post no encontrado" });
       }
   
-      res.json({ Likes: result[0].Likes }); // Retorna el número actualizado de likes
+      res.json({ Likes: result[0].Likes });  // Retorna el número actualizado de likes
     } catch (error) {
-      console.error("Error al dar like al post:", error);
-      res.status(500).json({ message: "Error al dar like al post" });
+      console.error("Error al incrementar los likes:", error);
+      res.status(500).json({ message: "Error al incrementar los likes" });
     }
   };
+  
+  // Función para disminuir el like
+  const manejarLikeDecrement = async (req, res) => {
+    const postId = req.params.id;
+    try {
+      const queryUpdate = `
+        UPDATE publicación
+        SET Likes = Likes - 1
+        WHERE ID = ${postId}
+      `;
+      await ejecutarConsulta(queryUpdate);  // Ejecuta la consulta para decrementar
+  
+      // Recupera el número actualizado de likes
+      const querySelect = `SELECT Likes FROM publicación WHERE ID = ${postId}`;
+      const result = await ejecutarConsulta(querySelect);
+  
+      if (result.length === 0) {
+        return res.status(404).json({ message: "Post no encontrado" });
+      }
+  
+      res.json({ Likes: result[0].Likes });  // Retorna el número actualizado de likes
+    } catch (error) {
+      console.error("Error al disminuir los likes:", error);
+      res.status(500).json({ message: "Error al disminuir los likes" });
+    }
+  };
+
+  const crearPublicacion = async (req, res = response) => {
+    const { Titulo, Contenido, ID_Usuario } = req.body;
+
+    try {
+        // Verificamos que el ID_Usuario (correo electrónico) sea una cadena válida
+        if (typeof ID_Usuario !== 'string' || !ID_Usuario.includes('@')) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'El ID del usuario debe ser un correo electrónico válido'
+            });
+        }
+
+        // Realizamos la inserción de la nueva publicación
+        const insertQuery = `
+            INSERT INTO publicación (Titulo, Contenido, ID_Usuario, Likes)
+            VALUES ('${Titulo}', '${Contenido}', '${ID_Usuario}', 0)
+        `;
+
+        await ejecutarConsulta(insertQuery);
+
+        res.status(201).json({
+            ok: true,
+            msg: 'Publicación creada correctamente',
+            Titulo,
+            Contenido,
+            ID_Usuario,
+            Likes: 0,
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Por favor hable con el administrador'
+        });
+    }
+}
+
+  
 module.exports = {
-    obtenerForoHome,obtenerForoPaginado,obtenerDetallesPost,manejarLike
+    obtenerForoHome,obtenerForoPaginado,obtenerDetallesPost,crearForo,actualizarForo,eliminarForo,
+    manejarLikeIncrement,manejarLikeDecrement,crearPublicacion
 };
