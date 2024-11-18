@@ -1,6 +1,5 @@
 const { ejecutarConsulta } = require('../database/config'); // Importa tu configuración de conexión a la base de datos
 const mysql = require('mysql');
-
 // Controlador para obtener todos los expertos
 const obtenerForoHome = async (req, res) => {
     try {
@@ -82,10 +81,13 @@ const obtenerForoPaginado = async (req, res) => {
     }
 };
 
+
+
 const obtenerDetallesPost = async (req, res) => {
     const postId = req.params.id; // Obtener el ID del post desde los parámetros de la URL
     try {
-      const query = `
+
+        const query = `
         SELECT 
           p.Titulo AS Titulo,
           p.Contenido AS Contenido,
@@ -93,7 +95,7 @@ const obtenerDetallesPost = async (req, res) => {
           CONCAT(u.nombre, ' ', u.apellidos) AS autor
         FROM publicación p
         JOIN usuarios u ON p.ID_Usuario = u.email
-        WHERE p.ID = ?
+        WHERE p.ID = ?  
       `;
 
       const values = [postId];
@@ -191,7 +193,97 @@ const obtenerDetallesPost = async (req, res) => {
     }
   };
 
+  const manejarLikeIncrement = async (req, res) => {
+    const postId = req.params.id;
+    try {
+      const queryUpdate = `
+        UPDATE publicación
+        SET Likes = Likes + 1
+        WHERE ID = ${postId}
+      `;
+      await ejecutarConsulta(queryUpdate);  // Ejecuta la consulta para incrementar
+  
+      // Recupera el número actualizado de likes
+      const querySelect = `SELECT Likes FROM publicación WHERE ID = ${postId}`;
+      const result = await ejecutarConsulta(querySelect);
+  
+      if (result.length === 0) {
+        return res.status(404).json({ message: "Post no encontrado" });
+      }
+  
+      res.json({ Likes: result[0].Likes });  // Retorna el número actualizado de likes
+    } catch (error) {
+      console.error("Error al incrementar los likes:", error);
+      res.status(500).json({ message: "Error al incrementar los likes" });
+    }
+  };
+  
+  // Función para disminuir el like
+  const manejarLikeDecrement = async (req, res) => {
+    const postId = req.params.id;
+    try {
+      const queryUpdate = `
+        UPDATE publicación
+        SET Likes = Likes - 1
+        WHERE ID = ${postId}
+      `;
+      await ejecutarConsulta(queryUpdate);  // Ejecuta la consulta para decrementar
+  
+      // Recupera el número actualizado de likes
+      const querySelect = `SELECT Likes FROM publicación WHERE ID = ${postId}`;
+      const result = await ejecutarConsulta(querySelect);
+  
+      if (result.length === 0) {
+        return res.status(404).json({ message: "Post no encontrado" });
+      }
+  
+      res.json({ Likes: result[0].Likes });  // Retorna el número actualizado de likes
+    } catch (error) {
+      console.error("Error al disminuir los likes:", error);
+      res.status(500).json({ message: "Error al disminuir los likes" });
+    }
+  };
 
+  const crearPublicacion = async (req, res = response) => {
+    const { Titulo, Contenido, ID_Usuario } = req.body;
+
+    try {
+        // Verificamos que el ID_Usuario (correo electrónico) sea una cadena válida
+        if (typeof ID_Usuario !== 'string' || !ID_Usuario.includes('@')) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'El ID del usuario debe ser un correo electrónico válido'
+            });
+        }
+
+        // Realizamos la inserción de la nueva publicación
+        const insertQuery = `
+            INSERT INTO publicación (Titulo, Contenido, ID_Usuario, Likes)
+            VALUES ('${Titulo}', '${Contenido}', '${ID_Usuario}', 0)
+        `;
+
+        await ejecutarConsulta(insertQuery);
+
+        res.status(201).json({
+            ok: true,
+            msg: 'Publicación creada correctamente',
+            Titulo,
+            Contenido,
+            ID_Usuario,
+            Likes: 0,
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Por favor hable con el administrador'
+        });
+    }
+}
+
+  
 module.exports = {
-    obtenerForoHome,obtenerForoPaginado,obtenerDetallesPost,crearForo,actualizarForo,eliminarForo
+    obtenerForoHome,obtenerForoPaginado,obtenerDetallesPost,crearForo,actualizarForo,eliminarForo,
+    manejarLikeIncrement,manejarLikeDecrement,crearPublicacion
 };
