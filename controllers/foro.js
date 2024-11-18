@@ -83,6 +83,8 @@ const obtenerForoPaginado = async (req, res) => {
 
 
 
+
+
 const obtenerDetallesPost = async (req, res) => {
     const postId = req.params.id; // Obtener el ID del post desde los parámetros de la URL
     try {

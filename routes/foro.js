@@ -2,6 +2,13 @@
 const express = require('express');
 const router = express.Router();
 const foroController = require('../controllers/foro');
+const { check } = require('express-validator');
+const { validarJWT } = require('../middlewares/validar-jwt');
+const { validarCampos } = require('../middlewares/validar-campos');
+const { validarPublicacionExistente} = require('../helpers/db-validator');
+
+
+
 
 router.get('/ordenar', foroController.obtenerForoPaginado);
 

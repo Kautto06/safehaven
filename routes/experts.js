@@ -1,7 +1,6 @@
 // expertosRoutes.js
 const express = require('express');
 const { check } = require('express-validator');
-console.log('Check:', check);
 const router = express.Router();
 const expertosController = require('../controllers/experts');
 const { validarJWT } = require('../middlewares/validar-jwt');

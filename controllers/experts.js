@@ -6,7 +6,8 @@ const mysql = require('mysql');
 const obtenerExpertos = async (req, res) => {
     try {
         const query = `
-            SELECT 
+            SELECT
+                ID AS expertId,
                 CONCAT(First_Name, " ", Last_Name) AS nombre, 
                 descripcion AS texto 
             FROM experto
@@ -65,8 +66,6 @@ const obtenerExpertosPaginado = async (req, res) => {
 const obtenerDetallesExperto = async (req, res) => {
     const expertId = req.params.id; // Obtener el ID del experto desde los parámetros de la URL
     
-    console.log('ID del experto recibido:', expertId);  // Verifica que el id esté llegando correctamente
-
     if (!expertId) {
         return res.status(400).json({ message: "ID del experto no válido" });
     }
