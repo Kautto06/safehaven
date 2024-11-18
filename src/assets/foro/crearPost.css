@@ -1,0 +1,166 @@
+/* General */
+.create-post-page {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #F5F5DC;
+}
+
+.create-post-page .create-post-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    flex: 1;
+}
+
+.create-post-page .create-post-content {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    animation: slideUp 0.8s ease-in-out;
+}
+
+.create-post-page .create-post-title {
+    font-size: 2rem;
+    color: #333333;
+    text-align: center;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.create-post-page .create-post-title::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #0077ff;
+    margin: 0.5rem auto 0;
+    border-radius: 3px;
+}
+
+/* Form */
+.create-post-page .create-post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.create-post-page .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-post-page .form-label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #555555;
+}
+
+.create-post-page .form-input,
+.create-post-page .form-textarea {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.create-post-page .form-input:focus,
+.create-post-page .form-textarea:focus {
+    border-color: #0077ff;
+    box-shadow: 0 0 8px rgba(0, 119, 255, 0.3);
+    outline: none;
+}
+
+.create-post-page .form-textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+/* Buttons */
+.create-post-page .button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.create-post-page .button {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.create-post-page .save-button {
+    background:  #5C8268;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 119, 255, 0.3);
+}
+
+.create-post-page .cancel-button {
+    background: #f44336;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
+}
+
+.create-post-page .button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.create-post-page .button:active {
+    transform: scale(0.95);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Success and Error Messages */
+.create-post-page .success-message {
+    background: #4caf50;
+    color: #ffffff;
+    padding: 0.75rem;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 1rem;
+    animation: fadeIn 0.5s ease;
+}
+
+.create-post-page .error-messages {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.create-post-page .error-message {
+    background: #f44336;
+    color: #ffffff;
+    padding: 0.75rem;
+    border-radius: 5px;
+    animation: fadeIn 0.5s ease;
+}

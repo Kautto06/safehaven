@@ -1,119 +1,147 @@
-import React, { useState } from 'react';
-
-import { IonPage, IonHeader, IonContent, IonImg, IonButton, IonIcon, IonPopover, IonList, IonItem, IonLabel, IonToast } from '@ionic/react';
-import { callOutline, arrowBackOutline, arrowForwardOutline, funnelOutline,filterOutline } from 'ionicons/icons';
+import React, { useState, useEffect } from 'react';
+import { IonContent, IonPage, IonButton, IonImg } from '@ionic/react';
 import '../../assets/expertos/Expertos.css';
-import logo from '../../assets/Logos/logoNoBackground.png';
-import profile from '../../assets/images/profile.svg';
 import { Footer, Header } from '../../components';
-
+import pageApi from '../../api/backend';
 
 export const Expertos: React.FC = () => {
-  const [showPopover, setShowPopover] = useState(false);
-  const [popoverEvent, setPopoverEvent] = useState<any | undefined>(undefined);
-  const [showToast, setShowToast] = useState(false);
+  const [expertos, setExpertos] = useState<any[]>([]);
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const openPopover = (e: React.MouseEvent) => {
-    setPopoverEvent(e.nativeEvent); // Usa `nativeEvent` para obtener el evento del DOM
-    setShowPopover(true);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [expertoDetalles, setExpertoDetalles] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchExpertos = async () => {
+      try {
+        const response = await pageApi.get('/experts/paginado', {
+          params: { page: currentPage, limit: 5 }
+        });
+        setExpertos(response.data.expertos);
+        setTotalPages(response.data.totalPages);
+      } catch (error) {
+        console.error("Error al cargar los expertos", error);
+      }
+    };
+
+    fetchExpertos();
+  }, [currentPage]);
+
+  const handlePagination = (page: number) => {
+    setCurrentPage(page);
   };
 
-  const closePopover = () => {
-    setShowPopover(false);
-    setPopoverEvent(undefined);
-  };
-
-  const copyPhoneNumber = async (phoneNumber: string) => {
+  const handleViewMore = async (expertId: number) => {
     try {
-      await navigator.clipboard.writeText(phoneNumber);
-      setShowToast(true); // Muestra la alerta
+      if (!expertId) {
+        console.error('ID del experto no válido');
+        return;
+      }
+      const response = await pageApi.get(`/experts/detalles/${expertId}`);
+      setExpertoDetalles(response.data);
+      setShowModal(true);
     } catch (error) {
-      console.error('Error al copiar el número:', error);
+      console.error("Error al obtener los detalles del experto", error);
     }
   };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setExpertoDetalles(null);
+  };
+
   return (
     <IonPage>
-      {/* Header */}
-      <Header/>
-
-      {/* Main content */}
-      <IonContent className='experts-body'>
+      <Header />
+      <IonContent className="forum-body">
         <main>
-          <h1>Expertos</h1>
-          <div className="header-right">
-            <span>Expertos más destacados</span>
-            <IonButton fill="clear" className="sort-button" onClick={openPopover}>
-              <IonIcon slot="icon-only" icon={filterOutline} />
-            </IonButton>
-
-            {/* Popover (Dropdown Menu) */}
-            <IonPopover
-              isOpen={showPopover}
-              event={popoverEvent}
-              onDidDismiss={closePopover}
-            >
-              <IonList>
-                <IonItem button onClick={() => console.log('Ordenar por nombre')}>
-                  <IonLabel>Ordenar por nombre</IonLabel>
-                </IonItem>
-                <IonItem button onClick={() => console.log('Ordenar por fecha')}>
-                  <IonLabel>Ordenar por fecha</IonLabel>
-                </IonItem>
-                <IonItem button onClick={() => console.log('Ordenar por popularidad')}>
-                  <IonLabel>Ordenar por popularidad</IonLabel>
-                </IonItem>
-              </IonList>
-            </IonPopover>
-          </div>
-
-          {/* Expert List */}
-          <section className="experts-content">
-            {Array.from({ length: 4 }).map((_, index) => (
-              <div className="forum-item" key={index}>
-                <IonImg src={profile} alt="Imagen experto" className="forum-image" />
-                <div className="forum-text">
-                  <h2 className="forum-title">Título del Mensaje {index + 1}</h2>
-                  <p>
-                    Ejemplo de contenido del mensaje del experto. Aquí puedes poner un resumen del mensaje o tema que se está discutiendo.
-                  </p>
-                  <IonButton fill="clear" className="view-button-expert">Ver</IonButton>
+          <h1>Nuestros Expertos</h1>
+          <section className="forum-content">
+            {expertos.length > 0 ? (
+              expertos.map((expert) => (
+                <div key={expert.ID} className="forum-item">
+                  <IonImg
+                    src="https://www.shutterstock.com/image-vector/no-image-available-icon-template-260nw-1340428865.jpg"
+                    alt="Imagen del experto"
+                    className="forum-image"
+                  />
+                  <div className="forum-text">
+                    <h2 className="forum-title">{expert.nombre}</h2>
+                    <p>{expert.texto}</p>
+                    <IonButton fill="clear" className="view-button" onClick={() => handleViewMore(expert.expertId)}>
+                      Ver
+                    </IonButton>
+                  </div>
                 </div>
-                <IonButton
-                  className="phone-button"
-                  fill="clear"
-                  onClick={() => copyPhoneNumber('+123456789')}
-                >
-                  <IonIcon icon={callOutline} />
-                  Contactar
-                </IonButton>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p>No se encontraron expertos</p>
+            )}
           </section>
         </main>
 
-        {/* Pagination */}
         <div className="pagination">
-          <IonButton fill="clear" className="pagination-link">
-            <IonIcon slot="start" icon={arrowBackOutline}></IonIcon>
-            Anterior
-          </IonButton>
-          <IonButton fill="clear" className="pagination-link">1</IonButton>
-          <IonButton fill="clear" className="pagination-link">2</IonButton>
-          <IonButton fill="clear" className="pagination-link">3</IonButton>
-          <IonButton fill="clear" className="pagination-link">
-            Siguiente
-            <IonIcon slot="end" icon={arrowForwardOutline}></IonIcon>
-          </IonButton>
+          <button
+            className="pagination-link"
+            disabled={currentPage === 1}
+            onClick={() => handlePagination(currentPage - 1)}
+          >
+            <span className="pagination-icon">←</span> Anterior
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i}
+              className={`pagination-link ${currentPage === i + 1 ? 'active' : ''}`}
+              onClick={() => handlePagination(i + 1)}
+            >
+              {i + 1}
+            </button>
+          ))}
+
+          <button
+            className="pagination-link"
+            disabled={currentPage === totalPages}
+            onClick={() => handlePagination(currentPage + 1)}
+          >
+            Siguiente <span className="pagination-icon">→</span>
+          </button>
         </div>
+
+        <Footer />
       </IonContent>
-      <IonToast
-        isOpen={showToast}
-        onDidDismiss={() => setShowToast(false)}
-        message="Número copiado al portapapeles"
-        duration={1500}
-        position="bottom"
-      />
-      <Footer/>
+
+      {/* Modal Personalizado */}
+      {showModal && (
+        <div className="custom-modal">
+          <div className="modal-content">
+            <button className="close-button" onClick={closeModal}>
+              ×
+            </button>
+            {expertoDetalles ? (
+              <div className="expert-details">
+                <h2>{expertoDetalles.nombre} {expertoDetalles.apellido}</h2>
+                <p><strong>Teléfono:</strong> {expertoDetalles.Telefono}</p>
+                <p><strong>Email:</strong> {expertoDetalles.Email}</p>
+                <p><strong>Género: </strong> {expertoDetalles.Genero}</p>
+                <p><strong>Ocupación: </strong> {expertoDetalles.Ocupación}</p>
+                <p><strong>Descripción: </strong> {expertoDetalles.descripcion}</p>
+                <p><strong>Fecha de Nacimiento: </strong> {expertoDetalles.Fecha_Nacimiento}</p>
+                <p><strong>Dirección: </strong> {expertoDetalles.Direccion}</p>
+                <p><strong>Certificaciones: </strong> {expertoDetalles.Certificaciones}</p>
+                <p><strong>Modalidad de Atención: </strong> {expertoDetalles.Modalidad_Atencion}</p>
+                <p><strong>Acerca de mí: </strong> {expertoDetalles.About_Me}</p>
+              </div>
+            ) : (
+              <p>No se pudieron cargar los detalles del experto.</p>
+            )}
+            <div className="modal-footer">
+              <button onClick={closeModal}>Cerrar</button>
+            </div>
+          </div>
+        </div>
+      )}
     </IonPage>
   );
 };

@@ -1,16 +1,14 @@
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
-import { IonContent, IonPage, IonInput, IonButton, IonSpinner,IonTextarea  } from '@ionic/react';
+import { IonContent, IonPage, IonSpinner } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import pageApi from '../../api/backend'; // Asegúrate de tener configurado el backend
 import { useAuthStore } from '../../hooks/auth/useAuthStore';
 import { Footer, Header } from '../../components';
 
-
-
+import '../../assets/foro/crearPost.css';
 
 export const CrearPublicacion: React.FC = () => {
-  // Accedemos al usuario desde el estado de Redux
   const { user, status } = useAuthStore();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -19,15 +17,24 @@ export const CrearPublicacion: React.FC = () => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
-  // Si no está autenticado, mostramos la página de carga
+  // Agregar una clase única al body cuando el componente se monte
+  useEffect(() => {
+    document.body.classList.add('create-post-page');
+
+    // Eliminar la clase cuando el componente se desmonte
+    return () => {
+      document.body.classList.remove('create-post-page');
+    };
+  }, []);
+
   if (status !== 'authenticated' || !user || !('name' in user)) {
     return (
-      <IonPage>
+      <IonPage className="loading-page">
         <Header />
-        <IonContent>
+        <IonContent className="loading-content">
           <div className="loading-container">
-            <IonSpinner name="bubbles" />
-            <p>Cargando...</p>
+            <IonSpinner name="bubbles" className="loading-spinner" />
+            <p className="loading-text">Cargando...</p>
           </div>
         </IonContent>
         <Footer />
@@ -35,20 +42,18 @@ export const CrearPublicacion: React.FC = () => {
     );
   }
 
-  const handleTituloChange = (event: any) => {
-    setTitulo(event.detail.value);
+  const handleTituloChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTitulo(event.target.value);
   };
-  
-  const handleContenidoChange = (event: any) => {
-    setContenido(event.detail.value);
-  };
-  
 
-  // Enviar los datos modificados al servidor utilizando axios
+  const handleContenidoChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContenido(event.target.value);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     setErrorMessages([]);
+
     let errors: string[] = [];
     if (titulo.length === 0 || titulo.length > 100) {
       errors.push('El título debe tener entre 1 y 100 caracteres.');
@@ -59,72 +64,76 @@ export const CrearPublicacion: React.FC = () => {
     }
 
     if (errors.length > 0) {
-      setErrorMessages(errors); // Guardamos los errores en el estado
+      setErrorMessages(errors);
       return;
     }
 
-    const token = localStorage.getItem('token'); // Obtener el token desde el almacenamiento local
-    console.log('Token enviado en la solicitud:', token);
-
+    const token = localStorage.getItem('token');
     if (!token) {
       console.error('Token no disponible');
-      return;  // Si no hay token, no envíes la solicitud
+      return;
     }
 
     try {
-      // Enviar la solicitud al backend con el token y los datos de la publicación
       const response = await pageApi.post(
-        '/foro/crear', // Ruta del backend para crear la publicación
+        '/foro/crear',
         { Titulo: titulo, Contenido: contenido, ID_Usuario: user.email },
-        { headers: { 'x-token': token } } // Asegúrate de incluir el token en los headers
+        { headers: { 'x-token': token } }
       );
 
       const data = response.data;
 
       if (data.ok) {
-        setShowSuccessMessage(true); // Mostrar el mensaje de éxito
+        setShowSuccessMessage(true);
         setTimeout(() => {
-          setShowSuccessMessage(false); // Ocultar el mensaje después de 2 segundos
-          history.push('/foro'); // Redirigir a la página del foro o a donde quieras
+          setShowSuccessMessage(false);
+          history.push('/foro');
         }, 2000);
       } else {
-        setErrorMessages([data.msg]); // Si hay un error, mostrarlo
+        setErrorMessages([data.msg]);
       }
     } catch (error) {
-      setErrorMessages(['Error en la solicitud. Intenta de nuevo más tarde.']); // Mostrar mensaje de error en caso de excepción
+      setErrorMessages(['Error en la solicitud. Intenta de nuevo más tarde.']);
     }
   };
 
   const handleCancel = () => {
-    history.push('/foro'); // Redirige a la página del foro si cancela
+    history.push('/foro');
   };
 
   return (
-    <IonPage>
-      <Header />
-      <div className="edit-profile-body">
-        <div className="edit-profile-content">
-          <h2>Crear Publicación</h2>
-          <form onSubmit={handleSubmit} className="edit-profile-form">
-            <div>
-              <label>Título:</label>
-              <IonInput
+    <IonPage className="create-post-page">
+      <Header/>
+      <div className="create-post-body">
+        <div className="create-post-content">
+          <h2 className="create-post-title">Crear Publicación</h2>
+          <form onSubmit={handleSubmit} className="create-post-form">
+            <div className="form-group">
+              <label className="form-label">Título:</label>
+              <input
+                type="text"
                 value={titulo}
-                onIonChange={handleTituloChange}
+                onChange={handleTituloChange}
                 placeholder="Ingresa el título de la publicación"
+                className="form-input"
               />
             </div>
-            <div>
-              <label>Contenido:</label>
-              <IonTextarea
+            <div className="form-group">
+              <label className="form-label">Contenido:</label>
+              <textarea
                 value={contenido}
-                onIonInput={handleContenidoChange}  // Usamos IonInput para el textarea
+                onChange={handleContenidoChange}
                 placeholder="Escribe el contenido aquí"
-                />
+                className="form-textarea"
+              />
             </div>
             <div className="button-group">
-              <IonButton type="submit" className="save-button">Publicar</IonButton>
-              <IonButton type="button" onClick={handleCancel} className="cancel-button">Cancelar</IonButton>
+              <button type="submit" className="button save-button">
+                Publicar
+              </button>
+              <button type="button" onClick={handleCancel} className="button cancel-button">
+                Cancelar
+              </button>
             </div>
           </form>
           {showSuccessMessage && (
@@ -139,7 +148,7 @@ export const CrearPublicacion: React.FC = () => {
           )}
         </div>
       </div>
-      <Footer />
+      <Footer/>
     </IonPage>
   );
 };

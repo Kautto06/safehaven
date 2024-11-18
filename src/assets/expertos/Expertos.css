@@ -162,3 +162,112 @@ h1 {
   --background: #585a59;
   color: white;
 }
+
+.custom-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8); /* Fondo oscuro con transparencia */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out; /* Animación de entrada */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background: linear-gradient(to bottom, #ffffff, #f0f4f7); /* Fondo degradado */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra */
+  width: 95%;
+  max-width: 650px;
+  position: relative;
+  animation: slideUp 0.4s ease-out; /* Animación al aparecer */
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border: none;
+  background: none;
+  font-size: 24px;
+  color: #333; /* Color oscuro */
+  cursor: pointer;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.close-button:hover {
+  transform: scale(1.2); /* Aumenta ligeramente el tamaño */
+  color: #e63946; /* Color más intenso */
+}
+
+.expert-details h2 {
+  margin: 0 0 10px;
+  font-size: 1.8rem;
+  color: #2b2d42; /* Azul oscuro */
+  font-weight: bold;
+  text-align: center;
+}
+
+.expert-details p {
+  font-size: 1rem;
+  margin: 5px 0;
+  color: #333; /* Texto en gris oscuro */
+  line-height: 1.5;
+  font-weight: bold;
+}
+
+.expert-details strong {
+  color: #5C8268; /* Azul moderno */
+}
+
+.expert-details {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.modal-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-footer button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: #5C8268; /* Azul moderno */
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.modal-footer button:hover {
+  background: #023e8a; /* Azul más oscuro */
+  transform: scale(1.05);
+}

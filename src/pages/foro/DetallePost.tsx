@@ -1,17 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 import pageApi from '../../api/backend';
-import { thumbsUpOutline } from 'ionicons/icons';
-import { IonContent, IonPage, IonImg, IonIcon } from '@ionic/react';
+import { IonContent, IonPage, IonImg, IonButton } from '@ionic/react';
 
 import '../../assets/foro/detallePost.css';
 import { Footer, Header } from '../../components';
+
+// Definir el tipo para el estado de navegación
+interface LocationState {
+  from: string;
+}
 
 export const DetallePost: React.FC = () => {
   const { id } = useParams<{ id: string }>(); // Obtiene el ID del post desde la URL
   const [post, setPost] = useState<any>(null); // El post detallado
   const [likes, setLikes] = useState<number>(0); // Los likes de la publicación
   const [hasLiked, setHasLiked] = useState<boolean>(false); // Para controlar si el usuario ya dio like
+  const history = useHistory();
+  const location = useLocation<LocationState>(); // Usamos el tipo LocationState aquí
+  
+  // Captura la página de origen (anterior) desde el estado de la navegación
+  const previousPage = location.state?.from || '/'; // Si no hay estado, regresa al home por defecto
 
   useEffect(() => {
     const fetchPostDetails = async () => {
@@ -19,7 +28,6 @@ export const DetallePost: React.FC = () => {
         const response = await pageApi.get(`/foro/detalles/${id}`);
         setPost(response.data); // Establece los detalles del post
         setLikes(response.data.Likes); // Establece los likes
-        console.log(response.data);
       } catch (error) {
         console.error("Error al cargar los detalles del post", error);
       }
@@ -43,6 +51,10 @@ export const DetallePost: React.FC = () => {
     }
   };
 
+  const handleGoBack = () => {
+    history.push(previousPage);  // Redirige a la página anterior
+  };
+
   if (!post) {
     return <div>Cargando...</div>; // Muestra un cargando si no se han cargado los detalles
   }
@@ -52,6 +64,7 @@ export const DetallePost: React.FC = () => {
       <Header />
       <IonContent className="post-detail-content">
         <main>
+        <button className="back-button" onClick={handleGoBack}>Volver</button>
           <h1 className="post-title">{post.Titulo}</h1>
           <section className="post-detail-container">
             <IonImg
@@ -71,12 +84,14 @@ export const DetallePost: React.FC = () => {
               
               {/* Botón de likes directamente aquí */}
               <button
-                  className={`like-button ${hasLiked ? 'liked' : ''}`}
-                  onClick={handleLike}
-                >
-                  {/* Texto en lugar del IonIcon */}
-                  {hasLiked ? "❤️" : "🤍"} {likes} Likes
-                </button>
+                className={`like-button ${hasLiked ? 'liked' : ''}`}
+                onClick={handleLike}
+              >
+                {hasLiked ? "❤️" : "🤍"} {likes} Likes
+              </button>
+
+              {/* Botón de regreso */}
+              
             </div>
           </section>
         </main>
@@ -85,5 +100,3 @@ export const DetallePost: React.FC = () => {
     </IonPage>
   );
 };
-
-

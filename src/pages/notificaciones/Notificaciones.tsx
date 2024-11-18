@@ -1,80 +1,90 @@
-import React, { useState } from 'react';
-import {
-  IonPage,
-  IonContent,
-  IonButton,
-  IonIcon,
-  IonImg,
-} from '@ionic/react';
-import '../../assets/notificaciones/Notificaciones.css';
-import { chevronForwardOutline, chevronBackOutline } from 'ionicons/icons';
+import React, { useState, useEffect } from 'react';
 import { Footer, Header } from '../../components';
+import pageApi from '../../api/backend'; // Aquí importas la API de backend
+import { IonPage } from '@ionic/react';
+
+import '../../assets/notificaciones/Notificaciones.css';
 
 export const Notificaciones: React.FC = () => {
-    const [notifications, setNotifications] = useState(
-        Array(5).fill({
-          title: "Title",
-          content: "Lorem ipsum dolor sit amet. Aut magnam assumenda non porro dolor...",
-          isRead: false // Estado de lectura inicial
-        })
-    );
+    const [notifications, setNotifications] = useState<any[]>([]);
+    const [totalPages, setTotalPages] = useState<number>(1);
+    const [currentPage, setCurrentPage] = useState<number>(1);
 
-    // Función para contar notificaciones no leídas
-    const unreadCount = notifications.filter(notification => !notification.isRead).length;
+    useEffect(() => {
+        const fetchNotifications = async () => {
+            try {
+                const response = await pageApi.get('/notificaciones/paginado', {
+                    params: { page: currentPage, limit: 5 } // Ajuste de los parámetros
+                });
+                console.log('Datos de notificaciones:', response.data);
+                setNotifications(response.data.notifications);
+                setTotalPages(response.data.totalPages);
+            } catch (error) {
+                console.error("Error al cargar las notificaciones", error);
+            }
+        };
+    
+        fetchNotifications();
+    }, [currentPage]);
 
-    const handleReadNotification = (index: number) => {
-        setNotifications((prevNotifications) =>
-          prevNotifications.map((notification, i) =>
-            i === index ? { ...notification, isRead: true } : notification
-          )
-        );
+    const handlePagination = (page: number) => {
+        setCurrentPage(page);
     };
 
     return (
-        <IonPage>
+        <IonPage id="notificaciones-page">
             <Header />
-            <IonContent className='notification-body'>
+            <div className="notification-body">
                 <main>
                     <div className="notification-container">
                         <div className="notification-header">
-                            <h1>Notificaciones</h1>
-                            <div className="notification-bell">
-                                🔔
-                                {/* Muestra el contador si hay notificaciones no leídas */}
-                                {unreadCount > 0 && (
-                                    <span className="notification-count">{unreadCount}</span>
-                                )}
-                            </div>
+                            <h1>Notificaciones SafeHaven</h1>
                         </div>
 
-                        {notifications.map((notification, index) => (
-                            <div className="notification-card" key={index}>
-                                <div className='notification-title'>{notification.title}</div>
-                                <div className='notification-content'>{notification.content}</div>
-                                <IonButton fill="clear" className='notification-button' onClick={()=>handleReadNotification(index)}>Ver más</IonButton>
-                                <span className="close-btn">&times;</span>
-                                <div className={`notification-status ${notification.isRead ? 'read-status' : ''}`}>
-                                    {notification.isRead ? 'Leído' : ''}
+                        {notifications && notifications.length > 0 ? (
+                            notifications.map((notification) => (
+                                <div key={notification.notificationId} className="notification-card-wrapper">
+                                    <div className="notification-card">
+                                        <h2>{notification.Titulo}</h2>
+                                        <p>{notification.Contenido}</p>
+                                        <p>{notification.Descripcion}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))
+                        ) : (
+                            <p>No se encontraron notificaciones</p>
+                        )}
 
                         <div className="pagination">
-                            <IonButton fill="clear" className="pagination-link">
-                                <IonIcon icon={chevronBackOutline} /> Anterior
-                            </IonButton>
-                            <IonButton fill="clear" className="pagination-link">1</IonButton>
-                            <IonButton fill="clear" className="pagination-link">2</IonButton>
-                            <IonButton fill="clear" className="pagination-link">3</IonButton>
-                            <IonButton fill="clear" className="pagination-link">
-                                Siguiente <IonIcon icon={chevronForwardOutline} />
-                            </IonButton>
+                            <button 
+                                className="pagination-link" 
+                                disabled={currentPage === 1} 
+                                onClick={() => handlePagination(currentPage - 1)}>
+                                Anterior
+                            </button>
+
+                            {Array.from({ length: totalPages }, (_, i) => (
+                                <button 
+                                    key={i} 
+                                    className={`pagination-link ${currentPage === i + 1 ? 'active' : ''}`} 
+                                    onClick={() => handlePagination(i + 1)}>
+                                    {i + 1}
+                                </button>
+                            ))}
+
+                            <button 
+                                className="pagination-link" 
+                                disabled={currentPage === totalPages} 
+                                onClick={() => handlePagination(currentPage + 1)}>
+                                Siguiente
+                            </button>
                         </div>
+                        
                     </div>
+                    
                 </main>
-            </IonContent>
-            <Footer/>
+                <Footer />
+            </div>
         </IonPage>
     );
 };
-

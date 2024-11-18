@@ -1,15 +1,12 @@
-import { IonContent, IonPage,IonButton } from '@ionic/react';
+import { IonContent, IonPage, IonButton } from '@ionic/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import React, { useEffect, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-
 import { Navigation, Pagination } from 'swiper/modules';
 import { useHistory } from 'react-router-dom';
 import '../../assets/common/Home.css';
-
-
 
 // Importar imágenes
 import actividadesImg from '../../assets/images/actividades.jpg';
@@ -24,7 +21,7 @@ import imagencompartida from '../../assets/images/profile.svg';
 import noImagen from '../../assets/images/foro.jpg';
 
 interface Expert {
-  ID: number;
+  expertId: number;  // Cambiado de ID a expertId
   nombre: string;
   texto: string;
 }
@@ -34,7 +31,6 @@ interface Foro {
   Titulo: string;
   texto_preview: string;
 }
-
 
 export const Home: React.FC = () => {
   const history = useHistory();
@@ -50,16 +46,16 @@ export const Home: React.FC = () => {
 
   const [expertos, setExpertos] = useState<Expert[]>([]);
   const [foro, setForo] = useState<Foro[]>([]);
-   
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [expertoDetalles, setExpertoDetalles] = useState<any>(null);
 
   useEffect(() => {
-
     const fetchExperts = async () => {
       try {
-        const response = await pageApi.get('/experts/'); // Usando axios
-        setExpertos(response.data);  // Actualiza el estado con los datos de los expertos
+        const response = await pageApi.get('/experts/todos');
+        setExpertos(response.data);
       } catch (error) {
-        console.error("Error al obtener expertos", error);  // Muestra el error si falla la solicitud
+        console.error("Error al obtener expertos", error);
       }
     };
 
@@ -69,31 +65,56 @@ export const Home: React.FC = () => {
   useEffect(() => {
     const fetchForo = async () => {
       try {
-        const response = await pageApi.get('/foro/'); // Usando axios
-        setForo(response.data);  // Actualiza el estado con los datos del foro
+        const response = await pageApi.get('/foro/');
+        setForo(response.data);
       } catch (error) {
-        console.error("Error al obtener publicaciones del foro", error);  // Muestra el error si falla la solicitud
+        console.error("Error al obtener publicaciones del foro", error);
       }
     };
 
     fetchForo();
   }, []);
 
+  // Maneja la apertura del modal con los detalles del experto
+  const handleViewExpert = async (expertId: number) => {
+    try {
+      if (!expertId) {
+        console.error('ID del experto no válido');
+        return;
+      }
+      const response = await pageApi.get(`/experts/detalles/${expertId}`);
+      setExpertoDetalles(response.data);
+      setShowModal(true);
+    } catch (error) {
+      console.error("Error al obtener los detalles del experto", error);
+    }
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setExpertoDetalles(null);
+  };
+
+  // Maneja la redirección al detalle del post
+  const handleViewMore = (postId: number) => {
+    console.log('Redirigiendo a post con ID:', postId);  // Verifica el ID
+    history.push(`/detalle/${postId}`);
+  };
+
   return (
     <IonPage>
       <Header />
-
       <IonContent fullscreen>
         <Swiper
           spaceBetween={50}
           slidesPerView={1}
           pagination={{ clickable: true }}
-          navigation={true} // Asegúrate de que esta línea esté presente
-          allowTouchMove={false} // Esta línea deshabilita el arrastre
-          modules={[Pagination, Navigation]} // Asegúrate de que Navigation esté en la lista de módulos
+          navigation={true}
+          allowTouchMove={false}
+          modules={[Pagination, Navigation]}
           className="swiper-container"
         >
-          {secciones.map((seccion, index) => (
+          {secciones.map((seccion) => (
             <SwiperSlide key={seccion.ruta} className="swiper-slide">
               <div className="slide-content" style={{ backgroundImage: `url(${seccion.imagen})` }}>
                 <h2>{seccion.nombre}</h2>
@@ -105,7 +126,7 @@ export const Home: React.FC = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-        {/* Sección Acerca de Nosotros */}
+
         <div className="about-us-section">
           <div className="about-us-content">
             <h2>Acerca de Nosotros</h2>
@@ -123,33 +144,41 @@ export const Home: React.FC = () => {
             </p>
           </div>
         </div>
+
         <div className="content-section">
-              {/* Sección izquierda - Foro */}
-              <div className="forum-section">
+          <div className="forum-section">
             <h2>Publicaciones más recientes</h2>
             <div className="forum-posts">
-                {foro.length > 0 ? (
-                  foro.map((post) => (
-                    <div className="forum-post" key={post.ID}> 
-                      <img src={noImagen} alt={post.Titulo} className="forum-image" />
-                      <div className="post-details">
-                        <h3>{post.Titulo}</h3>
-                        <p>{post.texto_preview}</p>
-                      </div>
+              {foro.length > 0 ? (
+                foro.map((post) => (
+                  <div
+                    className="forum-post"
+                    key={post.ID}
+                    onClick={() => handleViewMore(post.ID)} // Llamar a handleViewMore con el ID del post
+                  >
+                    <img src={noImagen} alt={post.Titulo} className="forum-image" />
+                    <div className="post-details">
+                      <h3>{post.Titulo}</h3>
+                      <p>{post.texto_preview}</p>
                     </div>
-                  ))
-                ) : (
-                  <p>No se encontraron publicaciones en el foro</p>
-                )}
-              </div>
+                  </div>
+                ))
+              ) : (
+                <p>No se encontraron publicaciones en el foro</p>
+              )}
+            </div>
           </div>
 
-              <div className="experts-section">
+          <div className="experts-section">
             <h2>Expertos</h2>
             <div className="experts-list">
-            {Array.isArray(expertos) && expertos.length > 0 ? (
+              {Array.isArray(expertos) && expertos.length > 0 ? (
                 expertos.map((expert) => (
-                  <div className="expert-item" key={expert.ID}>
+                  <div
+                    className="expert-item"
+                    key={expert.expertId}  // Cambié de ID a expertId
+                    onClick={() => handleViewExpert(expert.expertId)} // Llamar a handleViewExpert con expertId
+                  >
                     <img src={imagencompartida} alt={expert.nombre} className="expert-image" />
                     <div className="expert-details">
                       <h3>{expert.nombre}</h3>
@@ -160,15 +189,41 @@ export const Home: React.FC = () => {
               ) : (
                 <p>No se encontraron expertos</p>
               )}
-              </div>
-
-        </div>
+            </div>
           </div>
-          <Footer/>
+        </div>
+
+        <Footer />
+
+        {/* Modal para mostrar los detalles del experto */}
+        {showModal && (
+          <div className="custom-modal">
+            <div className="modal-content">
+              <button className="close-button" onClick={closeModal}>×</button>
+              {expertoDetalles ? (
+                <div className="expert-details">
+                  <h2>{expertoDetalles.nombre} {expertoDetalles.apellido}</h2>
+                  <p><strong>Teléfono:</strong> {expertoDetalles.Telefono}</p>
+                  <p><strong>Email:</strong> {expertoDetalles.Email}</p>
+                  <p><strong>Género:</strong> {expertoDetalles.Genero}</p>
+                  <p><strong>Ocupación:</strong> {expertoDetalles.Ocupación}</p>
+                  <p><strong>Descripción:</strong> {expertoDetalles.descripcion}</p>
+                  <p><strong>Fecha de Nacimiento:</strong> {expertoDetalles.Fecha_Nacimiento}</p>
+                  <p><strong>Dirección:</strong> {expertoDetalles.Direccion}</p>
+                  <p><strong>Certificaciones:</strong> {expertoDetalles.Certificaciones}</p>
+                  <p><strong>Modalidad de Atención:</strong> {expertoDetalles.Modalidad_Atencion}</p>
+                  <p><strong>Acerca de mí:</strong> {expertoDetalles.About_Me}</p>
+                </div>
+              ) : (
+                <p>No se pudieron cargar los detalles del experto.</p>
+              )}
+              <div className="modal-footer">
+                <button onClick={closeModal}>Cerrar</button>
+              </div>
+            </div>
+          </div>
+        )}
       </IonContent>
-      
     </IonPage>
-    
   );
 };
-
