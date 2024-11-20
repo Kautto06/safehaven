@@ -3,7 +3,6 @@ const mysql = require('mysql');  // Importa mysql para usar mysql.format
 
 const updateUser = async (req, res) => {
     const { nombre, apellidos, phone,email } = req.body;
-    console.log(email)
     const query = `UPDATE usuarios SET nombre = ?, apellidos = ?, phone = ? WHERE email = ?`;
     const values = [nombre, apellidos, phone, email];
 

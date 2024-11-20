@@ -23,6 +23,7 @@ const obtenerForoHome = async (req, res) => {
         res.status(500).json({ message: 'Error al obtener expertos' });
     }
 };
+
 const obtenerForoPaginado = async (req, res) => {
     const { page = 1, limit = 5, orden = 'fecha' } = req.query;  // Orden por defecto es 'fecha'
 
