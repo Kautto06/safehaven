@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { updateUser, updateEstadoUsuario, getAllUsers } = require('../controllers/user');
+const { updateUser, updateEstadoUsuario, getAllUsers, getPorID } = require('../controllers/user');
 const { validarJWT } = require('../middlewares/validar-jwt');
 const { validarCampos } = require('../middlewares/validar-campos');
 
@@ -22,6 +22,9 @@ router.put('/updateEstado',[
     check('email', 'El email es obligatorio'),
     validarCampos
 ],updateEstadoUsuario)
+
+router.get('/',[
+],getPorID)
 
 
 module.exports = router;

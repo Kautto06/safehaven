@@ -5,7 +5,7 @@ const { check } = require('express-validator')
 const { crearOpcion, actualizarOpcion, eliminarOpcion, eliminarOpcionesPorPregunta, getOpcionesPorPregunta, getOpciones, getOpcionesPorId } = require('../controllers/opciones')
 const { validarOpcionExistente, validarPreguntaExistente } = require('../helpers/db-validator')
 
-const opcionesController = require('../controllers/opciones');
+const preguntasController = require('../controllers/preguntas')
 
 const router = Router()
 
@@ -61,6 +61,5 @@ router.delete('/eliminarPorPregunta/:id',[
     validarCampos
 ],eliminarOpcionesPorPregunta)
 
-router.put('/incrementar/:id', preguntasController.incrementarFrecuenciaOpcion);
 
 module.exports = router

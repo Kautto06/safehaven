@@ -84,7 +84,8 @@ const loginUsuario = async(req,res=response) => {
             nombre: rowDataPacket.nombre,
             apellidos: rowDataPacket.apellidos,
             phone: rowDataPacket.phone,  // Agregar teléfono aquí
-            birthday: rowDataPacket.birthday,  // Agregar fecha de nacimiento aquí
+            birthday: rowDataPacket.birthday,
+            estado: rowDataPacket.estado,  // Agregar fecha de nacimiento aquí
             token
         })
 

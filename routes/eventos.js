@@ -19,8 +19,7 @@ router.post('/crear',[
 
     check('Tipo')
       .not().isEmpty().withMessage('El tipo del evento es obligatorio.')
-      .isLength({ max: 50 }).withMessage('El tipo del evento no debe exceder los 50 caracteres.')
-      .isIn(['conferencia', 'seminario', 'taller']).withMessage('El tipo del evento no es válido.'),
+      .isLength({ max: 50 }).withMessage('El tipo del evento no debe exceder los 50 caracteres.'),
 
     check('Fecha')
       .isDate().withMessage('La fecha del evento debe ser una fecha válida en formato YYYY-MM-DD.'),

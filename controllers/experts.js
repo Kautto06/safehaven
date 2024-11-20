@@ -139,14 +139,13 @@ const obtenerExpertoPorId = async (req, res) => {
   
   // Crear un nuevo experto
   const crearExperto = async (req, res) => {
-    const { First_Name, Last_Name, Telefono, Email, Genero, Ocupación,descripcion,FechaNacimiento,Direccion,Certificaciones, Modalidad_Atencion, About_me } = req.body;
-  
+    const { First_Name, Last_Name, Telefono, Email, Genero, Ocupación,descripcion,FechaNacimiento,Direccion,Certificaciones, Modalidad_Atencion, About_Me } = req.body;
     try {
       const query = `
         INSERT INTO experto (First_Name, Last_Name, Telefono, Email, Genero, Ocupación, descripcion, Fecha_Nacimiento, Direccion, Certificaciones, Modalidad_Atencion, About_Me)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `;
-      const values = [First_Name, Last_Name, Telefono, Email, Genero, Ocupación,descripcion,FechaNacimiento,Direccion,Certificaciones, Modalidad_Atencion, About_me];
+      const values = [First_Name, Last_Name, Telefono, Email, Genero, Ocupación,descripcion,FechaNacimiento,Direccion,Certificaciones, Modalidad_Atencion, About_Me];
       const formattedQuery = mysql.format(query, values);
   
       const result = await ejecutarConsulta(formattedQuery);
@@ -164,7 +163,7 @@ const obtenerExpertoPorId = async (req, res) => {
   // Actualizar un experto existente
   const actualizarExperto = async (req, res) => {
     const { id } = req.params;
-    const { First_Name, Last_Name, Telefono, Email, Genero, Ocupación, Modalidad_Atencion } = req.body;
+    const { First_Name, Last_Name, Telefono, Email, Genero, Ocupación, Modalidad_Atencion,descripcion,About_Me } = req.body;
   
     try {
       const query = `
@@ -176,10 +175,12 @@ const obtenerExpertoPorId = async (req, res) => {
           Email = COALESCE(?, Email),
           Genero = COALESCE(?, Genero),
           Ocupación = COALESCE(?, Ocupación),
-          Modalidad_Atencion = COALESCE(?, Modalidad_Atencion)
+          Modalidad_Atencion = COALESCE(?, Modalidad_Atencion),
+          descripcion = COALESCE(?, descripcion),
+          About_Me = COALESCE(?, About_Me)
         WHERE ID = ?
       `;
-      const values = [First_Name, Last_Name, Telefono, Email, Genero, Ocupación, Modalidad_Atencion, id];
+      const values = [First_Name, Last_Name, Telefono, Email, Genero, Ocupación, Modalidad_Atencion,descripcion,About_Me, id];
       const formattedQuery = mysql.format(query, values);
   
       const result = await ejecutarConsulta(formattedQuery);

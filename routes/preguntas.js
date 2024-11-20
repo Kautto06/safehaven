@@ -16,6 +16,14 @@ router.get('/', [
   validarCampos
 ], getPreguntas);
 
+router.get('/obtenerPorId/:id',[
+  check('id')
+    .isInt().withMessage('El ID debe ser un número entero.')
+    .custom(validarPreguntaExistente), 
+  validarJWT,
+  validarCampos
+],preguntasController.getPreguntasPorId)
+
 router.get('/obtener/', preguntasController.getPreguntas);
 
 // Ruta para crear una nueva pregunta (con validación JWT)

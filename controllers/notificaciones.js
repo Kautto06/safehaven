@@ -85,6 +85,8 @@ const getNotificacionesPorId = async (req, res) => {
 const crearNotificacion = async (req, res) => {
   const { Titulo, Contenido, ID_Usuario, Descripcion } = req.body;
 
+  console.log(ID_Usuario)
+
   try {
     const query = `
       INSERT INTO notificación (Titulo, Contenido, ID_Usuario, Descripcion)

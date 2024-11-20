@@ -76,8 +76,30 @@ const getAllUsers = async(req,res)=>{
     }
 }
 
+const getPorID= async(req,res)=>{
+    const {email} = req.query
+    console.log(email)
+
+    try {
+        const query = 'SELECT * FROM usuarios WHERE email = ?'
+        const params = [email]
+        const formattedQuery = mysql.format(query,params)
+        const result = await ejecutarConsulta(formattedQuery)
+
+        if (result) {
+            return res.status(200).json(result);
+        } else {
+            return res.status(404).json({ ok: false, msg: 'No hay usuarios registrados' });
+        }
+    } catch (error) {
+        console.error('Error al encontrar los usuarios:', error);
+        res.status(500).json({ ok: false, msg: 'Error en el servidor' });
+    }
+}
+
 module.exports = {
     updateUser,
     updateEstadoUsuario,
-    getAllUsers
+    getAllUsers,
+    getPorID
 };
