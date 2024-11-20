@@ -28,6 +28,9 @@ app.use('/api/eventos', require('./routes/eventos'))
 app.use('/api/denuncias', require('./routes/denuncias'))
 app.use('/api/uploads',require('./routes/uploads'))
 //app.use('/api/autoEvaluacion', require('./routes/'))
+app.use('/api/preguntas', require('./routes/preguntas'));
+app.use('/api/autoevaluacion', require('./routes/autoevaluacion'));
+app.use('/api/actividad', require('./routes/actividad'));
 
 app.listen(process.env.PORT, () => {
     console.log(`Servidor corriendo en puerto ${process.env.PORT}`)

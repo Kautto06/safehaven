@@ -35,6 +35,7 @@ router.post('/crear', [
 ], foroController.crearForo);
 
 
+
 router.delete('/eliminar/:id', [
     check('id')
         .isInt().withMessage('El ID debe ser un número entero.')

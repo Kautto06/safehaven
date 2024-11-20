@@ -37,6 +37,40 @@ const getPreguntasPorId = async (req, res) => {
   }
 };
 
+const getPreguntasConOpciones = async (req, res) => {
+  try {
+    const query = `
+      SELECT p.ID, p.Pregunta, o.ID as OpcionID, o.Opcion
+      FROM preguntas p
+      LEFT JOIN opciones o ON p.ID = o.ID_Pregunta
+    `;
+    const result = await ejecutarConsulta(query);
+
+    const preguntas = result.reduce((acc, row) => {
+      const { ID, Pregunta, OpcionID, Opcion } = row;
+      const existingQuestion = acc.find((q) => q.id === ID);
+      
+      if (existingQuestion) {
+        existingQuestion.options.push({ id: OpcionID, option: Opcion });
+      } else {
+        acc.push({
+          id: ID,
+          label: Pregunta,
+          options: [{ id: OpcionID, option: Opcion }]
+        });
+      }
+      
+      return acc;
+    }, []);
+    
+    res.json({ questions: preguntas });
+  } catch (error) {
+    console.error("Error al obtener las preguntas con opciones:", error);
+    res.status(500).json({ message: "Error al obtener las preguntas y opciones" });
+  }
+};
+
+
 // Crear una nueva pregunta
 const crearPregunta = async (req, res) => {
   const { pregunta } = req.body;
@@ -116,5 +150,6 @@ module.exports = {
   crearPregunta,
   actualizarPregunta,
   eliminarPregunta,
-  getPreguntasPorId
+  getPreguntasPorId,
+  getPreguntasConOpciones
 };

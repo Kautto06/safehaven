@@ -177,6 +177,27 @@ const eliminarOpcionesPorPregunta = async (req, res) => {
   }
 };
 
+const incrementarFrecuenciaOpcion = async (idOpcion) => {
+  const OpcionId = idOpcion;
+
+  try {
+    const query = `
+      UPDATE opciones
+      SET frecuencia = frecuencia + 1
+      WHERE ID = ?
+    `;
+    const values = [OpcionId];
+    const formattedQuery = mysql.format(query, values);
+
+    // Ejecuta la consulta para incrementar la frecuencia
+    await ejecutarConsulta(formattedQuery);
+
+  } catch (error) {
+    console.error("Error al incrementar la frecuencia de la opción:", error);
+    throw new Error("Error al incrementar la frecuencia de la opción");
+  }
+};
+
 module.exports = {
   crearOpcion,
   actualizarOpcion,
@@ -184,5 +205,6 @@ module.exports = {
   eliminarOpcionesPorPregunta,
   getOpcionesPorPregunta,
   getOpciones,
-  getOpcionesPorId
+  getOpcionesPorId,
+  incrementarFrecuenciaOpcion
 };
