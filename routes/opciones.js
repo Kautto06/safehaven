@@ -4,6 +4,7 @@ const { validarCampos } = require('../middlewares/validar-campos')
 const { check } = require('express-validator')
 const { getPreguntas, crearOpcion, actualizarOpcion, eliminarOpcion, eliminarOpcionesPorPregunta } = require('../controllers/opciones')
 
+const opcionesController = require('../controllers/opciones');
 
 const router = Router()
 
@@ -42,5 +43,7 @@ router.delete('/eliminarPorPregunta/:id',[
     validarJWT,
     validarCampos
 ],eliminarOpcionesPorPregunta)
+
+router.put('/incrementar/:id', preguntasController.incrementarFrecuenciaOpcion);
 
 module.exports = router

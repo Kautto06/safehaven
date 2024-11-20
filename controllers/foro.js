@@ -1,5 +1,8 @@
 const { ejecutarConsulta } = require('../database/config'); // Importa tu configuración de conexión a la base de datos
 const mysql = require('mysql');
+
+const {guardarAccion} = require('./actividad');
+
 // Controlador para obtener todos los expertos
 const obtenerForoHome = async (req, res) => {
     try {
@@ -12,7 +15,7 @@ const obtenerForoHome = async (req, res) => {
             ORDER BY ID DESC
             LIMIT 5
         `;
-        console.log("Ejecutando consulta:", query); // Imprime la consulta para verificar
+      
         const resultados = await ejecutarConsulta(query);
         res.json(resultados);
     } catch (error) {
@@ -81,10 +84,6 @@ const obtenerForoPaginado = async (req, res) => {
     }
 };
 
-
-
-
-
 const obtenerDetallesPost = async (req, res) => {
     const postId = req.params.id; // Obtener el ID del post desde los parámetros de la URL
     try {
@@ -106,8 +105,6 @@ const obtenerDetallesPost = async (req, res) => {
       const formattedQuery = mysql.format(query, values);
       const result = await ejecutarConsulta(formattedQuery);
 
-      // Agregar un console.log para ver lo que devuelve la consulta
-      console.log(result); // Verifica el resultado de la consulta
 
       if (result.length === 0) {
         return res.status(404).json({ message: "Post no encontrado" });
@@ -117,29 +114,6 @@ const obtenerDetallesPost = async (req, res) => {
     } catch (error) {
       console.error("Error al obtener detalles del post:", error);
       res.status(500).json({ message: "Error al obtener detalles del post" });
-    }
-  };
-
-  const crearForo = async (req, res) => {
-    const { Contenido, Titulo, ID_Usuario } = req.body;
-  
-    try {
-      const query = `
-        INSERT INTO foro (Contenido, Titulo, ID_Usuario, Fecha_Publicacion)
-        VALUES (?, ?, ?, NOW())
-      `;
-      const values = [Contenido, Titulo, ID_Usuario];
-      const formattedQuery = mysql.format(query, values);
-  
-      const result = await ejecutarConsulta(formattedQuery);
-  
-      res.status(201).json({
-        message: "Publicación creada exitosamente",
-        publicacionId: result.insertId,
-      });
-    } catch (error) {
-      console.error("Error al crear la publicación:", error);
-      res.status(500).json({ message: "Error al crear la publicación" });
     }
   };
   
@@ -261,11 +235,23 @@ const obtenerDetallesPost = async (req, res) => {
         // Realizamos la inserción de la nueva publicación
         const insertQuery = `
             INSERT INTO publicación (Titulo, Contenido, ID_Usuario, Likes)
-            VALUES ('${Titulo}', '${Contenido}', '${ID_Usuario}', 0)
+            VALUES (?, ?, ?, 0)
         `;
 
-        await ejecutarConsulta(insertQuery);
+        // Usamos mysql.format para evitar inyecciones SQL
+        const values = [Titulo, Contenido, ID_Usuario];
+        const formattedQuery = mysql.format(insertQuery, values);
 
+        // Ejecutamos la consulta y obtenemos el resultado
+        const result = await ejecutarConsulta(formattedQuery);
+
+        // Obtenemos el ID de la publicación recién insertada
+        const publicacionId = result.insertId;
+
+        // Llamamos a guardarAccion con el ID de la publicación
+        await guardarAccion(ID_Usuario, 'Publicacion', 'Publicación realizada en el foro.', publicacionId);
+
+        // Respondemos con éxito y el ID de la nueva publicación
         res.status(201).json({
             ok: true,
             msg: 'Publicación creada correctamente',
@@ -273,6 +259,7 @@ const obtenerDetallesPost = async (req, res) => {
             Contenido,
             ID_Usuario,
             Likes: 0,
+            publicacionId // Incluimos el ID de la publicación en la respuesta
         });
 
     } catch (error) {
@@ -283,9 +270,8 @@ const obtenerDetallesPost = async (req, res) => {
         });
     }
 }
-
   
 module.exports = {
-    obtenerForoHome,obtenerForoPaginado,obtenerDetallesPost,crearForo,actualizarForo,eliminarForo,
+    obtenerForoHome,obtenerForoPaginado,obtenerDetallesPost,actualizarForo,eliminarForo,
     manejarLikeIncrement,manejarLikeDecrement,crearPublicacion
 };

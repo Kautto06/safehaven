@@ -24,13 +24,7 @@ router.post('/crear', foroController.crearPublicacion);
 
 router.get('/', foroController.obtenerForoHome);
 
-router.post('/crear', [
-    check('Contenido', 'El contenido es obligatorio').not().isEmpty(),
-    check('Titulo', 'El título es obligatorio').not().isEmpty(),
-    check('ID_Usuario', 'El ID del usuario es obligatorio').not().isEmpty(),
-    validarJWT,          
-    validarCampos        
-], foroController.crearForo);
+
 
 
 router.delete('/eliminar/:id', [

@@ -38,7 +38,8 @@ const obtenerExpertosPaginado = async (req, res) => {
             SELECT 
                 ID AS expertId,  
                 CONCAT(First_Name, " ", Last_Name) AS nombre, 
-                descripcion AS texto 
+                descripcion AS texto ,
+                ocupación AS ocupación
             FROM experto
             ORDER BY ID DESC
             LIMIT ${limit} OFFSET ${offset}
