@@ -29,6 +29,7 @@ import {
   CrearPublicacion,
   DetallePost,
   ResultadosAutoevaluacion,
+  InformacionViolenciaGenero,
 } from '../pages';
 
 import { AdminDenuncias } from "../pages/admin/AdminDenuncia";
@@ -84,7 +85,7 @@ const AppRouter: React.FC = () => {
               <Route exact path="/admin/expertos" component={AdminExperts}/>
               <Route exact path="/admin/eventos" component={AdminEvents}/>
               <Route exact path="/admin/actividad" component={ActivityAdmin}/>
-              <Route exact path="/crearPublicacion" component={CrearPublicacion} />
+              <Route exact path="/informacion" component={InformacionViolenciaGenero}/>
               <Route exact path="/" component={Home} />
               
               <Redirect to= {location.pathname}/>

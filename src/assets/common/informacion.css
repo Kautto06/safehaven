@@ -1,0 +1,131 @@
+/* Contenedor de la sección principal */
+.info-section {
+    padding: 20px;
+    background-color: #F5F5DC;
+}
+  
+  /* Estilo de las subsecciones */
+  .info-subsection {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .info-subsection h3 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  
+  /* Estilo del acordeón */
+  .accordion-item {
+    margin-bottom: 15px;
+  }
+  
+  .accordion-header {
+    background-color: #5C8268;
+    color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  /* Imagen en las subsecciones */
+  .info-section-image {
+    width: 100%;
+    max-width: 600px; /* Limita el tamaño máximo */
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 10px;
+    margin: 20px auto; /* Centra la imagen horizontalmente y agrega margen superior */
+    object-fit: cover; /* Asegura que la imagen cubra el contenedor sin distorsionarse */
+    display: block; /* Asegura que el elemento respete las reglas de bloque para centrado */
+  }
+  
+  .accordion-body {
+    padding: 15px;
+    background-color: #f4f4f4;
+    display: none;
+    border-radius: 8px;
+  }
+  
+  .accordion-body.open {
+    display: block;
+  }
+  
+  /* Diseño en dos columnas para los recursos */
+  .resources-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .resource-item {
+    flex: 1 1 30%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .resource-item h4 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+  }
+  
+  /* Estilos generales */
+  h2 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 40px;
+  }
+  
+/* Hacer que las imágenes sean responsivas en pantallas pequeñas */
+@media (max-width: 768px) {
+    .info-section-image {
+      max-width: 90%; /* Reducir el tamaño máximo de las imágenes en pantallas más pequeñas */
+    }
+  }
+  
+  /* Hacer que las imágenes sean aún más pequeñas en pantallas móviles */
+  @media (max-width: 480px) {
+    .info-section-image {
+      max-width: 80%; /* Ajusta el tamaño máximo aún más en pantallas muy pequeñas */
+    }
+  }
+
+  .accordion-body {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+  }
+  
+  .accordion-body.open {
+    max-height: 200px; /* Ajusta según el contenido */
+    opacity: 1;
+  }
+  
+  .accordion-header {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0.5em;
+    background: #5C8268;
+    border: 1px solid #ddd;
+    transition: background 0.3s ease;
+  }
+  
+  .accordion-header.active {
+    background: #5C8268;
+  }
+
+  .resource-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  .resource-link:hover {
+    text-decoration: underline;
+  }

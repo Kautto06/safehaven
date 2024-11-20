@@ -15,10 +15,12 @@ import calendarioImg from '../../assets/images/calendario.jpg';
 import denunciaImg from '../../assets/images/denuncia.jpg';
 import expertosImg from '../../assets/images/expertos.jpg';
 import foroImg from '../../assets/images/foro.jpg';
+import infoImg from '../../assets/images/informacion.png';
 import { Footer, Header } from '../../components';
 import pageApi from '../../api/backend';
 import imagencompartida from '../../assets/images/profile.svg';
 import noImagen from '../../assets/images/foro.jpg';
+import { image } from 'ionicons/icons';
 
 interface Expert {
   expertId: number;  // Cambiado de ID a expertId
@@ -36,12 +38,14 @@ export const Home: React.FC = () => {
   const history = useHistory();
 
   const secciones = [
+    {nombre: 'Informacion importante',ruta: '/informacion',descripcion: 'Informacion acerca de la violencia de genero',imagen:infoImg},
     { nombre: 'Actividades', ruta: '/actividades', descripcion: 'Aquí puedes gestionar y ver tus actividades.', imagen: actividadesImg },
     { nombre: 'Autoevaluación', ruta: '/autoevaluacion', descripcion: 'Realiza tu autoevaluación periódica.', imagen: autoevaluacionImg },
     { nombre: 'Calendario', ruta: '/calendario', descripcion: 'Consulta tus eventos y planifica.', imagen: calendarioImg },
     { nombre: 'Denuncia', ruta: '/denuncia', descripcion: 'Haz denuncias si notas irregularidades.', imagen: denunciaImg },
     { nombre: 'Expertos', ruta: '/expertos', descripcion: 'Accede a nuestros expertos para recibir ayuda.', imagen: expertosImg },
     { nombre: 'Foro', ruta: '/foro', descripcion: 'Participa en discusiones y comparte tus ideas.', imagen: foroImg },
+
   ];
 
   const [expertos, setExpertos] = useState<Expert[]>([]);

@@ -18,7 +18,6 @@ export const UserProfile: React.FC = () => {
   const history = useHistory();
 
 
-  console.log(user)
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return new Intl.DateTimeFormat('es-ES').format(date);

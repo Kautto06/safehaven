@@ -23,4 +23,4 @@ export * from './admin/AdminExpertos'
 export * from './admin/AdminEventos'
 export * from './admin/AdminActividades'
 export * from './admin/AdminHome';
-
+export * from './common/informacion';
