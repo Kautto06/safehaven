@@ -59,8 +59,12 @@ export const Foro: React.FC = () => {
   };
   
   const handleViewMore = (postId: number) => {
+<<<<<<< HEAD
     console.log('Redirigiendo a post con ID:', postId);  // Verifica el ID
     window.location.href =`/foro/detalle/${postId}`
+=======
+    history.push(`/detalle/${postId}`, { from: '/foro' });
+>>>>>>> fa4a8de225606dc4f1fed62a51b744693b4a4e21
   };
   return (
     <IonPage>
@@ -85,11 +89,7 @@ export const Foro: React.FC = () => {
               {foro.length > 0 ? (
                 foro.map((post, idx) => (
                   <div key={post.ID} className="forum-item">
-                    <IonImg 
-                      src="https://www.shutterstock.com/image-vector/no-image-available-icon-template-260nw-1340428865.jpg" 
-                      alt="Imagen del foro" 
-                      className="forum-image" 
-                    />
+                    
                     <div className='forum-text'>
                       <h2 className='forum-title'>{post.Titulo}</h2>
                       <p>{post.texto_preview}</p>

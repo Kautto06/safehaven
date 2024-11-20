@@ -3,6 +3,7 @@ export * from './auth/Login';
 export * from './auth/Register';
 export * from './autoevaluacion/Autoevaluacion';
 export * from './autoevaluacion/InfoAutoevaluacion';
+export * from './autoevaluacion/autoevaluacionDetalle';
 export * from './calendario/Calendario';
 export * from './common/Home';
 export * from './denuncia/Denuncia';
@@ -22,4 +23,4 @@ export * from './admin/AdminExpertos'
 export * from './admin/AdminEventos'
 export * from './admin/AdminNotificaciones'
 export * from './admin/AdminHome';
-
+export * from './common/informacion';

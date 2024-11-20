@@ -1,112 +1,84 @@
-/* General para la página de detalle */
-
-
-
-.post-detail-content {
-  display: flex;
+/* Estilos generales */
+.detailforum-post-detail-content {
   --background: #F5F5DC;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   padding: 20px;
-}
-
-.post-title {
-  font-size: 2rem;
-  font-weight: bold;
+  font-family: 'Arial', sans-serif;
   color: #333;
+}
+
+/* Estilo del título del post */
+.detailforum-post-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2e3b4e;
+  margin-bottom: 20px;
   text-align: center;
-  margin-bottom: 1rem;
+  transition: color 0.3s ease;
 }
 
-.post-detail-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 20px;
-  padding: 20px;
+.detailforum-post-title:hover {
+  color: #5C8268; /* Color vibrante al pasar el mouse */
 }
 
-/* Imagen */
-.post-image {
-  width: 100%;
-  max-width: 400px; /* Limita el ancho máximo de la imagen */
-  height: auto; /* Mantiene la proporción */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-  margin: 0 auto; /* Centra la imagen horizontalmente */
-  display: block; /* Asegura que el margen automático funcione */
-}
-
-.post-image:hover {
-  transform: scale(1.05);
-}
-
-/* Texto del post */
-.post-detail-text {
-  max-width: 800px;
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center; /* Asegura que todo el contenido esté centrado */
-  display: block;
-  width: 100%;
-}
-
-.post-description {
+/* Estilo de la descripción del post */
+.detailforum-post-description {
   font-size: 1.2rem;
   line-height: 1.6;
-  margin-bottom: 1rem;
+  margin-bottom: 20px;
+  color: #555;
 }
 
-/* Botón de Like */
-.like-button {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
+/* Contenedor del post */
+.detailforum-post-detail-container {
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  transition: box-shadow 0.3s ease;
+}
+
+.detailforum-post-detail-container:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo del botón de "Volver" */
+.detailforum-back-button {
+  background-color: #5C8268;
+  color: white;
   font-size: 1rem;
-  color: #ffffff;
-  background-color: #1e88e5;
+  padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin: 20px auto;
-  text-align: center;
-  width: fit-content;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+  display: block;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.like-button:hover {
-  background-color: #1565c0;
-  transform: translateY(-2px);
+.detailforum-back-button:hover {
+  background-color: #5C8268;
 }
 
-.like-button.liked {
-  background-color: #ff4081;
-}
-
-.like-button .icon {
+/* Estilo del botón de "Like" */
+.detailforum-like-button {
   font-size: 1.5rem;
-}
-.back-button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background-color: #757575;  /* Color gris */
-  color: white;
-  font-size: 0.5rem;
-  padding: 10px 20px;  /* Ajusté el padding para hacer el botón más visible */
+  padding: 10px 20px;
+  border: none;
   border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  background-color: #5C8268;
+  color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
 }
 
 .back-button:hover {
@@ -192,4 +164,38 @@
     font-size: 0.7rem;
     padding: 6px 12px;
   }
+}
+.detailforum-like-button:hover {
+  background-color: #5C8268;
+  transform: scale(1.1);
+}
+
+.detailforum-like-button.liked {
+  background-color: #ff4c4c;
+}
+
+.detailforum-like-button .liked {
+  font-size: 1.8rem;
+  margin-right: 10px;
+}
+
+/* Estilos para los botones en la parte superior */
+.detailforum-header {
+  background-color: #222;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+/* Ajuste en el pie de página */
+.detailforum-footer {
+  background-color: #222;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 0.8rem;
 }

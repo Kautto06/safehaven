@@ -16,7 +16,7 @@ export const Notificaciones: React.FC = () => {
                 const response = await pageApi.get('/notificaciones/paginado', {
                     params: { page: currentPage, limit: 5 } // Ajuste de los parámetros
                 });
-                console.log('Datos de notificaciones:', response.data);
+               
                 setNotifications(response.data.notifications);
                 setTotalPages(response.data.totalPages);
             } catch (error) {
