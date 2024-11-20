@@ -62,36 +62,25 @@ export const DetallePost: React.FC = () => {
   return (
     <IonPage>
       <Header />
-      <IonContent className="post-detail-content">
+      <IonContent className="detailforum-post-detail-content">
         <main>
-        <button className="back-button" onClick={handleGoBack}>Volver</button>
-          <h1 className="post-title">{post.Titulo}</h1>
-          <section className="post-detail-container">
-            <IonImg
-              className="post-image"
-              src={
-                post.Imagen ||
-                "https://www.shutterstock.com/image-vector/no-image-available-icon-template-260nw-1340428865.jpg"
-              }
-              alt="Imagen del foro"
-            />
-            <div className="post-detail-text">
+          <button className="detailforum-back-button" onClick={handleGoBack}>Volver</button>
+          <h1 className="detailforum-post-title">{post.Titulo}</h1>
+          <section className="detailforum-post-detail-container">
+            <div className="detailforum-post-detail-text">
               {/* Contenido del post */}
-              <p className="post-description">{post.Contenido}</p>
+              <p className="detailforum-post-description">{post.Contenido}</p>
               <p>
                 <strong>Autor:</strong> {post.autor}
               </p>
               
               {/* Botón de likes directamente aquí */}
               <button
-                className={`like-button ${hasLiked ? 'liked' : ''}`}
+                className={`detailforum-like-button ${hasLiked ? 'liked' : ''}`}
                 onClick={handleLike}
               >
                 {hasLiked ? "❤️" : "🤍"} {likes} Likes
               </button>
-
-              {/* Botón de regreso */}
-              
             </div>
           </section>
         </main>

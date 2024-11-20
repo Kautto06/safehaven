@@ -1,30 +1,56 @@
 import React, { useState, useEffect } from 'react';
-import { IonContent, IonPage, IonButton, IonAlert } from '@ionic/react';
+import { IonContent, IonPage, IonButton, IonAlert,IonSpinner } from '@ionic/react';
+import pageApi from '../../api/backend'; // Aquí importas la API de backend
 import '../../assets/autoevaluacion/Autoevaluacion.css';
-import preguntasData from '../../data/preguntas.json';
 import { Footer, Header } from '../../components';
+import { useAuthStore } from '../../hooks/auth/useAuthStore'; // Para obtener datos del usuario autenticado
 
 export const Autoevaluacion: React.FC = () => {
-  const [questions, setQuestions] = useState<any[]>([]); // Estado para las preguntas
+  const { user,status } = useAuthStore(); // Usuario autenticado
+  const [questions, setQuestions] = useState<any[]>([]);
   const [formData, setFormData] = useState<{ [key: string]: string }>({});
   const [showAlert, setShowAlert] = useState(false);
   const [errorMessages, setErrorMessages] = useState<{ [key: string]: string | null }>({});
   const [submittedData, setSubmittedData] = useState<{ [key: string]: string } | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Estado para evitar doble envío
 
-  // Cargar preguntas desde el archivo importado
+
+  if (status !== 'authenticated' || !user || !('name' in user)) {
+    return (
+      <IonPage>
+        <Header />
+        <IonContent>
+          <div className="loading-container">
+            <IonSpinner name="bubbles" />
+            <p>Cargando...</p>
+          </div>
+        </IonContent>
+        <Footer />
+      </IonPage>
+    );
+  }
+
+
+  // Cargar preguntas y opciones desde la API
   useEffect(() => {
-    // Usar los datos importados del archivo JSON
-    const data = preguntasData;
+    const fetchQuestions = async () => {
+      try {
+        const response = await pageApi.get('/preguntas/preguntas-con-opciones'); // Usando pageApi.get
+        console.log('Datos de preguntas:', response.data);
+        setQuestions(response.data.questions);
 
-    setQuestions(data.questions); // Establecer las preguntas desde el JSON
+        // Inicializar formData con valores vacíos
+        const initialData = response.data.questions.reduce((acc: any, question: any) => {
+          acc[question.id] = '';
+          return acc;
+        }, {});
+        setFormData(initialData);
+      } catch (error) {
+        console.error("Error al obtener las preguntas con opciones:", error);
+      }
+    };
 
-    // Inicializar formData con valores vacíos
-    const initialData = data.questions.reduce((acc: any, question: any) => {
-      acc[question.id] = '';
-      return acc;
-    }, {});
-
-    setFormData(initialData);
+    fetchQuestions();
   }, []);
 
   const handleInputChange = (name: string, value: string) => {
@@ -33,7 +59,6 @@ export const Autoevaluacion: React.FC = () => {
       [name]: value
     }));
 
-    // Limpiar error si se corrige el campo
     if (value !== '') {
       setErrorMessages((prevErrors) => ({
         ...prevErrors,
@@ -42,60 +67,70 @@ export const Autoevaluacion: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const newErrorMessages: { [key: string]: string | null } = {};
     let allQuestionsAnswered = true;
 
-    // Validación para cada pregunta
+    // Validar respuestas
     questions.forEach((question) => {
       if (formData[question.id] === '') {
-        newErrorMessages[question.id] = `Por favor responde la pregunta.`;                                                                                                                                                                                    
+        newErrorMessages[question.id] = 'Por favor responde la pregunta.';
         allQuestionsAnswered = false;
       }
     });
 
     setErrorMessages(newErrorMessages);
 
-    if (!allQuestionsAnswered) {
+    if (!allQuestionsAnswered || isSubmitting) {
       return;
     }
 
-    console.log('Form data: ', formData);
-    setShowAlert(true); // Mostrar alerta de éxito
-    setSubmittedData(formData); // Guardar los datos enviados para mostrar el JSON
-  };
+    setIsSubmitting(true);
 
-  const handleCancel = () => {
-    const resetFormData = Object.keys(formData).reduce((acc: any, key: string) => {
-      acc[key] = '';
-      return acc;
-    }, {});
-    setFormData(resetFormData);
-    setSubmittedData(null); // Limpiar los datos enviados
+    // Transformar datos para el backend
+    const respuestas = questions.map((question) => ({
+      idPregunta: question.id,
+      idOpcion: formData[question.id]
+    }));
+
+    try {
+      const response = await pageApi.post('/autoevaluacion/guardar', { 
+        user: { email: user.email }, 
+        respuestas 
+      });
+
+      console.log('Respuesta del backend:', response.data);
+      setSubmittedData(formData); // Guardar datos enviados para mostrarlos
+      setShowAlert(true); // Mostrar alerta de éxito
+    } catch (error) {
+      console.error('Error al enviar la autoevaluación:', error);
+      alert('Ocurrió un error al enviar la autoevaluación. Intenta nuevamente.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <IonPage>
-      <Header /> {/* Usar el componente del header */}
+      <Header />
       <IonContent className="evaluation-body">
         <main>
-          <form onSubmit={handleSubmit} className='evaluation-form' id='evalutationForm'>
+          <form onSubmit={handleSubmit} className="evaluation-form">
             <h1>Autoevaluación</h1>
-
             {questions.map((question) => (
-              <div key={question.id} className='question'>
-                <label className='question-label'>{question.label}</label>
+              <div key={question.id} className="question">
+                <label className="question-label">{question.label}</label>
                 <select
                   className={`question-select ${errorMessages[question.id] ? 'error-highlight' : ''}`}
                   name={question.id}
                   value={formData[question.id]}
-                  onChange={(e) => handleInputChange(question.id, e.target.value)} // Cambiar el evento de manera directa
+                  onChange={(e) => handleInputChange(question.id, e.target.value)}
                 >
                   <option value="">Selecciona una opción</option>
-                  {question.options.map((option: string, index: number) => (
-                    <option key={index} value={option}>{option}</option>
+                  {question.options.map((option: { id: string; option: string }) => (
+                    <option key={option.id} value={option.id}>{option.option}</option>
                   ))}
                 </select>
 
@@ -105,24 +140,16 @@ export const Autoevaluacion: React.FC = () => {
               </div>
             ))}
 
-            <div className='comment-section'>
-              <label>Comentario</label>
-              <textarea
-                id="comment"
-                name="comment"
-                value={formData.comment || ''}
-                onChange={(e) => handleInputChange('comment', e.target.value ?? '')} // Manejar null o undefined
-                placeholder="Deja tu comentario aquí"
-              />
-            </div>
-
             <div className="buttons">
-              <IonButton className="submit-button-evaluation" type="submit" expand="block">Enviar</IonButton>
-              <IonButton className='cancel-button-evaluation' color="danger" expand="block" onClick={handleCancel} routerLink='/foro'>Cancelar</IonButton>
+              <IonButton className="submit-button-evaluation" type="submit" expand="block" disabled={isSubmitting}>
+                {isSubmitting ? 'Enviando...' : 'Enviar'}
+              </IonButton>
+              <IonButton className="cancel-button-evaluation" color="danger" expand="block" onClick={() => setSubmittedData(null)}>
+                Cancelar
+              </IonButton>
             </div>
           </form>
 
-          {/* Mostrar datos enviados como JSON */}
           {submittedData && (
             <div className="submitted-data">
               <h2>Datos enviados:</h2>
@@ -130,12 +157,11 @@ export const Autoevaluacion: React.FC = () => {
             </div>
           )}
 
-          {/* Notificación de éxito */}
           <IonAlert
             isOpen={showAlert}
             onDidDismiss={() => setShowAlert(false)}
             header={'Autoevaluación completada'}
-            message={'La autoevaluación se realizó con éxito.'}
+            message={'Nuestro personal se pondra en contacto contigo'}
             buttons={['OK']}
           />
         </main>
@@ -144,5 +170,3 @@ export const Autoevaluacion: React.FC = () => {
     </IonPage>
   );
 };
-
-

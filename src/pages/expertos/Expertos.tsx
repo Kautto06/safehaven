@@ -69,6 +69,7 @@ export const Expertos: React.FC = () => {
                   <div className="forum-text">
                     <h2 className="forum-title">{expert.nombre}</h2>
                     <p>{expert.texto}</p>
+                    <p>{expert.ocupación}</p>
                     <IonButton fill="clear" className="view-button" onClick={() => handleViewMore(expert.expertId)}>
                       Ver
                     </IonButton>

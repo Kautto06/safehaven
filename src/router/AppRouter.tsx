@@ -27,7 +27,8 @@ import {
   AdminEvents,
   ActivityAdmin,
   CrearPublicacion,
-  DetallePost
+  DetallePost,
+  ResultadosAutoevaluacion,
 } from '../pages';
 
 import { AdminDenuncias } from "../pages/admin/AdminDenuncia";
@@ -70,6 +71,7 @@ const AppRouter: React.FC = () => {
               <Route exact path="/denuncia" component={InformativaDenuncia}/>
               <Route exact path="/autoevaluacion" component={AutoevaluacionInfo}/>
               <Route exact path="/autoevaluacion/formulario" component={Autoevaluacion} />
+              <Route exact path="/resultados/:id_objeto" component={ResultadosAutoevaluacion} />
               <Route exact path="/calendario" component={CalendarComponent} />
               <Route exact path="/perfilUsuario" component={UserProfile} />
               <Route exact path="/editarPerfil" component={EditProfile} />
