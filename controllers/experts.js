@@ -2,6 +2,17 @@ const { ejecutarConsulta } = require('../database/config');
 const mysql = require('mysql'); 
 
 
+const obtenerAllExpertos = async (req, res) => {
+  try {
+      const query = `SELECT * FROM experto`;
+      const resultados = await ejecutarConsulta(query);
+      res.json(resultados);
+  } catch (error) {
+      console.error("Error al obtener expertos:", error);
+      res.status(500).json({ message: 'Error al obtener expertos' });
+  }
+};
+
 // Controlador para obtener todos los expertos
 const obtenerExpertos = async (req, res) => {
     try {
@@ -108,7 +119,7 @@ const obtenerExpertoPorId = async (req, res) => {
     const { id } = req.params;
   
     try {
-      const query = 'SELECT * FROM expertos WHERE ID = ?';
+      const query = 'SELECT * FROM experto WHERE ID = ?';
       const values = [id];
       const formattedQuery = mysql.format(query, values);
   
@@ -127,14 +138,14 @@ const obtenerExpertoPorId = async (req, res) => {
   
   // Crear un nuevo experto
   const crearExperto = async (req, res) => {
-    const { First_Name, Last_Name, Telefono, Email, Genero, Ocupación, Modalidad_Atencion } = req.body;
+    const { First_Name, Last_Name, Telefono, Email, Genero, Ocupación,descripcion,FechaNacimiento,Direccion,Certificaciones, Modalidad_Atencion, About_me } = req.body;
   
     try {
       const query = `
-        INSERT INTO expertos (First_Name, Last_Name, Telefono, Email, Genero, Ocupación, Modalidad_Atencion)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO experto (First_Name, Last_Name, Telefono, Email, Genero, Ocupación, descripcion, Fecha_Nacimiento, Direccion, Certificaciones, Modalidad_Atencion, About_Me)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `;
-      const values = [First_Name, Last_Name, Telefono, Email, Genero, Ocupación, Modalidad_Atencion];
+      const values = [First_Name, Last_Name, Telefono, Email, Genero, Ocupación,descripcion,FechaNacimiento,Direccion,Certificaciones, Modalidad_Atencion, About_me];
       const formattedQuery = mysql.format(query, values);
   
       const result = await ejecutarConsulta(formattedQuery);
@@ -156,7 +167,7 @@ const obtenerExpertoPorId = async (req, res) => {
   
     try {
       const query = `
-        UPDATE expertos
+        UPDATE experto
         SET
           First_Name = COALESCE(?, First_Name),
           Last_Name = COALESCE(?, Last_Name),
@@ -188,9 +199,8 @@ const obtenerExpertoPorId = async (req, res) => {
     const { id } = req.params;
   
     try {
-      const query = 'DELETE FROM expertos WHERE ID = ?';
+      const query = 'DELETE FROM experto WHERE ID = ?';
       const formattedQuery = mysql.format(query, [id]);
-  
       const result = await ejecutarConsulta(formattedQuery);
   
       if (result.affectedRows === 0) {
@@ -212,4 +222,5 @@ const obtenerExpertoPorId = async (req, res) => {
     crearExperto,
     actualizarExperto,
     eliminarExperto,
+    obtenerAllExpertos
   };

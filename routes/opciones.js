@@ -2,7 +2,8 @@ const {Router}= require('express')
 const { validarJWT } = require('../middlewares/validar-jwt')
 const { validarCampos } = require('../middlewares/validar-campos')
 const { check } = require('express-validator')
-const { getPreguntas, crearOpcion, actualizarOpcion, eliminarOpcion, eliminarOpcionesPorPregunta } = require('../controllers/opciones')
+const { crearOpcion, actualizarOpcion, eliminarOpcion, eliminarOpcionesPorPregunta, getOpcionesPorPregunta, getOpciones, getOpcionesPorId } = require('../controllers/opciones')
+const { validarOpcionExistente, validarPreguntaExistente } = require('../helpers/db-validator')
 
 
 const router = Router()
@@ -10,7 +11,23 @@ const router = Router()
 router.get('/',[
     validarJWT,
     validarCampos
-],getPreguntas)
+],getOpciones)
+
+router.get('/:id',[
+    check('id')
+        .isInt().withMessage('El ID debe ser un número entero.')
+        .custom(validarOpcionExistente), 
+    validarJWT,
+    validarCampos
+],getOpcionesPorId)
+
+router.get('/pregunta/:id',[
+    check('id')
+        .isInt().withMessage('El ID debe ser un número entero.')
+        .custom(validarPreguntaExistente), 
+    validarJWT,
+    validarCampos
+],getOpcionesPorPregunta)
 
 router.post('/crear',[
     check('opcion','el contenido de la opcion es obligatorio').not().isEmpty(),

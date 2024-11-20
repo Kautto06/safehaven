@@ -1,6 +1,24 @@
 const { ejecutarConsulta } = require('../database/config'); // Importa tu configuración de conexión a la base de datos
 const mysql = require('mysql');
 // Controlador para obtener todos los expertos
+
+const obtenerPublicaciones = async (req,res) =>{
+  try {
+    const query= 'SELECT * FROM publicación'
+    const result = await ejecutarConsulta(query)
+
+    if (!result.length) {
+      return res.status(404).json({ message: "No hay denuncias registradas" });
+    }
+
+    res.json(result);
+    
+  } catch (error) {
+    console.error("Error al obtener publicaciones:", error);
+    res.status(500).json({ message: "Error al obtener publicaciones" });
+  }
+}
+
 const obtenerForoHome = async (req, res) => {
     try {
         const query = `
@@ -125,7 +143,7 @@ const obtenerDetallesPost = async (req, res) => {
   
     try {
       const query = `
-        INSERT INTO foro (Contenido, Titulo, ID_Usuario, Fecha_Publicacion)
+        INSERT INTO publicación (Contenido, Titulo, ID_Usuario, Fecha_Publicacion)
         VALUES (?, ?, ?, NOW())
       `;
       const values = [Contenido, Titulo, ID_Usuario];
@@ -148,7 +166,7 @@ const obtenerDetallesPost = async (req, res) => {
     const { id } = req.params;
   
     try {
-      const query = 'DELETE FROM foro WHERE ID = ?';
+      const query = 'DELETE FROM publicación WHERE ID = ?';
       const formattedQuery = mysql.format(query, [id]);
   
       const result = await ejecutarConsulta(formattedQuery);
@@ -171,7 +189,7 @@ const obtenerDetallesPost = async (req, res) => {
   
     try {
       const query = `
-        UPDATE foro
+        UPDATE publicación
         SET
           Contenido = COALESCE(?, Contenido),
           Titulo = COALESCE(?, Titulo),
@@ -284,8 +302,10 @@ const obtenerDetallesPost = async (req, res) => {
     }
 }
 
+
+
   
 module.exports = {
     obtenerForoHome,obtenerForoPaginado,obtenerDetallesPost,crearForo,actualizarForo,eliminarForo,
-    manejarLikeIncrement,manejarLikeDecrement,crearPublicacion
+    manejarLikeIncrement,manejarLikeDecrement,crearPublicacion,obtenerPublicaciones
 };

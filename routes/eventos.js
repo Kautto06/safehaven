@@ -2,7 +2,8 @@ const {Router}= require('express')
 const { validarJWT } = require('../middlewares/validar-jwt')
 const { validarCampos } = require('../middlewares/validar-campos')
 const { check } = require('express-validator')
-const { getEventos, crearEvento, actualizarEvento, eliminarEvento } = require('../controllers/eventos')
+const { getEventos, crearEvento, actualizarEvento, eliminarEvento, getEventoPorId } = require('../controllers/eventos')
+const { validarEventoExistente } = require('../helpers/db-validator')
 
 const router = Router()
 
@@ -42,8 +43,7 @@ router.put('/actualizar/:id', [
 
     check('Tipo')
         .optional()
-        .isLength({ max: 50 }).withMessage('El tipo del evento no debe exceder los 50 caracteres.')
-        .isIn(['conferencia', 'seminario', 'taller']).withMessage('El tipo del evento no es válido.'),
+        .isLength({ max: 50 }).withMessage('El tipo del evento no debe exceder los 50 caracteres.'),
 
     check('Fecha')
         .optional()
@@ -55,6 +55,14 @@ router.put('/actualizar/:id', [
     validarJWT,
     validarCampos
 ], actualizarEvento);
+
+router.get('/:id',[
+    check('id')
+        .isInt().withMessage('El ID debe ser un número entero.')
+        .custom(validarEventoExistente),
+    validarJWT,
+    validarCampos
+],getEventoPorId)
 
 router.delete('/eliminar/:id', [
     check('id')

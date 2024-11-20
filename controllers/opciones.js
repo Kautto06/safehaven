@@ -1,34 +1,79 @@
 const mysql = require('mysql2/promise');
 const { ejecutarConsulta } = require('../database/config'); // Configuración para ejecutar consultas en la BD
 
-// Obtener todas las preguntas con sus opciones
-const getPreguntas = async (req, res) => {
+const getOpciones = async (req, res) => {
+ // Obtener el ID de la pregunta desde los parámetros de la URL
+
   try {
-    const query = `
-      SELECT p.ID AS PreguntaID, p.Titulo, o.ID AS OpcionID, o.Opcion
-      FROM preguntas p
-      LEFT JOIN opciones o ON p.ID = o.PreguntaID
-    `;
+    // Consulta SQL para obtener las opciones asociadas a una pregunta específica
+    const query = `SELECT * FROM opciones`;
+    
+    // Ejecutar la consulta con el ID de la pregunta
     const result = await ejecutarConsulta(query);
 
-    const preguntas = result.reduce((acc, row) => {
-      const pregunta = acc.find(p => p.ID === row.PreguntaID);
-      if (pregunta) {
-        pregunta.Opciones.push({ ID: row.OpcionID, Opcion: row.Opcion });
-      } else {
-        acc.push({
-          ID: row.PreguntaID,
-          Titulo: row.Titulo,
-          Opciones: row.OpcionID ? [{ ID: row.OpcionID, Opcion: row.Opcion }] : []
-        });
-      }
-      return acc;
-    }, []);
+    // Si no se encuentran opciones para la pregunta, devolver un mensaje de error
+    if (result.length === 0) {
+      return res.status(404).json({ message: "No se encontraron opciones para esta pregunta" });
+    }
 
-    res.status(200).json(preguntas);
+    // Responder con las opciones encontradas
+    res.status(200).json(result);
   } catch (error) {
-    console.error("Error al obtener las preguntas:", error);
-    res.status(500).json({ message: "Error al obtener las preguntas" });
+    console.error("Error al obtener las opciones:", error);
+    res.status(500).json({ message: "Error al obtener las opciones" });
+  }
+};
+
+const getOpcionesPorId = async (req, res) => {
+  const { id } = req.params; // Obtener el ID de la pregunta desde los parámetros de la URL
+
+  try {
+    // Consulta SQL para obtener las opciones asociadas a una pregunta específica
+    const query = `
+      SELECT *
+      FROM opciones o
+      WHERE o.ID = ?
+    `;
+    
+    // Ejecutar la consulta con el ID de la pregunta
+    const result = await ejecutarConsulta(mysql.format(query, [id]));
+
+    // Si no se encuentran opciones para la pregunta, devolver un mensaje de error
+    if (result.length === 0) {
+      return res.status(404).json({ message: "No se encontraron opciones para esta pregunta" });
+    }
+    // Responder con las opciones encontradas
+    res.status(200).json(result);
+  } catch (error) {
+    console.error("Error al obtener las opciones:", error);
+    res.status(500).json({ message: "Error al obtener las opciones" });
+  }
+};
+
+// Obtener todas las preguntas con sus opciones
+const getOpcionesPorPregunta = async (req, res) => {
+  const { id } = req.params; // Obtener el ID de la pregunta desde los parámetros de la URL
+
+  try {
+    // Consulta SQL para obtener las opciones asociadas a una pregunta específica
+    const query = `
+      SELECT o.ID AS OpcionID, o.Opcion
+      FROM opciones o
+      WHERE o.ID_Pregunta = ?
+    `;
+    
+    // Ejecutar la consulta con el ID de la pregunta
+    const result = await ejecutarConsulta(mysql.format(query, [id]));
+
+    // Si no se encuentran opciones para la pregunta, devolver un mensaje de error
+    if (result.length === 0) {
+      return res.status(404).json({ message: "No se encontraron opciones para esta pregunta" });
+    }
+    // Responder con las opciones encontradas
+    res.status(200).json(result);
+  } catch (error) {
+    console.error("Error al obtener las opciones:", error);
+    res.status(500).json({ message: "Error al obtener las opciones" });
   }
 };
 
@@ -38,13 +83,14 @@ const crearOpcion = async (req, res) => {
 
   try {
     const query = `
-      INSERT INTO opciones (Opcion, PreguntaID)
+      INSERT INTO opciones (Opcion, ID_Pregunta)
       VALUES (?, ?)
     `;
     const values = [opcion, PreguntaID];
     const formattedQuery = mysql.format(query, values);
-
     const result = await ejecutarConsulta(formattedQuery);
+
+    console.log(result)
 
     res.status(201).json({
       message: "Opción creada exitosamente",
@@ -114,17 +160,17 @@ const eliminarOpcionesPorPregunta = async (req, res) => {
   try {
     const query = `
       DELETE FROM opciones
-      WHERE PreguntaID = ?
+      WHERE ID_Pregunta = ?
     `;
     const formattedQuery = mysql.format(query, [id]);
 
     const result = await ejecutarConsulta(formattedQuery);
 
     if (result.affectedRows === 0) {
-      return res.status(404).json({ message: "No se encontraron opciones para esta pregunta" });
+      return res.status(200).json({ message: "No habian registradas opciones para esta pregunta" });
     }
 
-    res.json({ message: "Opciones eliminadas exitosamente" });
+    res.status(200).json({ message: "Opciones eliminadas exitosamente" });
   } catch (error) {
     console.error("Error al eliminar opciones por pregunta:", error);
     res.status(500).json({ message: "Error al eliminar opciones por pregunta" });
@@ -132,9 +178,11 @@ const eliminarOpcionesPorPregunta = async (req, res) => {
 };
 
 module.exports = {
-  getPreguntas,
   crearOpcion,
   actualizarOpcion,
   eliminarOpcion,
   eliminarOpcionesPorPregunta,
+  getOpcionesPorPregunta,
+  getOpciones,
+  getOpcionesPorId
 };

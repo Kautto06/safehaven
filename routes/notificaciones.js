@@ -1,10 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const notificationsController = require('../controllers/notificaciones');
 
-router.get('/paginado', notificationsController.obtenerNotificacionesPaginadas);
 
-module.exports = router;
+
+
 const { Router } = require('express');
 const { validarJWT } = require('../middlewares/validar-jwt');
 const { validarCampos } = require('../middlewares/validar-campos');
@@ -14,10 +11,14 @@ const {
   crearNotificacion,
   actualizarNotificacion,
   eliminarNotificacion,
+  obtenerNotificacionesPaginadas,
+  getNotificacionesPorId,
 } = require('../controllers/notificaciones');
+const { validarNotificacionExistente } = require('../helpers/db-validator');
 
+const router = Router()
 
-router.get('/paginado', notificationsController.obtenerNotificacionesPaginadas);
+router.get('/paginado', obtenerNotificacionesPaginadas);
 
 // Obtener todas las notificaciones
 router.get('/', [
@@ -25,29 +26,39 @@ router.get('/', [
   validarCampos
 ], getNotificaciones);
 
+router.get('/:id',[
+  check('id')
+        .isInt().withMessage('El ID debe ser un número entero.')
+        .custom(validarNotificacionExistente), 
+  validarJWT,
+  validarCampos
+],getNotificacionesPorId)
+
 // Crear una nueva notificación
 router.post('/crear', [
   check('Titulo', 'El título es obligatorio').not().isEmpty(),
   check('Contenido', 'El contenido es obligatorio').not().isEmpty(),
-  check('ID_Usuario', 'El ID del usuario es obligatorio').not().isEmpty(),
   validarJWT,
   validarCampos,
 ], crearNotificacion);
 
 // Actualizar una notificación por ID
 router.put('/actualizar/:id', [
-  check('id', 'El ID debe ser un número entero').isInt(),
+  check('id')
+        .isInt().withMessage('El ID debe ser un número entero.')
+        .custom(validarNotificacionExistente), 
   check('Titulo', 'El título es obligatorio').optional().not().isEmpty(),
   check('Contenido', 'El contenido es obligatorio').optional().not().isEmpty(),
   check('ID_Usuario', 'El ID del usuario es obligatorio').optional().not().isEmpty(),
-  check('Link', 'El link debe ser una URL válida').optional().isURL(),
   validarJWT,
   validarCampos,
 ], actualizarNotificacion);
 
 // Eliminar una notificación por ID
 router.delete('/eliminar/:id', [
-  check('id', 'El ID debe ser un número entero').isInt(),
+  check('id')
+        .isInt().withMessage('El ID debe ser un número entero.')
+        .custom(validarNotificacionExistente), 
   validarJWT,
   validarCampos,
 ], eliminarNotificacion);

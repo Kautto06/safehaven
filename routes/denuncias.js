@@ -2,7 +2,8 @@ const {Router}= require('express')
 const { validarJWT } = require('../middlewares/validar-jwt')
 const { validarCampos } = require('../middlewares/validar-campos')
 const { check } = require('express-validator')
-const { obtenerDenuncias, crearDenuncia, actualizarDenuncia, eliminarDenuncia } = require('../controllers/denuncias')
+const { obtenerDenuncias, crearDenuncia, actualizarDenuncia, eliminarDenuncia, cambiarEstadoDenuncia } = require('../controllers/denuncias')
+const { validarDenunciaExistente } = require('../helpers/db-validator')
 
 const router = Router()
 
@@ -31,6 +32,15 @@ router.put('/actualizar/:id',[
     validarJWT,
     validarCampos
 ], actualizarDenuncia);
+
+router.put('/actualizarestado/:id',[
+    check('id')
+        .isInt().withMessage('El ID debe ser un número entero.')
+        .custom(validarDenunciaExistente), 
+    check('Estado', 'El estado es obligatorio').optional().not().isEmpty(),
+    validarJWT,
+    validarCampos
+], cambiarEstadoDenuncia);
 
 router.delete('/eliminar/:id', [
     check('id')

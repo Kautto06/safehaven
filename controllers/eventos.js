@@ -18,10 +18,29 @@ const getEventos = async (req, res) => {
   }
 };
 
+const getEventoPorId = async(req,res) => {
+  const {id} = req.params
+  try {
+    const query = 'SELECT * FROM eventos WHERE ID = ?';
+    const params = [id]
+    const formattedQuery = mysql.format(query,params)
+    const result = await ejecutarConsulta(formattedQuery);
+
+    if (!result.length) {
+      return res.status(404).json({ message: "No hay eventos registrados" });
+    }
+
+    res.json(result);
+  } catch (error) {
+    console.error("Error al obtener eventos:", error);
+    res.status(500).json({ message: "Error al obtener eventos" });
+  }
+}
+
 // Crear un nuevo evento
 const crearEvento = async (req, res) => {
   const { Titulo_Evento, Tipo, Fecha, Horario } = req.body;
-
+  console.log(req.body)
   try {
     const query = `
       INSERT INTO eventos (Titulo_Evento, Tipo, Fecha, Horario)
@@ -99,4 +118,5 @@ module.exports = {
   crearEvento,
   actualizarEvento,
   eliminarEvento,
+  getEventoPorId
 };

@@ -24,6 +24,8 @@ router.post('/crear', foroController.crearPublicacion);
 
 router.get('/', foroController.obtenerForoHome);
 
+router.get('/all',foroController.obtenerPublicaciones)
+
 router.post('/crear', [
     check('Contenido', 'El contenido es obligatorio').not().isEmpty(),
     check('Titulo', 'El título es obligatorio').not().isEmpty(),

@@ -17,6 +17,26 @@ const getPreguntas = async (req, res) => {
   }
 };
 
+const getPreguntasPorId = async (req, res) => {
+  const {id} = req.params
+
+  try {
+    const query = `
+      SELECT ID, Pregunta
+      FROM preguntas p
+      WHERE p.ID = ?
+    `;
+    const formattedQuery = mysql.format(query, [id]);
+
+    const result = await ejecutarConsulta(formattedQuery);
+
+    res.json(result);
+  } catch (error) {
+    console.error("Error al obtener las preguntas:", error);
+    res.status(500).json({ message: "Error al obtener las preguntas" });
+  }
+};
+
 // Crear una nueva pregunta
 const crearPregunta = async (req, res) => {
   const { pregunta } = req.body;
@@ -77,8 +97,8 @@ const eliminarPregunta = async (req, res) => {
       WHERE ID = ?
     `;
     const formattedQuery = mysql.format(query, [id]);
-
     const result = await ejecutarConsulta(formattedQuery);
+
 
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: "Pregunta no encontrada" });
@@ -96,4 +116,5 @@ module.exports = {
   crearPregunta,
   actualizarPregunta,
   eliminarPregunta,
+  getPreguntasPorId
 };

@@ -8,6 +8,7 @@ const { validarCampos } = require('../middlewares/validar-campos');
 const { validarExpertoExistente } = require('../helpers/db-validator');
 
 // Ruta para obtener todos los expertos
+router.get('/', expertosController.obtenerAllExpertos);
 router.get('/todos', expertosController.obtenerExpertos);
 router.get('/paginado', expertosController.obtenerExpertosPaginado);
 router.get('/detalles/:id', expertosController.obtenerDetallesExperto); 

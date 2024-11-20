@@ -46,7 +46,7 @@ const obtenerNotificacionesPaginadas = async (req, res) => {
 // Obtener todas las notificaciones
 const getNotificaciones = async (req, res) => {
   try {
-    const notificaciones = await ejecutarConsulta('SELECT * FROM notificaciones');
+    const notificaciones = await ejecutarConsulta('SELECT * FROM notificación');
     res.status(200).json({
       ok: true,
       notificaciones,
@@ -60,16 +60,37 @@ const getNotificaciones = async (req, res) => {
   }
 };
 
+const getNotificacionesPorId = async (req, res) => {
+  const {id} = req.params
+  try {
+    const query = 'SELECT * FROM notificación WHERE ID = ?'
+    const params = [id]
+    const formattedQuery = mysql.format(query,params)
+    const notificacion = await ejecutarConsulta(formattedQuery);
+
+    res.status(200).json({
+      ok: true,
+      notificacion,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      ok: false,
+      msg: 'Error al obtener las notificaciones',
+    });
+  }
+};
+
 // Crear una nueva notificación
 const crearNotificacion = async (req, res) => {
-  const { Titulo, Contenido, ID_Usuario, Link, Descripcion } = req.body;
+  const { Titulo, Contenido, ID_Usuario, Descripcion } = req.body;
 
   try {
     const query = `
-      INSERT INTO notificaciones (Titulo, Contenido, ID_Usuario, Link, Descripcion)
-      VALUES (?, ?, ?, ?, ?)
+      INSERT INTO notificación (Titulo, Contenido, ID_Usuario, Descripcion)
+      VALUES (?, ?, ?, ?)
     `;
-    const params = [Titulo, Contenido, ID_Usuario, Link || null, Descripcion || null];
+    const params = [Titulo, Contenido, ID_Usuario, Descripcion || null];
 
     const formattedQuery = mysql.format(query, params);
     const resultado = await ejecutarConsulta(formattedQuery);
@@ -77,7 +98,7 @@ const crearNotificacion = async (req, res) => {
     res.status(201).json({
       ok: true,
       msg: 'Notificación creada exitosamente',
-      notificacionId: resultado.insertId,
+      ID: resultado.insertId,
     });
   } catch (error) {
     console.error(error);
@@ -91,15 +112,15 @@ const crearNotificacion = async (req, res) => {
 // Actualizar una notificación por ID
 const actualizarNotificacion = async (req, res) => {
   const { id } = req.params;
-  const { Titulo, Contenido, ID_Usuario, Link, Descripcion } = req.body;
+  const { Titulo, Contenido, ID_Usuario, Descripcion } = req.body;
 
   try {
     const query = `
-      UPDATE notificaciones
-      SET Titulo = ?, Contenido = ?, ID_Usuario = ?, Link = ?, Descripcion = ?
+      UPDATE notificación
+      SET Titulo = ?, Contenido = ?, ID_Usuario = ?, Descripcion = ?
       WHERE ID = ?
     `;
-    const params = [Titulo, Contenido, ID_Usuario, Link, Descripcion, id];
+    const params = [Titulo, Contenido, ID_Usuario, Descripcion, id];
     const formattedQuery = mysql.format(query, params);
     const resultado = await ejecutarConsulta(formattedQuery);
 
@@ -128,7 +149,7 @@ const eliminarNotificacion = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const query = 'DELETE FROM notificaciones WHERE ID = ?';
+    const query = 'DELETE FROM notificación WHERE ID = ?';
     const params = [id];
 
     const formattedQuery = mysql.format(query, params);
@@ -160,4 +181,5 @@ module.exports = {
   crearNotificacion,
   actualizarNotificacion,
   eliminarNotificacion,
+  getNotificacionesPorId
 };

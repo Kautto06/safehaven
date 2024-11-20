@@ -3,7 +3,7 @@ const mysql = require('mysql');
 // Función que verifica si el ID de una notificación existe
 const validarNotificacionExistente = async (id) => {
   try {
-    const query = 'SELECT 1 FROM notificaciones WHERE ID = ? LIMIT 1';
+    const query = 'SELECT 1 FROM notificación WHERE ID = ? LIMIT 1';
     const params = [id]
       const formattedQuery = mysql.format(query, params);
       const result = await ejecutarConsulta(formattedQuery);
@@ -35,7 +35,7 @@ const validarEventoExistente = async (id) => {
   // Función que verifica si el ID de un experto existe
 const validarExpertoExistente = async (id) => {
     try {
-      const query = 'SELECT 1 FROM expertos WHERE ID = ? LIMIT 1';
+      const query = 'SELECT 1 FROM experto WHERE ID = ? LIMIT 1';
       const params = [id]
       const formattedQuery = mysql.format(query, params);
       const result = await ejecutarConsulta(formattedQuery);
@@ -65,7 +65,7 @@ const validarOpcionExistente = async (id) => {
 
 const validarPublicacionExistente = async (id) => {
     try {
-      const query = 'SELECT 1 FROM foro WHERE ID = ? LIMIT 1';
+      const query = 'SELECT 1 FROM publicación WHERE ID = ? LIMIT 1';
       const params = [id]
       const formattedQuery = mysql.format(query, params);
       const result = await ejecutarConsulta(formattedQuery);
@@ -92,16 +92,29 @@ const validarPreguntaExistente = async (id) => {
       throw new Error(error.message || 'Error al validar la existencia de la pregunta');
     }
 };
-  
 
+const validarDenunciaExistente = async (id) =>{
+  try{
+    const query = 'SELECT 1 FROM denuncia WHERE ID = ? LIMIT 1';
+    const params = [id]
+    const formattedQuery = mysql.format(query, params);
+    const result = await ejecutarConsulta(formattedQuery);
 
-  
+    if (result.length === 0) {
+      throw new Error(`No se encontró una pregunta con el ID ${id}`);
+    }
+  } catch (error) {
+    throw new Error(error.message || 'Error al validar la existencia de la pregunta');
+  }
+}
+
 module.exports = { 
-    validarEventoExistente,
-    validarExpertoExistente,
-    validarOpcionExistente,
-    validarNotificacionExistente,
-    validarPublicacionExistente,
-    validarPreguntaExistente,
-    validarPublicacionExistente
+  validarEventoExistente,
+  validarExpertoExistente,
+  validarOpcionExistente,
+  validarNotificacionExistente,
+  validarPublicacionExistente,
+  validarPreguntaExistente,
+  validarPublicacionExistente,
+  validarDenunciaExistente
 };
