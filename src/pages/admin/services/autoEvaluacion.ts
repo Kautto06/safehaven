@@ -76,7 +76,7 @@ export const getPreguntas = async () => {
 
   export const getPreguntaPorId = async (preguntaId: number) => {
     try {
-      const response = await pageApi.get(`/preguntas/${preguntaId}`);
+      const response = await pageApi.get(`/preguntas/obtenerPorId/${preguntaId}`);
       return response.data;
     } catch (error) {
       console.error("Error al agregar la opción:", error);

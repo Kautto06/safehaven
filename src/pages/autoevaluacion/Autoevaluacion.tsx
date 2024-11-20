@@ -88,8 +88,29 @@ export const Autoevaluacion: React.FC = () => {
     }
 
     setIsSubmitting(true);
-  }
 
+    // Transformar datos para el backend
+    const respuestas = questions.map((question) => ({
+      idPregunta: question.id,
+      idOpcion: formData[question.id]
+    }));
+
+    try {
+      const response = await pageApi.post('/autoevaluacion/guardar', { 
+        user: { email: user.email }, 
+        respuestas 
+      });
+
+      console.log('Respuesta del backend:', response.data);
+      setSubmittedData(formData); // Guardar datos enviados para mostrarlos
+      setShowAlert(true); // Mostrar alerta de éxito
+    } catch (error) {
+      console.error('Error al enviar la autoevaluación:', error);
+      alert('Ocurrió un error al enviar la autoevaluación. Intenta nuevamente.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <IonPage>
@@ -123,18 +144,11 @@ export const Autoevaluacion: React.FC = () => {
               <IonButton className="submit-button-evaluation" type="submit" expand="block" disabled={isSubmitting}>
                 {isSubmitting ? 'Enviando...' : 'Enviar'}
               </IonButton>
-              <IonButton className="cancel-button-evaluation" color="danger" expand="block" onClick={() => setSubmittedData(null)}>
-                Cancelar
+              <IonButton className="cancel-button-evaluation" color="danger" expand="block" onClick={() => window.location.href = '/autoevaluacion'}>
+                Volver
               </IonButton>
             </div>
           </form>
-
-          {submittedData && (
-            <div className="submitted-data">
-              <h2>Datos enviados:</h2>
-              <pre>{JSON.stringify(submittedData, null, 2)}</pre>
-            </div>
-          )}
 
           <IonAlert
             isOpen={showAlert}

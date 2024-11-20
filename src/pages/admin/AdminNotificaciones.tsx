@@ -4,10 +4,12 @@ import { notificacionesApi } from './services/notificaciones'; // Ajusta la ruta
 
 import '../../assets/admin/AdminActivity.css'; // Asegúrate de tener el archivo CSS adecuado para los estilos
 
+
 interface Notificacion {
   ID: number;
   Titulo: string;
   Contenido: string;
+  ID_Usuario: string;
   Descripcion?: string | null;
 }
 
@@ -19,6 +21,7 @@ export const AdminNotificacion: React.FC = () => {
     Titulo: '',
     Contenido: '',
     Descripcion: '',
+    ID_Usuario : ''
   });
 
   const [isEditing, setIsEditing] = useState<boolean>(false); // Para manejar el modo de edición
@@ -42,12 +45,13 @@ export const AdminNotificacion: React.FC = () => {
 
   const handleCreateNotification = async () => {
     try {
+      newNotificacion.ID_Usuario=localStorage.getItem('email') || ''
       let createdNotification = await notificacionesApi.crearNotificacion(newNotificacion);
       
       createdNotification = await notificacionesApi.obtenerNotificaionId(createdNotification.ID)
       console.log(createdNotification)
       setNotificaciones([...notificaciones, createdNotification.notificacion[0]]);
-      setNewNotificacion({ ID: 0, Titulo: '', Contenido: '', Descripcion: '' }); // Limpiar formulario
+      setNewNotificacion({ ID: 0, Titulo: '', Contenido: '', Descripcion: '' ,ID_Usuario: ''}); // Limpiar formulario
     } catch (error) {
       console.error('Error al crear la notificación', error);
     }
@@ -66,7 +70,7 @@ export const AdminNotificacion: React.FC = () => {
           noti.ID === newNotificacion.ID ? newNotificacion : noti
         )
       );
-      setNewNotificacion({ ID: 0, Titulo: '', Contenido: '', Descripcion: '' });
+      setNewNotificacion({ ID: 0, Titulo: '', Contenido: '', Descripcion: '' ,ID_Usuario: ''});
       setIsEditing(false);
     } catch (error) {
       console.error('Error al actualizar la notificación', error);

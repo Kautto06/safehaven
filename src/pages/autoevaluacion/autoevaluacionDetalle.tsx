@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom'; 
 import { Header, Footer } from '../../components';
 import pageApi from '../../api/backend'; 
+import '../../assets/autoevaluacion/detalleaut.css'
 
 interface Respuesta {
   id_pregunta: number;

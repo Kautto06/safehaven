@@ -4,7 +4,7 @@ interface Notificacion {
     ID: number;
     Titulo: string;
     Contenido: string;
-    Link?: string;
+    ID_Usuario: string;
     Descripcion?: string | null;
   }
 

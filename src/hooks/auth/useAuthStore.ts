@@ -72,7 +72,7 @@ export const useAuthStore = () => {
         email: data.email,
         birthday: data.birthday, 
         phone: data.phone, 
-        gender: data.genero
+        gender: data.genero,
       }));
 
 
@@ -98,10 +98,6 @@ export const useAuthStore = () => {
     try {
       console.log(gender)
       const { data } = await pageApi.post('/auth/nuevo', { email, password, phone, birthday, gender,nombre,apellidos });
-
-
-      // Despachar la acción de onLogin con el email y nombre del usuario
-      dispatch(onLogin({  name: data.nombre, lastName: data.apellidos ,email: data.email, birthday:data.birthday, phone:data.phone, gender: data.genero}));
     } catch (error: any) {
       dispatch(onLogout(error.response.data?.msg || '--'));
       setTimeout(() => {

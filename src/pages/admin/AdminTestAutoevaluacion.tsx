@@ -66,6 +66,7 @@ export const AdminTestAutoevaluacion: React.FC = () => {
       let nuevaPregunta = await agregarPregunta(newPregunta); // Llama al servicio para agregar la pregunta
       console.log(nuevaPregunta)
       nuevaPregunta = await getPreguntaPorId(nuevaPregunta.PreguntaID)
+      console.log(nuevaPregunta)
       setPreguntas([...preguntas, { ...nuevaPregunta[0], opciones: [] }]); // Agrega la pregunta con un array vacío de opciones
       setNewPregunta(""); // Limpia el input
     } catch (error) {

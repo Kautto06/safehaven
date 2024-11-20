@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, IonList, IonItem, IonLabel } from '@ionic/react';
 import { menuOutline, personCircleOutline, notifications, logOutOutline } from 'ionicons/icons';
 import '../../assets/common/header.css';
 import logo from '../../assets/logos/logoNoBackground.png';
 import { useAuthStore } from '../../hooks/auth/useAuthStore';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import pageApi from '../../api/backend';
 
 // DropdownMenu con window.location.href
-const DropdownMenu: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+const DropdownMenu: React.FC<{ onClose: () => void, isAdmin: boolean }> = ({ onClose, isAdmin }) => {
     const handleNavigation = (path: string) => {
         window.location.href = path; // Redirige a la ruta
         onClose(); // Cierra el menú
@@ -37,9 +39,12 @@ const DropdownMenu: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                 <IonItem onClick={() => handleNavigation("/actividades")} routerLink='/actividades'>
                     <IonLabel>Actividades</IonLabel>
                 </IonItem>
-                <IonItem onClick={() => handleNavigation("/admin")} routerLink='/admin'>
-                    <IonLabel>Modo Admin</IonLabel>
-                </IonItem>
+                {/* Mostrar solo si es admin */}
+                {isAdmin && (
+                    <IonItem onClick={() => handleNavigation("/admin")} routerLink='/admin'>
+                        <IonLabel>Modo Admin</IonLabel>
+                    </IonItem>
+                )}
             </IonList>
         </div>
     );
@@ -48,8 +53,28 @@ const DropdownMenu: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 export const Header: React.FC = () => {
     const [showMenu, setShowMenu] = useState(false);
     const [showProfileMenu, setShowProfileMenu] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);  // Nuevo estado para controlar si el usuario es admin
     const { startLogout } = useAuthStore();
     const history = useHistory();
+    const email = localStorage.getItem("email"); // Suponiendo que el correo está guardado en localStorage
+
+    // Función para obtener el usuario y verificar el rol
+    const fetchUserRole = async () => {
+        if (email) {
+            try {
+                const {data} = await pageApi.get(`/user/`, { params:{ email }}); // Ajusta la URL según tu API
+                if (data[0].Rol === 'Admin') {
+                    setIsAdmin(true);
+                }
+            } catch (error) {
+                console.error("Error al obtener los datos del usuario", error);
+            }
+        }
+    };
+
+    useEffect(() => {
+        fetchUserRole(); // Obtener el rol del usuario al montar el componente
+    }, [email]);
 
     const toggleMenu = () => {
         setShowMenu(!showMenu);
@@ -86,7 +111,7 @@ export const Header: React.FC = () => {
                     </IonButton>
                 </IonButtons>
             </IonToolbar>
-            {showMenu && <DropdownMenu onClose={() => setShowMenu(false)} />}
+            {showMenu && <DropdownMenu onClose={() => setShowMenu(false)} isAdmin={isAdmin} />}
             {showProfileMenu && (
                 <div className="dropdown-menu">
                     <IonList>

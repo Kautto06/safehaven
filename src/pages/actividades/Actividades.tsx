@@ -73,7 +73,7 @@ export const Actividades: React.FC = () => {
 
     switch (accion.tipo_accion) {
       case 'Publicacion':
-        history.push(`/detalle/${accion.id_objeto}`, { from: '/actividades' });
+        history.push(`/foro/detalle/${accion.id_objeto}`, { from: '/actividades' });
         break;
       case 'AutoEvaluacion':
         history.push(`/resultados/${accion.id_objeto}`);

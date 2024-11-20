@@ -49,6 +49,7 @@ export const AdminExperts: React.FC = () => {
   const loadExperts = async () => {
     try {
       const data = await getExpertos();
+      console.log(data)
       setExperts(data);
     } catch (error) {
       console.error('Error fetching experts:', error);
@@ -117,7 +118,7 @@ export const AdminExperts: React.FC = () => {
       alert('Por favor, complete todos los campos.');
       return;
     }
-
+    
     try {
       let updatedExpert = await modificarExperto(newExpert.ID, newExpert);
       
