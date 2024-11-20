@@ -271,3 +271,114 @@ h1 {
   background: #023e8a; /* Azul más oscuro */
   transform: scale(1.05);
 }
+
+@media (max-width: 768px) {
+  /* Ajustes para el body y el contenedor principal */
+  main {
+    padding: 10px;
+  }
+
+  .experts-body {
+    --background: #F5F5DC;
+  }
+
+  /* Ajustes para el título principal */
+  h1 {
+    font-size: 1.8em; /* Reducir tamaño de fuente */
+    margin-bottom: 15px; /* Reducir margen inferior */
+    padding-top: 10px; /* Reducir padding superior */
+  }
+
+  /* Ajustes para el header derecho */
+  .header-right {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+
+  .header-right span {
+    font-size: 1.4em; /* Reducir tamaño de fuente */
+    text-align: left;
+  }
+
+  /* Ajustes para el botón de ordenación */
+  .sort-button {
+    width: 60px;
+    height: 30px;
+    font-size: 1.1em; /* Reducir tamaño de fuente */
+    margin-left: 10px;
+    padding: 5px;
+  }
+
+  /* Ajustes para el contenedor de los foros */
+  .experts-content {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Ajustes para los elementos del foro */
+  .forum-item {
+    width: 100%;
+    padding: 15px; /* Reducir padding */
+    margin: 10px 0;
+  }
+
+  .forum-image {
+    width: 80px; /* Reducir tamaño de la imagen */
+    height: 80px;
+    margin-right: 10px;
+  }
+
+  /* Ajustes para el título del foro */
+  .forum-title {
+    font-size: 1.1em; /* Reducir tamaño de fuente */
+  }
+
+  /* Ajustes para los botones */
+  .phone-button {
+    padding: 6px 10px;
+    font-size: 0.8em;
+    position: relative; 
+    bottom: 0;
+    right: 0;
+  }
+
+  .view-button-expert {
+    padding: 8px 12px;
+    font-size: 0.9em; /* Reducir tamaño de la fuente */
+  }
+
+  /* Ajustes para la paginación */
+  .pagination-link {
+    padding: 8px 12px;
+    font-size: 0.9em; /* Reducir tamaño de la fuente */
+    margin: 5px;
+  }
+
+  /* Ajustes para el modal */
+  .custom-modal {
+    padding: 20px;
+  }
+
+  .modal-content {
+    width: 95%;
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .close-button {
+    font-size: 20px;
+  }
+
+  .expert-details h2 {
+    font-size: 1.5rem; /* Reducir tamaño de fuente */
+  }
+
+  .expert-details p {
+    font-size: 0.9rem; /* Reducir tamaño de fuente */
+  }
+
+  .modal-footer button {
+    font-size: 0.9rem; /* Reducir tamaño de fuente */
+  }
+}

@@ -71,7 +71,7 @@ export const Register: React.FC = () => {
 
       // Si el registro es exitoso, redirigir a la página de login
       if (status === 'authenticated') {
-        history.push('/home');
+        window.location.href ='/login'
       } else if (authErrorMessage) {
         setErrorMessage(authErrorMessage);
         setShowAlert(true);
@@ -187,7 +187,7 @@ export const Register: React.FC = () => {
             <p>¿Ya tienes una cuenta? 
               <span 
                 style={{ color: '#5C8268', cursor: 'pointer', textDecoration: 'underline' }} 
-                onClick={() => history.push('/login')}
+                onClick={() => window.location.href = '/login'}
               >
                 Iniciar Sesión
               </span>

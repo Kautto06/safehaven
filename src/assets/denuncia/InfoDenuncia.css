@@ -102,4 +102,66 @@
   ul li {
     margin-bottom: 8px;
   }
+
+  @media (max-width: 768px) {
+    /* Estilos generales para la página de denuncia */
+    .informativa-body {
+        padding: 10px; /* Reducir padding para pantallas pequeñas */
+    }
+
+    /* Estilos para el título */
+    .informativa-title {
+        font-size: 1.5rem; /* Reducir tamaño de fuente */
+        margin-top: 10px; /* Reducir margen superior */
+    }
+
+    /* Estilos para la sección principal */
+    .main-infoD {
+        margin: 10px;
+        padding: 15px;
+        border-radius: 5px; /* Reducir el radio del borde */
+    }
+
+    /* Estilos para las secciones dentro de la denuncia */
+    .informativa-section h2 {
+        font-size: 1.2rem; /* Reducir tamaño de fuente */
+    }
+
+    .informativa-section p {
+        font-size: 0.9rem; /* Reducir tamaño de fuente para párrafos */
+    }
+
+    /* Estilos para las listas */
+    .informativa-section ul {
+        padding-left: 20px;
+    }
+
+    .informativa-section li {
+        font-size: 0.9rem; /* Reducir tamaño de fuente en las listas */
+    }
+
+    /* Estilo para el botón de siguiente */
+    .next-button {
+        width: 100%; /* El botón ocupa todo el ancho */
+        font-size: 1rem; /* Reducir el tamaño de la fuente */
+        padding: 15px; /* Aumentar el padding para mejor interacción */
+        justify-content: center; /* Asegurarse de que el texto esté centrado */
+    }
+
+    /* Mejorar la visibilidad de los títulos y textos */
+    h1, h2 {
+        font-size: 1.4rem; /* Reducir tamaño de fuente de los títulos */
+    }
+
+    /* Estilo de los párrafos */
+    p {
+        font-size: 0.9rem; /* Reducir el tamaño de la fuente */
+    }
+
+    /* Ajustes para las listas */
+    ul li {
+        font-size: 0.9rem; /* Reducir tamaño de fuente en los ítems de lista */
+    }
+}
+
   

@@ -87,7 +87,7 @@ export const CrearPublicacion: React.FC = () => {
         setShowSuccessMessage(true);
         setTimeout(() => {
           setShowSuccessMessage(false);
-          history.push('/foro');
+          window.location.href = '/foro'
         }, 2000);
       } else {
         setErrorMessages([data.msg]);
@@ -98,7 +98,7 @@ export const CrearPublicacion: React.FC = () => {
   };
 
   const handleCancel = () => {
-    history.push('/foro');
+    window.location.href = '/foro'
   };
 
   return (

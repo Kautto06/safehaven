@@ -1,10 +1,5 @@
 
-@media (max-width: 600px) {
-    .pagination-link {
-        padding: 8px 12px; /* Reduce el padding en pantallas pequeñas */
-        font-size: 0.9em; /* Reduce el tamaño del texto en pantallas pequeñas */
-    }
-}
+
 /* Estilos generales para el body */
 .activity-body {
     margin: 0;
@@ -51,20 +46,7 @@ main {
 
 
 /* Responsividad */
-@media (max-width: 768px) {
-    .expert-item {
-        flex-direction: column;
-        text-align: center;
-    }
 
-    .expert-image {
-        margin-bottom: 15px;
-    }
-
-    .menu-toggle {
-        right: 10px;
-    }
-}
 
 /* Estilos para la sección de actividad */
 .activity-section {
@@ -151,6 +133,86 @@ main {
 
 /* Estilos para la paginación */
 
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    /* Sección de actividad */
+    .activity-section {
+        padding: 20px; /* Reducir padding para pantallas más pequeñas */
+        margin-top: 30px; /* Ajustar margen superior */
+    }
+
+    /* Título de actividad */
+    .activity-section h1 {
+        font-size: 24px; /* Reducir tamaño de fuente */
+    }
+
+    /* Barra de búsqueda */
+    .search-bar {
+        flex-direction: column; /* Hacer que los elementos de la barra de búsqueda se apilen verticalmente */
+        align-items: center; /* Centrar los elementos */
+    }
+
+    .search-bar-input {
+        width: 250px; /* Reducir el tamaño de la barra de búsqueda */
+    }
+
+    .search-bar-button {
+        margin-left: 0; /* Eliminar margen izquierdo */
+        margin-top: 10px; /* Añadir margen superior */
+        width: 100%; /* Hacer el botón más ancho */
+    }
+
+    /* Grid de actividades */
+    .activity-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ajustar la cantidad de columnas */
+        gap: 30px; /* Reducir espacio entre las tarjetas */
+    }
+
+    /* Tarjetas de actividad */
+    .activity-card {
+        padding: 15px; /* Reducir padding en las tarjetas */
+    }
+
+    .activity-content h2 {
+        font-size: 16px; /* Reducir tamaño del título de la actividad */
+    }
+
+    .activity-content p {
+        font-size: 12px; /* Reducir tamaño del texto en las actividades */
+    }
+
+    /* Paginación */
+    .pagination-link {
+        padding: 8px 12px; /* Reducir el padding en pantallas pequeñas */
+        font-size: 0.9em; /* Reducir el tamaño del texto */
+    }
+}
+
+/* Responsividad para pantallas muy pequeñas */
+@media (max-width: 600px) {
+    .pagination-link {
+        padding: 6px 10px; /* Reducir aún más el padding */
+        font-size: 0.8em; /* Reducir el tamaño del texto */
+    }
+
+    /* Elementos de las tarjetas de actividad */
+    .activity-icon {
+        font-size: 24px; /* Reducir el tamaño del icono */
+        margin-right: 10px; /* Reducir margen derecho */
+    }
+
+    .activity-card {
+        padding: 10px; /* Reducir padding para pantallas aún más pequeñas */
+    }
+
+    .activity-content h2 {
+        font-size: 14px; /* Reducir tamaño de fuente del título */
+    }
+
+    .activity-content p {
+        font-size: 10px; /* Reducir tamaño de texto en las tarjetas */
+    }
+}
 
 
 

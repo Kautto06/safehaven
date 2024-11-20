@@ -4,6 +4,7 @@
     overflow-y: auto; /* Permite el desplazamiento vertical */
     height: 100vh; 
     background-color: #F5F5DC;
+    flex-direction: column;
   }
   
   .admin-header-denuncia {
@@ -31,6 +32,7 @@
     flex-direction: column;
     gap: 20px;
     padding-top: 20px;
+    margin-top: 20px; /* Añadido margen superior */
   }
   
   .denuncia-card {
@@ -49,13 +51,13 @@
     color: #2980b9;
   }
 
-  .back-button-container {
+  .back-button-container-admin {
     display: flex;
     justify-content: center;
     margin-bottom: 30px; /* Añadir espacio entre el botón y la lista */
   }
   
-  .back-button {
+  .back-button-admin {
     padding: 12px 25px;
     background-color: #2c3e50;
     color: white;
@@ -68,11 +70,11 @@
     transition: background-color 0.3s;
   }
   
-  .back-button:hover {
+  .back-button-admin:hover {
     background-color: #3498db;
   }
   
-  .back-button:focus {
+  .back-button-admin:focus {
     outline: none;
   }
   
@@ -125,3 +127,68 @@
     color: #2980b9;
   }
   
+  .no-denuncias-message {
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .no-denuncias-message h2 {
+    color: #ff6347; /* Puedes elegir otro color */
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .no-denuncias-message p {
+    color: #555;
+    font-size: 16px;
+  }
+
+  @media (max-width: 480px) {
+    .admin-header-denuncia {
+      padding: 10px;
+    }
+  
+    .header-title-denuncia {
+      font-size: 1.2rem;
+    }
+  
+    .header-description {
+      font-size: 0.9rem;
+    }
+  
+    .denuncia-card {
+      padding: 10px;
+    }
+  
+    .denuncia-card-title {
+      font-size: 1.1rem;
+    }
+  
+    .back-button-admin {
+      padding: 8px 15px;
+      font-size: 0.9rem;
+    }
+  
+    .action-button {
+      width: 100%;
+      font-size: 0.9rem;
+    }
+  
+    .denuncia-card-subtitle,
+    .denuncia-card-content p,
+    .denuncia-status {
+      font-size: 0.8rem;
+    }
+  
+    .no-denuncias-message h2 {
+      font-size: 18px;
+    }
+  
+    .no-denuncias-message p {
+      font-size: 12px;
+    }
+  }

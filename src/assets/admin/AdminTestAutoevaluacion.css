@@ -410,7 +410,49 @@
   background-color: darkgray;
 }
 
+@media (max-width: 480px) {
+  .admin-header-test {
+    font-size: 1rem;
+    padding: 10px;
+  }
 
+  .input-question-new,
+  .input-question,
+  .input-edit-question {
+    width: 100%;
+  }
+
+  .add-question-button,
+  .edit-button,
+  .delete-button,
+  .save-button-test,
+  .cancel-button-test {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  .save-button-test {
+    padding: 8px 16px;
+  }
+
+  .cancel-button-test {
+    padding: 8px 16px;
+  }
+
+  .question-card {
+    padding: 10px;
+  }
+
+  .edit-question-form {
+    padding: 15px;
+    width: 90%;
+  }
+
+  .edit-option-form {
+    padding: 15px;
+    width: 90%;
+  }
+}
 
   
   

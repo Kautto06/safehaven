@@ -89,7 +89,7 @@ export const Login: React.FC = () => {
             <p>¿No tienes una cuenta?{' '}
               <span
                 style={{ color: 'blue', cursor: 'pointer', textDecoration: 'underline' }}
-                onClick={() => history.push('/register')}
+                onClick={() => window.location.href ='/register'}
               >
                 Registrarse
               </span>

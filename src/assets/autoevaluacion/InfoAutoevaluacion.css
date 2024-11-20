@@ -48,4 +48,48 @@
     filter: brightness(1.1);
     transition: 0.3s;
   }
+
+/* Media Queries para dispositivos pequeños */
+@media (max-width: 768px) {
+  .main-info {
+    max-width: 90%; /* Reduce el tamaño máximo del contenedor */
+    padding: 15px; /* Reduce el padding */
+  }
+
+  .infoAut-header {
+    font-size: 1.5em; /* Reduce el tamaño del título */
+  }
+
+  .parrafo-infoAut {
+    font-size: 0.9em; /* Reduce el tamaño del texto */
+    margin-bottom: 12px; /* Reduce el espacio entre párrafos */
+  }
+
+  .begin-button {
+    font-size: 0.9em; /* Reduce el tamaño del botón */
+    padding: 8px 15px; /* Reduce el padding del botón */
+  }
+}
+
+/* Media Queries para dispositivos móviles */
+@media (max-width: 480px) {
+  .main-info {
+    max-width: 100%; /* El contenedor ocupa el 100% en pantallas muy pequeñas */
+    padding: 10px; /* Reduce aún más el padding */
+  }
+
+  .infoAut-header {
+    font-size: 1.3em; /* Ajusta el tamaño del título para pantallas muy pequeñas */
+  }
+
+  .parrafo-infoAut {
+    font-size: 0.8em; /* Ajusta el tamaño del texto */
+    margin-bottom: 10px; /* Ajusta el margen entre párrafos */
+  }
+
+  .begin-button {
+    font-size: 0.8em; /* Ajusta el tamaño del botón */
+    padding: 7px 12px; /* Ajusta el padding */
+  }
+}
   

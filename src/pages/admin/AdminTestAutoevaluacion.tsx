@@ -1,56 +1,26 @@
-import React, { useState } from "react";
-import { IonPage, IonAlert, IonModal, IonButton } from "@ionic/react";
+import React, { useState, useEffect } from "react";
+import { IonPage, IonAlert, IonButton, IonModal } from "@ionic/react";
 import { useHistory } from "react-router";
 import "../../assets/admin/AdminTestAutoevaluacion.css";
+import { getPreguntas, getOpciones, agregarPregunta, eliminarPregunta, modificarPregunta, agregarOpcion, eliminarOpcion, modificarOpcion, getOpcionPorId, getPreguntaPorId } from "./services/autoEvaluacion"; // Importa las funciones
 
-// Tipos de los datos
+// Nuevas interfaces
 interface Opcion {
-  id: number;
-  texto: string;
+  ID: number;
+  Opcion: string;
+  ID_Pregunta: number;
+  frecuencia: number;
 }
 
 interface Pregunta {
-  id: number;
-  pregunta: string;
-  respuesta: string;
+  ID: number;
+  Pregunta: string;
   opciones: Opcion[];
 }
 
 export const AdminTestAutoevaluacion: React.FC = () => {
   const history = useHistory();
-  const [preguntas, setPreguntas] = useState<Pregunta[]>([
-    {
-      id: 1,
-      pregunta: "¿Sientes miedo o ansiedad en tu hogar?",
-      respuesta: "",
-      opciones: [
-        { id: 1, texto: "Sí, frecuentemente" },
-        { id: 2, texto: "A veces" },
-        { id: 3, texto: "No, nunca" },
-      ],
-    },
-    {
-      id: 2,
-      pregunta: "¿Has sido alguna vez humillado/a en público?",
-      respuesta: "",
-      opciones: [
-        { id: 1, texto: "Sí, varias veces" },
-        { id: 2, texto: "Sí, pero pocas veces" },
-        { id: 3, texto: "No, nunca" },
-      ],
-    },
-    {
-      id: 3,
-      pregunta: "¿Te han amenazado de alguna forma?",
-      respuesta: "",
-      opciones: [
-        { id: 1, texto: "Sí, verbalmente" },
-        { id: 2, texto: "Sí, físicamente" },
-        { id: 3, texto: "No, nunca" },
-      ],
-    },
-  ]);
-
+  const [preguntas, setPreguntas] = useState<Pregunta[]>([]);
   const [newPregunta, setNewPregunta] = useState<string>("");
   const [newOpcion, setNewOpcion] = useState<string>("");
 
@@ -65,18 +35,54 @@ export const AdminTestAutoevaluacion: React.FC = () => {
   const [deletePreguntaId, setDeletePreguntaId] = useState<number | null>(null);
   const [deleteOpcionId, setDeleteOpcionId] = useState<number | null>(null);
 
+  const [showModalGestionarOpciones, setShowModalGestionarOpciones] = useState<boolean>(false);
+  const [preguntaSeleccionada, setPreguntaSeleccionada] = useState<Pregunta | null>(null);
+
+  // Cargar preguntas y opciones desde la API
+  useEffect(() => {
+    const fetchDatos = async () => {
+      try {
+        const [preguntasData, opcionesData] = await Promise.all([
+          getPreguntas(), // Carga preguntas
+          getOpciones(),  // Carga opciones
+        ]);
+
+        const preguntasConOpciones = preguntasData.map((pregunta: Pregunta) => ({
+          ...pregunta,
+          opciones: opcionesData.filter((opcion: Opcion) => opcion.ID_Pregunta === pregunta.ID) || [],
+        }));
+
+        setPreguntas(preguntasConOpciones);
+      } catch (error) {
+        console.error("Error al cargar las preguntas u opciones:", error);
+      }
+    };
+    fetchDatos();
+  }, []);
+
   // Agregar pregunta
-  const handleAgregarPregunta = () => {
-    const newId = preguntas.length + 1;
-    setPreguntas([...preguntas, { id: newId, pregunta: newPregunta, respuesta: "", opciones: [] }]);
-    setNewPregunta("");
+  const handleAgregarPregunta = async () => {
+    try {
+      let nuevaPregunta = await agregarPregunta(newPregunta); // Llama al servicio para agregar la pregunta
+      console.log(nuevaPregunta)
+      nuevaPregunta = await getPreguntaPorId(nuevaPregunta.PreguntaID)
+      setPreguntas([...preguntas, { ...nuevaPregunta[0], opciones: [] }]); // Agrega la pregunta con un array vacío de opciones
+      setNewPregunta(""); // Limpia el input
+    } catch (error) {
+      console.error("Error al agregar la pregunta:", error);
+    }
   };
 
   // Eliminar pregunta
-  const handleEliminarPregunta = () => {
+  const handleEliminarPregunta = async () => {
     if (deletePreguntaId !== null) {
-      setPreguntas(preguntas.filter((pregunta) => pregunta.id !== deletePreguntaId));
-      setDeletePreguntaId(null);
+      try {
+        await eliminarPregunta(deletePreguntaId);
+        setPreguntas(preguntas.filter((pregunta) => pregunta.ID !== deletePreguntaId));
+        setDeletePreguntaId(null);
+      } catch (error) {
+        console.error("Error al eliminar la pregunta:", error);
+      }
     }
     setShowConfirmDelete(false);
   };
@@ -84,79 +90,112 @@ export const AdminTestAutoevaluacion: React.FC = () => {
   // Modificar pregunta
   const handleModificarPregunta = (id: number) => {
     setEditPreguntaId(id);
-    const pregunta = preguntas.find((preg) => preg.id === id);
+    const pregunta = preguntas.find((preg) => preg.ID === id);
+
     if (pregunta) {
-      setEditPreguntaText(pregunta.pregunta);
+      setEditPreguntaText(pregunta.Pregunta);
     }
   };
 
-  const handleGuardarModificacion = () => {
+  const handleGuardarModificacion = async () => {
     if (editPreguntaId !== null) {
-      setPreguntas(
-        preguntas.map((pregunta) =>
-          pregunta.id === editPreguntaId ? { ...pregunta, pregunta: editPreguntaText } : pregunta
-        )
-      );
-      setEditPreguntaId(null);
-      setEditPreguntaText("");
+      try {
+        let updatedPregunta = await modificarPregunta(editPreguntaId, editPreguntaText); // Llama al servicio
+        updatedPregunta = await getPreguntaPorId(editPreguntaId)
+        console.log(updatedPregunta)
+        setPreguntas(
+          preguntas.map((pregunta) =>
+            pregunta.ID === editPreguntaId
+              ? { ...pregunta, Pregunta: updatedPregunta[0].Pregunta } // Actualiza el texto
+              : pregunta
+          )
+        );
+        setEditPreguntaId(null); // Limpia la edición
+        setEditPreguntaText("");
+      } catch (error) {
+        console.error("Error al modificar la pregunta:", error);
+      }
     }
   };
 
   // Agregar opción
-  const handleAgregarOpcion = (preguntaId: number) => {
-    setPreguntas(
-      preguntas.map((pregunta) =>
-        pregunta.id === preguntaId
-          ? {
-              ...pregunta,
-              opciones: [...pregunta.opciones, { id: pregunta.opciones.length + 1, texto: newOpcion }],
-            }
-          : pregunta
-      )
-    );
-    setNewOpcion("");
-  };
-
-  // Modificar opción
-  const handleModificarOpcion = (preguntaId: number, opcionId: number) => {
-    const preguntaIndex = preguntas.findIndex((pregunta) => pregunta.id === preguntaId);
-    const opcion = preguntas[preguntaIndex].opciones.find((op) => op.id === opcionId);
-    if (opcion) {
-      setEditOpcionId(opcionId);
-      setEditOpcionText(opcion.texto);
-    }
-  };
-
-  const handleGuardarModificacionOpcion = (preguntaId: number) => {
-    if (editOpcionId !== null) {
+  const handleAgregarOpcion = async (preguntaId: number) => {
+    try {
+      let nuevaOpcion = await agregarOpcion(preguntaId, newOpcion); // Llama al servicio
+      nuevaOpcion = await getOpcionPorId(nuevaOpcion.OpcionID)
       setPreguntas(
         preguntas.map((pregunta) =>
-          pregunta.id === preguntaId
-            ? {
-                ...pregunta,
-                opciones: pregunta.opciones.map((opcion) =>
-                  opcion.id === editOpcionId ? { ...opcion, texto: editOpcionText } : opcion
-                ),
-              }
+          pregunta.ID === preguntaId
+            ? { ...pregunta, opciones: [...pregunta.opciones, nuevaOpcion[0]] } // Agrega la nueva opción
             : pregunta
-      ));
-      setEditOpcionId(null);
-      setEditOpcionText("");
-      setShowOptionsModal(null); // Cerrar modal al guardar cambios
+        )
+      );
+      setNewOpcion(""); // Limpia el input
+    } catch (error) {
+      console.error("Error al agregar la opción:", error);
     }
   };
 
   // Eliminar opción
-  const handleEliminarOpcion = (preguntaId: number, opcionId: number) => {
-    setPreguntas(
-      preguntas.map((pregunta) =>
-        pregunta.id === preguntaId
-          ? { ...pregunta, opciones: pregunta.opciones.filter((opcion) => opcion.id !== opcionId) }
-          : pregunta
-      )
-    );
-    setDeleteOpcionId(null);
-    setShowConfirmDelete(false);
+  const handleEliminarOpcion = async (preguntaId: number, opcionId: number) => {
+    try {
+      await eliminarOpcion(preguntaId, opcionId);
+      setPreguntas(
+        preguntas.map((pregunta) =>
+          pregunta.ID === preguntaId
+            ? { ...pregunta, opciones: pregunta.opciones.filter((opcion) => opcion.ID !== opcionId) }
+            : pregunta
+        )
+      );
+    } catch (error) {
+      console.error("Error al eliminar la opción:", error);
+    }
+  };
+
+  // Modificar opción
+  const handleModificarOpcion = (preguntaId: number, opcionId: number) => {
+    const pregunta = preguntas.find((preg) => preg.ID === preguntaId);
+    if (pregunta) {
+      const opcion = pregunta.opciones.find((op) => op.ID === opcionId);
+      if (opcion) {
+        setEditOpcionId(opcionId);
+        setEditOpcionText(opcion.Opcion);
+      }
+    }
+    
+  };
+
+  const handleGuardarModificacionOpcion = async (preguntaId: number) => {
+    if (editOpcionId !== null) {
+      try {
+        let updatedOpcion = await modificarOpcion(preguntaId, editOpcionId, editOpcionText); // Llama al servicio
+        updatedOpcion = await getOpcionPorId(editOpcionId)
+        setPreguntas(
+          preguntas.map((pregunta) =>
+            pregunta.ID === preguntaId
+              ? {
+                  ...pregunta,
+                  opciones: pregunta.opciones.map((opcion) =>
+                    opcion.ID === editOpcionId
+                      ? { ...opcion, Opcion: updatedOpcion[0].Opcion } // Actualiza el texto
+                      : opcion
+                  ),
+                }
+              : pregunta
+          )
+        );
+        setEditOpcionId(null); // Limpia la edición
+        setEditOpcionText("");
+      } catch (error) {
+        console.error("Error al modificar la opción:", error);
+      }
+    }
+  };
+
+  // Gestión de opciones
+  const handleGestionarOpciones = (pregunta: Pregunta) => {
+    setPreguntaSeleccionada(pregunta);
+    setShowModalGestionarOpciones(true);
   };
 
   const handleGoBack = () => {
@@ -169,13 +208,12 @@ export const AdminTestAutoevaluacion: React.FC = () => {
         <header className="admin-header-test">
           <h1>Administración del Test de Autoevaluación</h1>
           <p className="header-description-test">
-            El administrador puede agregar, modificar y eliminar preguntas del test de autoevaluación, así como gestionar
-            las opciones de cada pregunta.
+            Agrega, modifica y elimina preguntas y opciones del test.
           </p>
         </header>
 
-        <div className="back-button-container">
-          <button className="back-button" onClick={handleGoBack}>
+        <div className="back-button-container-admin">
+          <button onClick={() => (window.location.href = "/admin")} className="back-button-admin">
             Volver a la página principal
           </button>
         </div>
@@ -185,80 +223,115 @@ export const AdminTestAutoevaluacion: React.FC = () => {
             type="text"
             value={newPregunta}
             onChange={(e) => setNewPregunta(e.target.value)}
-            className="input-question-new"
             placeholder="Nueva pregunta"
+            className="input-question-new"
           />
           <button onClick={handleAgregarPregunta} className="add-question-button-new">
             Agregar Pregunta
           </button>
         </div>
 
-        <div className="question-list">
-          <h2>Preguntas del Test</h2>
+        <section className="question-list">
+          <h2>Preguntas</h2>
           {preguntas.map((pregunta) => (
-            <div key={pregunta.id} className="question-card">
-              <div className="question-card-header">
-                <h3>{pregunta.pregunta}</h3>
-              </div>
+            <article key={pregunta.ID} className="question-card">
+              <header className="question-card-header">
+                {editPreguntaId === pregunta.ID ? (
+                  <div className="edit-input-container">
+                    <input
+                      type="text"
+                      value={editPreguntaText}
+                      onChange={(e) => setEditPreguntaText(e.target.value)}
+                      placeholder="Editar pregunta"
+                      className="input-edit"
+                    />
+                    <button onClick={handleGuardarModificacion} className="save-button">
+                      Guardar
+                    </button>
+                    <button
+                      onClick={() => {
+                        setEditPreguntaId(null);
+                        setEditPreguntaText("");
+                      }}
+                      className="cancel-button"
+                    >
+                      Cancelar
+                    </button>
+                  </div>
+                ) : (
+                  <h3>{pregunta.Pregunta}</h3>
+                )}
+              </header>
               <div className="question-card-actions">
                 <button
                   onClick={() => {
-                    setDeletePreguntaId(pregunta.id);
+                    setDeletePreguntaId(pregunta.ID);
                     setShowConfirmDelete(true);
                   }}
                   className="delete-button"
                 >
                   Eliminar
                 </button>
-                <button onClick={() => handleModificarPregunta(pregunta.id)} className="edit-button">
-                  Modificar
-                </button>
-                <button onClick={() => setShowOptionsModal(pregunta.id)} className="options-button">
+                <button onClick={() => setShowOptionsModal(pregunta.ID)} className="options-button">
                   Gestionar Opciones
                 </button>
+                <button onClick={() => handleModificarPregunta(pregunta.ID)} className="edit-button">
+                  Modificar
+                </button>
               </div>
-
-              {editPreguntaId === pregunta.id && (
-                <div className="edit-question-form">
-                  <input
-                    type="text"
-                    value={editPreguntaText}
-                    onChange={(e) => setEditPreguntaText(e.target.value)}
-                    className="input-question"
-                  />
-                  <button onClick={handleGuardarModificacion} className="save-button-test">
-                    Guardar
-                  </button>
-                  <button onClick={() => setEditPreguntaId(null)} className="cancel-button-test">
-                    Cancelar
-                  </button>
-                </div>
-              )}
-            </div>
+            </article>
           ))}
-        </div>
+        </section>
 
-        {/* Modal para opciones */}
         <IonModal isOpen={showOptionsModal !== null} onDidDismiss={() => setShowOptionsModal(null)}>
-          <div className="options-modal-content">
+          <section className="options-modal-content">
             <h2>Gestionar Opciones</h2>
             {preguntas
-              .find((pregunta) => pregunta.id === showOptionsModal)
+              .find((pregunta) => pregunta.ID === showOptionsModal)
               ?.opciones.map((opcion) => (
-                <div key={opcion.id} className="option-item">
-                  <span>{opcion.texto}</span>
-                  <button onClick={() => handleModificarOpcion(showOptionsModal!, opcion.id)} className="edit-option">
-                    Editar
-                  </button>
-                  <button
-                    onClick={() => {
-                      setDeleteOpcionId(opcion.id);
-                      setShowConfirmDelete(true);
-                    }}
-                    className="delete-option"
-                  >
-                    Eliminar
-                  </button>
+                <div key={opcion.ID} className="option-item">
+                  {editOpcionId === opcion.ID ? (
+                    <div className="edit-input-container">
+                      <input
+                        type="text"
+                        value={editOpcionText}
+                        onChange={(e) => setEditOpcionText(e.target.value)}
+                        placeholder="Editar opción"
+                        className="input-edit"
+                      />
+                      <button
+                        onClick={() => handleGuardarModificacionOpcion(showOptionsModal!)}
+                        className="save-button"
+                      >
+                        Guardar
+                      </button>
+                      <button
+                        onClick={() => {
+                          setEditOpcionId(null);
+                          setEditOpcionText("");
+                        }}
+                        className="cancel-button"
+                      >
+                        Cancelar
+                      </button>
+                    </div>
+                  ) : (
+                    <>
+                      <span>{opcion.Opcion}</span>
+                      <button
+                        onClick={() => handleModificarOpcion(showOptionsModal!, opcion.ID)}
+                        className="edit-option-button"
+                      >
+                        Modificar
+                      </button>
+                      <button
+                        onClick={() => handleEliminarOpcion(showOptionsModal!, opcion.ID)}
+                        className="delete-option"
+                      >
+                        Eliminar
+                      </button>
+                    </>
+                  )}
                 </div>
               ))}
             <div className="add-option">
@@ -268,45 +341,22 @@ export const AdminTestAutoevaluacion: React.FC = () => {
                 onChange={(e) => setNewOpcion(e.target.value)}
                 placeholder="Nueva opción"
               />
-              <button
-                onClick={() => handleAgregarOpcion(showOptionsModal!)}
-                className="add-option-button"
-              >
+              <button onClick={() => handleAgregarOpcion(showOptionsModal!)} className="add-option-button">
                 Agregar Opción
               </button>
             </div>
-            {editOpcionId !== null && (
-              <div className="edit-option-form-container">
-                <div className="edit-option-form">
-                  <input
-                    type="text"
-                    value={editOpcionText}
-                    onChange={(e) => setEditOpcionText(e.target.value)}
-                    className="input-option"
-                  />
-                  <button onClick={() => handleGuardarModificacionOpcion(showOptionsModal!)} className="save-option-button">
-                    Guardar
-                  </button>
-                  <button onClick={() => setEditOpcionId(null)} className="cancel-option-button">
-                    Cancelar
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
+          </section>
         </IonModal>
 
-        {/* Confirmar eliminación */}
         <IonAlert
           isOpen={showConfirmDelete}
           onDidDismiss={() => setShowConfirmDelete(false)}
           header="Confirmación"
-          message="¿Está seguro de que desea eliminar esta opción?"
+          message="¿Está seguro de que desea eliminar?"
           buttons={[
             {
               text: "Cancelar",
               role: "cancel",
-              handler: () => setShowConfirmDelete(false),
             },
             {
               text: "Eliminar",

@@ -302,3 +302,130 @@ h1 {
 .create-post-button:hover {
   background-color:  #5C8268; /* Color de hover */
 }
+
+/* Estilos responsive */
+@media (max-width: 768px) {
+  /* Foro general */
+  main {
+    padding: 10px;
+  }
+
+  .forum-content {
+    padding: 10px;
+    width: 100%;
+  }
+
+  .forum-item {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .forum-image {
+    width: 80px; /* Ajusta la imagen */
+    height: 80px;
+  }
+
+  .forum-title {
+    font-size: 1.1em;
+  }
+
+  .forum-text p {
+    margin-left: 0; /* Elimina el margen izquierdo */
+  }
+
+  .forum-header {
+    flex-direction: column;
+    padding: 10px;
+    align-items: flex-start;
+  }
+
+  .header-right {
+    margin-bottom: 10px;
+  }
+
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 25px;
+  }
+
+  .sort-button-forum {
+    font-size: 1em;
+    padding: 5px;
+    width: auto;
+    height: auto;
+  }
+
+  .likes-count {
+    font-size: 12px;
+    bottom: 10px;
+    right: 10px;
+    padding: 5px 10px;
+  }
+
+  .create-post-button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .pagination-link {
+    padding: 10px 16px;
+    font-size: 1em;
+  }
+
+  .view-button {
+    font-size: 0.8em;
+    padding: 6px 12px;
+  }
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 480px) {
+  /* Foro general */
+  h1 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+  }
+
+  .forum-item {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .forum-image {
+    width: 70px;
+    height: 70px;
+  }
+
+  .forum-title {
+    font-size: 1em;
+  }
+
+  .forum-text p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .forum-header {
+    flex-direction: column;
+    padding: 8px;
+  }
+
+  .sort-button-forum {
+    font-size: 0.9em;
+    width: auto;
+    height: auto;
+  }
+
+  .pagination-link {
+    font-size: 0.9em;
+    padding: 10px;
+  }
+
+  .create-post-button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}

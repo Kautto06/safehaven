@@ -52,7 +52,7 @@ export const DetallePost: React.FC = () => {
   };
 
   const handleGoBack = () => {
-    history.push(previousPage);  // Redirige a la página anterior
+    window.location.href = previousPage  // Redirige a la página anterior
   };
 
   if (!post) {

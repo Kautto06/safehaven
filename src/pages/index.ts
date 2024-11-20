@@ -20,6 +20,6 @@ export * from './admin/AdminTestAutoevaluacion'
 export * from './admin/AdminForo'
 export * from './admin/AdminExpertos'
 export * from './admin/AdminEventos'
-export * from './admin/AdminActividades'
+export * from './admin/AdminNotificaciones'
 export * from './admin/AdminHome';
 

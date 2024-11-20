@@ -12,12 +12,12 @@ export const AdminPage: React.FC = () => {
     { title: "Foro de Apoyo", description: "Moderación del foro", route: "/admin/foro" },
     { title: "Expertos", description: "Gestionar disponibilidad de profesionales", route: "/admin/expertos" },
     { title: "Calendario de Eventos", description: "Administrar eventos", route: "/admin/eventos" },
-    { title: "Tu Actividad", description: "Ver estadísticas globales de actividad", route: "/admin/actividad" },
+    { title: "Notificaciones", description: "Monitorear notificaciones del sistema", route: "/admin/notificacion" },
   ];
 
   const handleLogout = () => {
     // Aquí puedes implementar la lógica para salir del modo admin y redirigir al home
-    history.push('/')  // Redirige a la página principal
+    window.location.href ="/";  // Redirige a la página principal
   };
 
   return (

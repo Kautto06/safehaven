@@ -132,17 +132,21 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    overflow-y: auto;
   }
-  
+
+
   .experts-admin-add-popup,
   .experts-admin-confirmation-popup {
     background-color: #fff;
     padding: 20px;
+    
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     width: 90%;
     max-width: 500px;
     text-align: center;
+    
   }
   
   .experts-admin-form {
@@ -193,4 +197,135 @@
   .experts-admin-cancel-button:hover {
     background-color: #5a6268;
   }
-  
+
+  /* Para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .experts-admin-container {
+    padding: 15px;
+  }
+
+  .experts-admin-header {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .experts-admin-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .experts-admin-intro p {
+    font-size: 0.9rem;
+  }
+
+  .experts-admin-add-button {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+
+  .experts-admin-list {
+    display: block;
+    margin-top: 20px;
+  }
+
+  .experts-admin-card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .experts-admin-info h3 {
+    font-size: 1rem;
+  }
+
+  .experts-admin-info p {
+    font-size: 0.85rem;
+  }
+
+  .experts-admin-actions {
+    display: block;
+    margin-top: 15px;
+  }
+
+  .experts-admin-edit-button,
+  .experts-admin-delete-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+    margin-top: 10px;
+  }
+
+  .experts-admin-overlay {
+    padding: 20px;
+  }
+
+  .experts-admin-add-popup,
+  .experts-admin-confirmation-popup {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .experts-admin-form input {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .experts-admin-form-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .experts-admin-submit-button,
+  .experts-admin-cancel-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+    margin-top: 10px;
+  }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .experts-admin-header h1 {
+    font-size: 1.3rem;
+  }
+
+  .experts-admin-add-button {
+    font-size: 0.85rem;
+    padding: 7px 12px;
+  }
+
+  .experts-admin-card {
+    width: 100%;
+  }
+
+  .experts-admin-info h3 {
+    font-size: 0.9rem;
+  }
+
+  .experts-admin-info p {
+    font-size: 0.8rem;
+  }
+
+  .experts-admin-actions {
+    display: block;
+    margin-top: 10px;
+  }
+
+  .experts-admin-edit-button,
+  .experts-admin-delete-button {
+    width: 100%;
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+
+  .experts-admin-form input {
+    padding: 6px;
+    font-size: 0.85rem;
+  }
+
+  .experts-admin-submit-button,
+  .experts-admin-cancel-button {
+    padding: 8px 15px;
+    font-size: 0.85rem;
+    margin-top: 10px;
+  }
+}

@@ -80,24 +80,7 @@
     height: 100vh;
   }
   
-  @media (max-width: 768px) {
-    h1 {
-      font-size: 2em;
-    }
-  
-    .user-profile-content {
-      padding: 20px;
-    }
-  
-    .profile-detail p {
-      font-size: 1.1em;
-    }
-  
-    .profile-image {
-      width: 75px;
-      height: 75px;
-    }
-  }
+
   
   .logout-btn {
     background-color: #d9534f;  /* Rojo para indicar una acción destructiva */
@@ -160,3 +143,56 @@
     font-size: 14px;
     margin-top: 10px;
   }
+
+  /* Estilos responsivos para dispositivos móviles */
+@media (max-width: 768px) {
+  /* Título */
+  h1 {
+      font-size: 2em; /* Reducir tamaño del título */
+  }
+
+  /* Contenedor de los datos del usuario */
+  .user-profile-content {
+      padding: 20px; /* Reducir padding para mejor ajuste en pantallas pequeñas */
+  }
+
+  /* Detalles del perfil */
+  .profile-detail p {
+      font-size: 1.1em; /* Reducir el tamaño de los textos */
+  }
+
+  /* Imagen de perfil */
+  .profile-image {
+      width: 75px; /* Reducir el tamaño de la imagen */
+      height: 75px; /* Mantener las proporciones */
+  }
+
+  /* Botón de editar perfil */
+  .edit-profile-btn {
+      padding: 10px; /* Reducir el tamaño del botón */
+      font-size: 1em; /* Ajustar el tamaño del texto del botón */
+  }
+
+  /* Botón de logout */
+  .logout-btn {
+      padding: 10px 15px; /* Ajustar el padding para pantallas pequeñas */
+      font-size: 1em; /* Reducir tamaño del texto */
+  }
+
+  /* Botón de editar perfil (ajustar tamaño en móvil) */
+  .edit-profile-btn {
+      padding: 10px 15px; /* Reducir padding para pantallas pequeñas */
+      font-size: 1em; /* Ajustar el tamaño del texto */
+  }
+
+  /* Estilo para el icono dentro del botón de editar */
+  .edit-icon {
+      margin-right: 8px; /* Reducir el espacio entre el icono y el texto */
+  }
+
+  /* Mensaje de error */
+  .error-message {
+      font-size: 12px; /* Reducir el tamaño del texto del mensaje de error */
+      margin-top: 8px; /* Ajustar el margen superior */
+  }
+}

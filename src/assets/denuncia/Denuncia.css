@@ -53,20 +53,7 @@ main {
 
 
 
-@media (max-width: 768px) {
-    .expert-item {
-        flex-direction: column;
-        text-align: center;
-    }
 
-    .expert-image {
-        margin-bottom: 15px;
-    }
-
-    .menu-toggle {
-        right: 10px;
-    }
-}
 
 
 
@@ -159,3 +146,79 @@ IonTextArea {
 }
 
 /* Estilos para el botón de enviar */
+@media (max-width: 768px) {
+    /* Estilo para el body */
+    .report-body {
+        font-size: 14px; /* Reduce el tamaño de la fuente en dispositivos pequeños */
+    }
+
+    /* Estilos para el main */
+    main {
+        padding: 15px; /* Reducir el padding en dispositivos pequeños */
+        flex-direction: column; /* Aseguramos que todo esté en una columna */
+        align-items: flex-start; /* Alineamos el contenido a la izquierda */
+    }
+
+    /* Estilos para el título */
+    .anonymous-report-title {
+        font-size: 1.5em; /* Reducir tamaño de fuente en dispositivos pequeños */
+        margin-top: 15px; /* Añadir un poco de espacio superior */
+    }
+
+    /* Estilos para los botones */
+    .submit-button, .cancel-button {
+        width: 100%; /* Los botones ocupan todo el ancho en pantallas pequeñas */
+        padding: 12px 20px; /* Aumentar padding para mejor interacción */
+        font-size: 1.2em; /* Aumentar tamaño de fuente */
+        margin: 10px 0; /* Espacio entre los botones */
+    }
+
+    /* Estilo para las secciones del formulario */
+    .form-section {
+        padding: 8px; /* Reducir padding */
+    }
+
+    .form-section label {
+        font-size: 1em; /* Reducir tamaño de fuente */
+    }
+
+    .select-container select {
+        padding: 12px; /* Aumentar padding para mejor interacción */
+    }
+
+    /* Ajuste de textarea */
+    IonTextArea {
+        padding: 12px; /* Aumentar padding para mejor usabilidad */
+    }
+
+    /* Ajustes para el icono de archivo */
+    .file-upload {
+        flex-direction: column; /* Alinear verticalmente los elementos */
+        align-items: flex-start; /* Alineamos el icono y el nombre del archivo a la izquierda */
+    }
+
+    .file-icon {
+        width: 100%; /* Aseguramos que el icono de archivo ocupe el 100% del ancho */
+        padding: 12px; /* Aumentamos padding */
+        margin-bottom: 10px; /* Espacio inferior */
+    }
+
+    /* Para las imágenes del foro y expertos */
+    .expert-item, .forum-post {
+        flex-direction: column; /* Apilamos los elementos verticalmente */
+        align-items: center; /* Alineamos al centro */
+        text-align: center; /* Aseguramos que el texto esté centrado */
+    }
+
+    .expert-image, .forum-image {
+        width: 60px; /* Reducir tamaño de imagen */
+        height: 60px; /* Reducir tamaño de imagen */
+        margin-bottom: 15px; /* Añadir espacio entre la imagen y el texto */
+    }
+
+    /* Estilo de las publicaciones dentro del foro */
+    .forum-post, .expert-item {
+        width: 100%; /* Asegurar que las publicaciones ocupen el 100% del ancho */
+        margin-bottom: 15px; /* Añadir margen entre las publicaciones */
+    }
+}

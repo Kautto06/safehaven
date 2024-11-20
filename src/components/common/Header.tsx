@@ -1,78 +1,76 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 import { IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, IonList, IonItem, IonLabel } from '@ionic/react';
 import { menuOutline, personCircleOutline, notifications, logOutOutline } from 'ionicons/icons';
 import '../../assets/common/header.css';
 import logo from '../../assets/logos/logoNoBackground.png';
-import { useAuthStore } from '../../hooks/auth/useAuthStore'; 
+import { useAuthStore } from '../../hooks/auth/useAuthStore';
 import { useHistory } from 'react-router-dom';
 
-
-
+// DropdownMenu con window.location.href
 const DropdownMenu: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+    const handleNavigation = (path: string) => {
+        window.location.href = path; // Redirige a la ruta
+        onClose(); // Cierra el menú
+    };
+
     return (
         <div className="dropdown-menu">
             <IonList>
-                <IonItem routerLink="/expertos" onClick={onClose}>
+                <IonItem onClick={() => handleNavigation("/expertos")} routerLink='/expertos'>
                     <IonLabel>Nuestros Expertos</IonLabel>
                 </IonItem>
-                <IonItem routerLink="/foro" onClick={onClose}>
+                <IonItem onClick={() => handleNavigation("/foro")} routerLink='/foro'>
                     <IonLabel>Foro</IonLabel>
                 </IonItem>
-                <IonItem routerLink="/denuncia" onClick={onClose}>
+                <IonItem onClick={() => handleNavigation("/denuncia")} routerLink='/denuncia'>
                     <IonLabel>Denuncia</IonLabel>
                 </IonItem>
-                <IonItem routerLink="/autoevaluacion" onClick={onClose}>
+                <IonItem onClick={() => handleNavigation("/autoevaluacion")} routerLink='/autoevaluacion'>
                     <IonLabel>Autoevaluación</IonLabel>
                 </IonItem>
-                <IonItem routerLink="/calendario" onClick={onClose}>
+                <IonItem onClick={() => handleNavigation("/calendario")} routerLink='/calendario'>
                     <IonLabel>Calendario de actividades</IonLabel>
                 </IonItem>
-                <IonItem routerLink="/notificaciones" onClick={onClose}>
+                <IonItem onClick={() => handleNavigation("/notificaciones")} routerLink='/notificaciones'>
                     <IonLabel>Notificaciones</IonLabel>
                 </IonItem>
-                <IonItem routerLink="/actividades" onClick={onClose}>
-                            <IonLabel>Actividades</IonLabel>
+                <IonItem onClick={() => handleNavigation("/actividades")} routerLink='/actividades'>
+                    <IonLabel>Actividades</IonLabel>
                 </IonItem>
-                <IonItem routerLink="/admin" onClick={onClose}>
-                            <IonLabel>Modo Admin</IonLabel>
+                <IonItem onClick={() => handleNavigation("/admin")} routerLink='/admin'>
+                    <IonLabel>Modo Admin</IonLabel>
                 </IonItem>
             </IonList>
         </div>
     );
 };
 
-
-
 export const Header: React.FC = () => {
     const [showMenu, setShowMenu] = useState(false);
     const [showProfileMenu, setShowProfileMenu] = useState(false);
     const { startLogout } = useAuthStore();
-    const history = useHistory(); // Usar el hook useHistory para redirigir
-
-
+    const history = useHistory();
 
     const toggleMenu = () => {
-        setShowMenu(!showMenu); // Alterna entre true y false
-        console.log("showMenu:", !showMenu);
+        setShowMenu(!showMenu);
     };
 
-
     const handleProfileRedirect = () => {
-        history.push('/perfilusuario'); // Redirige directamente a la página de perfil de usuario
+        window.location.href = "/perfilusuario"; // Redirige directamente a la página de perfil de usuario
     };
 
     const handleLogout = async () => {
-        startLogout(); // Llama a la función para cerrar sesión
+        startLogout();
         localStorage.clear(); // Limpia el localStorage
-        setShowProfileMenu(false); // Cierra el menú de perfil
-        history.push('/login'); // Redirige a la página de inicio de sesión
+        setShowProfileMenu(false);
+        window.location.href = "/login"; // Redirige a la página de inicio de sesión
     };
 
     return (
         <IonHeader>
             <IonToolbar className='cabecera'>
                 <IonTitle className="header-title">
-                    <div className="logo-button" onClick={() => (history.push('/'))}>
+                    <div className="logo-button" onClick={() => (window.location.href = '/')}>
                         <img src={logo} alt="Logo" className="header-logo" />
                     </div>
                 </IonTitle>

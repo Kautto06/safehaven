@@ -1,122 +1,199 @@
-import React, { useState } from 'react';
-import { IonPage } from '@ionic/react';
+import React, { useEffect, useState } from 'react';
+import { IonPage, IonButton, IonAlert } from '@ionic/react';
 import '../../assets/admin/AdminDenuncia.css';
 import { useHistory } from 'react-router';
+import {
+  obtenerDenuncias,
+  actualizarDenuncia,
+  eliminarDenuncia,
+  actualizarEstadoDenuncia,
+} from './services/denuncia';
+import { useAuthStore } from '../../hooks';
+
+// Interfaz de la denuncia
+interface Denuncia {
+  ID: number;
+  TipoViolencia: string;
+  UbicacionIncidente: string;
+  Contenido: string;
+  RelacionAgresor: string; // Relación con el agresor
+  estado: string; // Puede ser "Pendiente", "En Proceso" o "Resuelta"
+  ID_USUARIO: string; // ID del usuario relacionado
+  LinkImagen?: string; // URL de la imagen (puede ser opcional si no hay imagen)
+}
 
 export const AdminDenuncias: React.FC = () => {
-    const history = useHistory();
-  // Array de ejemplo con denuncias
-  const [denuncias, setDenuncias] = useState([
-    {
-      tipo: "Psicológica",
-      lugar: "Casa de la víctima",
-      descripcion: "He sufrido amenazas y comentarios humillantes constantes por parte de mi pareja.",
-      fecha: "2024-11-10",
-      estado: "Pendiente", // Se puede marcar como "En Proceso" o "Resuelta"
-    },
-    {
-      tipo: "Física",
-      lugar: "Trabajo",
-      descripcion: "Fui golpeada por mi pareja en un arranque de celos.",
-      fecha: "2024-11-09",
-      estado: "Pendiente",
-    },
-    {
-      tipo: "Acoso laboral",
-      lugar: "Oficina",
-      descripcion: "Mi jefe me ha hecho comentarios inapropiados y ha creado un ambiente de trabajo hostil.",
-      fecha: "2024-11-08",
-      estado: "Pendiente",
-    },
-    {
-      tipo: "Abuso sexual",
-      lugar: "Evento social",
-      descripcion: "Fui víctima de abuso sexual por parte de un conocido.",
-      fecha: "2024-11-07",
-      estado: "Pendiente",
-    },
-    {
-      tipo: "Económica",
-      lugar: "Casa",
-      descripcion: "Mi pareja controla todas mis finanzas y no me deja tener acceso a mi propio dinero.",
-      fecha: "2024-11-06",
-      estado: "Pendiente",
-    },
-  ]);
+  const history = useHistory();
+  const [denuncias, setDenuncias] = useState<Denuncia[]>([]); // Tipado explícito
+  const [showAlert, setShowAlert] = useState<boolean>(false); // Para mostrar/ocultar el alert
+  const [denunciaAEliminar, setDenunciaAEliminar] = useState<number | null>(null); // ID de la denuncia a eliminar
 
-  const handleGoBack = () => {
-    // Redirige a la página principal de administración
-    history.push('/admin'); // Cambia '/admin' por la ruta correspondiente a tu página principal de administración
-  };
+  // Cargar las denuncias desde el backend
+  useEffect(() => {
+    const cargarDenuncias = async () => {
+      try {
+        const data = await obtenerDenuncias();
+        console.log('Datos cargados:', data);
+        setDenuncias(data); // Asegúrate de que `data` sea un array de tipo Denuncia[]
 
-  // Función para cambiar el estado de la denuncia
-  const handleMarcarEnProceso = (index: number) => {
-    // Actualiza el estado de la denuncia a "En Proceso"
-    denuncias[index].estado = "En Proceso";
-    // Fuerza la actualización del componente para reflejar el cambio
-    setDenuncias([...denuncias]);
-  };
+      } catch (error) {
+        console.error('Error al cargar las denuncias:', error);
+      }
+    };
+
+    cargarDenuncias();
+  }, []); // Asegúrate de que esto se ejecute solo una vez
   
-  const handleMarcarResuelta = (index: number) => {
-    // Actualiza el estado de la denuncia a "Resuelta"
-    denuncias[index].estado = "Resuelta";
-    // Fuerza la actualización del componente para reflejar el cambio
-    setDenuncias([...denuncias]);
+  // Función para actualizar el estado de la denuncia
+  const actualizarEstado = async (id: number, nuevoEstado: string) => {
+    try {
+      await actualizarEstadoDenuncia(id, nuevoEstado); // Actualiza el estado en el backend
+      // Sincroniza el estado en el frontend después de la actualización
+      setDenuncias((prevDenuncias) =>
+        prevDenuncias.map((denuncia) =>
+          denuncia.ID === id ? { ...denuncia, estado: nuevoEstado } : denuncia
+        )
+      );
+
+    } catch (error) {
+      console.error('Error al actualizar la denuncia:', error);
+    }
+  };
+
+  // Función para marcar denuncia como "En Proceso"
+  const handleMarcarEnProceso = (id: number) => {
+    actualizarEstado(id, 'En Proceso');
+  };
+
+  // Función para marcar denuncia como "Resuelta"
+  const handleMarcarResuelta = (id: number) => {
+    actualizarEstado(id, 'Resuelta');
+  };
+
+  // Función para confirmar la eliminación de la denuncia
+  const handleEliminarDenuncia = (id: number) => {
+    setDenunciaAEliminar(id); // Guardamos la denuncia que queremos eliminar
+    setShowAlert(true); // Mostramos el alert de confirmación
+  };
+
+  // Función para eliminar la denuncia después de la confirmación
+  const confirmarEliminar = async () => {
+    if (denunciaAEliminar !== null) {
+      try {
+        await eliminarDenuncia(denunciaAEliminar);
+        setDenuncias((prevDenuncias) => prevDenuncias.filter((denuncia) => denuncia.ID !== denunciaAEliminar));
+      } catch (error) {
+        console.error('Error al eliminar la denuncia:', error);
+      }
+    }
+    setShowAlert(false); // Ocultamos el alert después de eliminar
+    setDenunciaAEliminar(null); // Limpiamos la denuncia seleccionada para eliminar
+  };
+
+  // Función para cancelar la eliminación
+  const cancelarEliminar = () => {
+    setShowAlert(false); // Solo ocultamos el alert
+    setDenunciaAEliminar(null); // Limpiamos la denuncia seleccionada
+  };
+
+  // Navegar de regreso a la página principal del administrador
+  const handleGoBack = () => {
+    window.location.href = '/admin'
   };
 
   return (
     <IonPage className="admin-denuncias-container">
-    <header className="admin-header-denuncia">
+      <header className="admin-header-denuncia">
         <h1 className="header-title-denuncia">Administración de Denuncias Anónimas</h1>
         <p className="header-description">
-        Revisa, clasifica y toma acciones correspondientes basadas en las denuncias recibidas.
+          Revisa, clasifica y toma acciones correspondientes basadas en las denuncias recibidas.
         </p>
-    </header>
+      </header>
 
-    <div className="back-button-container">
-        <button className="back-button" onClick={handleGoBack}>
-        Volver a la página principal
+      <div className="back-button-container-admin">
+        <button className="back-button-admin" onClick={() => history.push('/admin')}>
+          Volver a la página principal
         </button>
-    </div>
+      </div>
 
-    <section className="denuncia-list">
-        {denuncias.map((denuncia, index) => (
-        <div key={index} className="denuncia-card">
-            <div className="denuncia-card-header">
-            <h3 className="denuncia-card-title">{`Denuncia de violencia ${denuncia.tipo}`}</h3>
-            <p className="denuncia-card-subtitle">{`Fecha: ${denuncia.fecha}`}</p>
-            </div>
-
-            <div className="denuncia-card-content">
-            <p><strong>Tipo de violencia:</strong> {denuncia.tipo}</p>
-            <p><strong>Lugar del incidente:</strong> {denuncia.lugar}</p>
-            <p><strong>Descripción:</strong> {denuncia.descripcion}</p>
-            </div>
-
-            <div className="denuncia-actions">
-            <button
-                className="action-button en-proceso"
-                onClick={() => handleMarcarEnProceso(index)}
-                disabled={denuncia.estado === "En Proceso" }
-            >
-                Marcar como en proceso
-            </button>
-            <button
-                className="action-button resuelta"
-                onClick={() => handleMarcarResuelta(index)}
-                disabled={denuncia.estado === "Resuelta"}
-            >
-                Marcar como resuelta
-            </button>
-            </div>
-
-            <div className="denuncia-status">
-            <p><strong>Estado:</strong> {denuncia.estado}</p>
-            </div>
+      {denuncias.length === 0 ? (
+        <div className="no-denuncias-message">
+          <h2>No hay denuncias registradas en este momento</h2>
+          <p>Por favor, revisa más tarde.</p>
         </div>
-        ))}
-    </section>
+      ) : (
+        <section className="denuncia-list">
+          {denuncias.map((denuncia) => (
+            <div key={denuncia.ID} className="denuncia-card">
+              <div className="denuncia-card-header">
+                <h3 className="denuncia-card-title">{`Denuncia de violencia ${denuncia.TipoViolencia}`}</h3>
+              </div>
+
+              <div className="denuncia-card-content">
+                <p><strong>Tipo de violencia:</strong> {denuncia.TipoViolencia}</p>
+                <p><strong>Lugar del incidente:</strong> {denuncia.UbicacionIncidente}</p>
+                <p><strong>Descripción:</strong> {denuncia.Contenido}</p>
+                <p><strong>ID del Usuario:</strong> {denuncia.ID_USUARIO}</p>
+                {denuncia.LinkImagen && (
+                  <div>
+                    <strong>Prueba adjunta: </strong>
+                    <img
+                      src={denuncia.LinkImagen}
+                      alt="Prueba adjunta"
+                      className="denuncia-image"
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div className="denuncia-actions">
+                <button
+                  className="action-button en-proceso"
+                  onClick={() => handleMarcarEnProceso(denuncia.ID)}
+                  disabled={denuncia.estado === 'En Proceso'}
+                >
+                  Marcar como en proceso
+                </button>
+                <button
+                  className="action-button resuelta"
+                  onClick={() => handleMarcarResuelta(denuncia.ID)}
+                  disabled={denuncia.estado === 'Resuelta'}
+                >
+                  Marcar como resuelta
+                </button>
+                <button
+                  className="action-button eliminar"
+                  onClick={() => handleEliminarDenuncia(denuncia.ID)}
+                >
+                  Eliminar
+                </button>
+              </div>
+
+              <div className="denuncia-status">
+                <p><strong>Estado:</strong> {denuncia.estado}</p>
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
+
+      <IonAlert
+        isOpen={showAlert}
+        onDidDismiss={() => setShowAlert(false)}
+        header={'Confirmar eliminación'}
+        message={'¿Estás seguro de que deseas eliminar esta denuncia?'}
+        buttons={[
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            handler: cancelarEliminar,
+          },
+          {
+            text: 'Eliminar',
+            handler: confirmarEliminar,
+          },
+        ]}
+      />
     </IonPage>
   );
 };
-

@@ -146,3 +146,99 @@
     }
   }
 
+  .foro-admin-empty-message {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.2em;
+    color: #555;
+    margin: 20px 0;
+  }
+  
+  .foro-admin-empty-message p {
+    margin: 10px 0;
+  }
+  
+  .foro-admin-empty-message p:first-child {
+    font-weight: bold;
+    font-size: 1.4em;
+  }
+  
+  .foro-admin-empty-message p:last-child {
+    font-style: italic;
+    color: #777;
+  }
+
+  @media screen and (max-width: 768px) {
+    .foro-admin-header {
+        padding: 15px;
+    }
+
+    .foro-admin-container {
+        padding: 10px;
+    }
+
+    .foro-admin-post-card {
+        padding: 10px;
+    }
+
+    .foro-admin-post-header {
+        font-size: 12px;
+    }
+
+    .foro-admin-post-content {
+        font-size: 14px;
+    }
+
+    .foro-admin-moderate-button {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+
+    .foro-admin-block-message {
+        max-width: 90%;
+        font-size: 16px;
+    }
+
+    .foro-admin-empty-message {
+        font-size: 1em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .foro-admin-header {
+        padding: 10px;
+        font-size: 18px;
+    }
+
+    .foro-admin-container {
+        padding: 5px;
+    }
+
+    .foro-admin-post-card {
+        padding: 8px;
+    }
+
+    .foro-admin-post-header {
+        font-size: 11px;
+    }
+
+    .foro-admin-post-content {
+        font-size: 12px;
+    }
+
+    .foro-admin-moderate-button {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+
+    .foro-admin-block-message {
+        font-size: 14px;
+    }
+
+    .foro-admin-empty-message {
+        font-size: 0.9em;
+    }
+}

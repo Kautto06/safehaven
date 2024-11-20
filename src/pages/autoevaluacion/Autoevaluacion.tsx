@@ -73,7 +73,8 @@ export const Autoevaluacion: React.FC = () => {
       return acc;
     }, {});
     setFormData(resetFormData);
-    setSubmittedData(null); // Limpiar los datos enviados
+    setSubmittedData(null); 
+    window.location.href = '/autoevaluacion'
   };
 
   return (
@@ -118,7 +119,7 @@ export const Autoevaluacion: React.FC = () => {
 
             <div className="buttons">
               <IonButton className="submit-button-evaluation" type="submit" expand="block">Enviar</IonButton>
-              <IonButton className='cancel-button-evaluation' color="danger" expand="block" onClick={handleCancel} routerLink='/foro'>Cancelar</IonButton>
+              <IonButton className='cancel-button-evaluation' color="danger" expand="block" onClick={handleCancel}>Cancelar</IonButton>
             </div>
           </form>
 

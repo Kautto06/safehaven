@@ -25,8 +25,13 @@
     
 }
 
-.dropdown-menu .ion-item {
+.dropdown-menu .input-wrapper {
+    cursor: pointer;
     --ion-item-background: transparent; /* Fondo transparente para items */
+}
+
+.dropdown-menu .input-wrapper:hover {
+    background-color: #f0f0f0;
 }
 
 .cabecera {
@@ -60,4 +65,51 @@
 .header-title {
     margin: 0; /* Elimina el margen para evitar desalineación */
     flex: 1; /* Ocupa todo el espacio disponible */
+}
+
+
+/* Ajustes para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+    /* Ajustar la cabecera para pantallas pequeñas */
+    .cabecera {
+        flex-direction: column; /* Apilar los elementos en lugar de alinearlos horizontalmente */
+        align-items: center; /* Centrar los elementos */
+    }
+
+    /* Ajustar el logo */
+    .header-logo {
+        width: 120px; /* Reducir el tamaño del logo en pantallas pequeñas */
+        height: 40px;
+    }
+
+    /* Ajustar el tamaño del texto del título */
+    .header-title {
+        font-size: 18px; /* Reducir tamaño de fuente para dispositivos pequeños */
+        text-align: center; /* Asegurar que el título esté centrado */
+    }
+
+    /* Ajustes del menú desplegable */
+    .dropdown-menu {
+        width: 180px; /* Hacer el menú más pequeño en pantallas pequeñas */
+    }
+}
+
+/* Ajustes para pantallas muy pequeñas (móviles más pequeños o teléfonos de baja resolución) */
+@media (max-width: 480px) {
+    .cabecera {
+        padding: 10px; /* Añadir padding para que los elementos no estén tan juntos */
+    }
+
+    .header-logo {
+        width: 100px; /* Logo aún más pequeño */
+        height: 30px;
+    }
+
+    .header-title {
+        font-size: 16px; /* Reducir el tamaño del texto aún más */
+    }
+
+    .dropdown-menu {
+        width: 150px; /* Menú aún más pequeño */
+    }
 }

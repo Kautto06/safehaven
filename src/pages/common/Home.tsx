@@ -98,7 +98,7 @@ export const Home: React.FC = () => {
   // Maneja la redirección al detalle del post
   const handleViewMore = (postId: number) => {
     console.log('Redirigiendo a post con ID:', postId);  // Verifica el ID
-    history.push(`/detalle/${postId}`);
+    window.location.href = `/foro/detalle/${postId}`
   };
 
   return (
@@ -119,7 +119,7 @@ export const Home: React.FC = () => {
               <div className="slide-content" style={{ backgroundImage: `url(${seccion.imagen})` }}>
                 <h2>{seccion.nombre}</h2>
                 <p>{seccion.descripcion}</p>
-                <IonButton className='btn-seccion' onClick={() => history.push(seccion.ruta)}>
+                <IonButton className='btn-seccion' onClick={() => window.location.href = seccion.ruta}>
                   Ir a {seccion.nombre}
                 </IonButton>
               </div>

@@ -57,7 +57,16 @@
     .footer-section {
         margin-bottom: 15px; /* Separar más las secciones en móviles */
     }
+
+    .social-icons {
+        margin-top: 10px; /* Separar los iconos más en pantallas pequeñas */
+    }
+
+    .social-icon {
+        font-size: 20px; /* Reducir el tamaño de los iconos en pantallas pequeñas */
+    }
 }
+
 
 /* Estilo para el fondo oscuro en el footer */
 #footer {
@@ -106,4 +115,21 @@
 
 #footer .container-fluid .social-links a:hover {
     color: #FFD700;
+}
+
+
+@media (max-width: 480px) {
+    #footer .container-fluid {
+        flex-direction: column; /* Cambiar la dirección de los elementos a columna */
+        align-items: center; /* Centrar los elementos en pantallas pequeñas */
+    }
+
+    #footer .container-fluid .social-links {
+        margin-top: 10px; /* Separar los iconos sociales */
+    }
+
+    #footer .container-fluid .ms-auto {
+        text-align: center; /* Centrar el texto de contacto en pantallas pequeñas */
+        margin-top: 10px;
+    }
 }

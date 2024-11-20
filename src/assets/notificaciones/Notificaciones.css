@@ -172,3 +172,74 @@ main {
     border-radius: 12px;
     border: 1px solid #e0e0e0;
 }
+
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .notification-container {
+        max-width: 90%;
+        padding: 15px;
+    }
+
+    .notification-card {
+        margin-bottom: 10px;
+        padding: 12px;
+    }
+
+    .notification-header h1 {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .pagination {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .pagination-link {
+        font-size: 14px;
+        padding: 8px 12px;
+        margin-bottom: 20px;
+    }
+
+    .notifications-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .notification-button {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+
+    .notification-card-wrapper {
+        margin-bottom: 10px;
+    }
+
+    .notification-card {
+        padding: 15px;
+    }
+
+    .notification-count {
+        font-size: 10px;
+        padding: 2px 5px;
+    }
+
+    .notification-icon {
+        font-size: 25px;
+        margin-right: 10px;
+    }
+
+    .notification-content h2 {
+        font-size: 18px;
+    }
+
+    .notification-content p {
+        font-size: 13px;
+    }
+
+    .notification-card-wrapper {
+        padding: 8px;
+    }
+}

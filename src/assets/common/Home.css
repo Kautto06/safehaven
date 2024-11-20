@@ -186,4 +186,149 @@
   font-weight: bold;
 }
 
-  
+/* ----------------------------------- Responsive Design ----------------------------------- */
+
+/* Ajustes para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+  /* Estilo para el contenedor del carrusel */
+  .swiper-container {
+    height: 60vh; /* Ajusta la altura para pantallas pequeñas */
+  }
+
+  /* Ajustes en las secciones de contenido */
+  .about-us-section {
+    padding: 20px; /* Reduce el padding */
+  }
+
+  /* Ajuste de la imagen y contenido del carrusel */
+  .swiper-slide .slide-content {
+    padding: 20px; /* Reduce el padding en el carrusel */
+  }
+
+  /* Ajustes del título y texto en el carrusel */
+  .slide-content h2 {
+    font-size: 2em; /* Reduce el tamaño del título */
+  }
+
+  .slide-content p {
+    font-size: 1.2em; /* Reduce el tamaño de la descripción */
+  }
+
+  /* Ajustes para el botón de acción */
+  .btn-seccion {
+    font-size: 14px; /* Ajusta el tamaño del texto */
+    padding: 8px 16px; /* Ajusta el tamaño del botón */
+  }
+
+  /* Ajuste en la paginación de Swiper */
+  .swiper-pagination-bullet {
+    margin: 5px; /* Reduce el margen entre los bullets */
+  }
+
+  /* Ajustes en la sección "Acerca de Nosotros" */
+  .about-us-content h2 {
+    font-size: 2em; /* Ajusta el tamaño del título */
+  }
+
+  .about-us-content p {
+    font-size: 1em; /* Ajusta el tamaño del texto */
+  }
+
+  /* Ajustes en la sección subdividida */
+  .content-section {
+    flex-direction: column; /* Apilar las secciones en lugar de alinearlas horizontalmente */
+  }
+
+  /* Ajustes en las secciones de foro y expertos */
+  .forum-section, .experts-section {
+    flex: 1 0 100%; /* Las secciones ocuparán el 100% del ancho */
+    margin-bottom: 20px;
+  }
+
+  /* Ajustes en los posts */
+  .forum-post, .expert-item {
+    height: auto; /* Permite que los posts se ajusten en altura */
+    padding: 12px; /* Reduce el padding */
+  }
+
+  .forum-image, .expert-image {
+    width: 60px; /* Reduce el tamaño de las imágenes */
+    height: 60px;
+  }
+
+  /* Ajustes en los detalles de los posts */
+  .post-details h3, .expert-details h3 {
+    font-size: 1.1em; /* Reduce el tamaño del título */
+  }
+
+  .post-details p, .expert-details p {
+    font-size: 0.8em; /* Reduce el tamaño del texto */
+  }
+}
+
+/* Ajustes para pantallas más pequeñas (teléfonos móviles) */
+@media (max-width: 480px) {
+  /* Ajustes en la altura del carrusel */
+  .swiper-container {
+    height: 50vh; /* Ajusta aún más la altura */
+  }
+
+  /* Ajustes adicionales en el carrusel */
+  .swiper-slide .slide-content {
+    padding: 10px; /* Reduce el padding */
+  }
+
+  .slide-content h2 {
+    font-size: 1.8em; /* Ajusta el tamaño del título */
+  }
+
+  .slide-content p {
+    font-size: 1em; /* Ajusta el tamaño de la descripción */
+  }
+
+  .btn-seccion {
+    font-size: 12px; /* Reduce el tamaño del texto en el botón */
+    padding: 6px 12px; /* Ajusta el tamaño del botón */
+  }
+
+  .swiper-pagination-bullet {
+    margin: 3px; /* Reduce aún más el margen entre los bullets */
+  }
+
+  /* Ajustes en la sección "Acerca de Nosotros" */
+  .about-us-section {
+    padding: 15px; /* Reduce el padding */
+  }
+
+  .about-us-content h2 {
+    font-size: 1.8em; /* Ajusta el tamaño del título */
+  }
+
+  .about-us-content p {
+    font-size: 0.9em; /* Ajusta el tamaño del texto */
+  }
+
+  /* Ajustes en la sección subdividida */
+  .content-section {
+    padding: 20px 10px; /* Reduce el padding */
+  }
+
+  /* Ajustes en los posts */
+  .forum-post, .expert-item {
+    height: auto; /* Ajusta la altura de los posts */
+    padding: 10px; /* Reduce el padding */
+  }
+
+  .forum-image, .expert-image {
+    width: 50px; /* Reduce más el tamaño de las imágenes */
+    height: 50px;
+  }
+
+  .post-details h3, .expert-details h3 {
+    font-size: 1em; /* Ajusta el tamaño del título */
+  }
+
+  .post-details p, .expert-details p {
+    font-size: 0.75em; /* Ajusta el tamaño del texto */
+  }
+}

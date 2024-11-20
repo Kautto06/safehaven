@@ -60,7 +60,7 @@ export const Foro: React.FC = () => {
   
   const handleViewMore = (postId: number) => {
     console.log('Redirigiendo a post con ID:', postId);  // Verifica el ID
-    history.push(`/detalle/${postId}`, { from: '/foro' });
+    window.location.href =`/foro/detalle/${postId}`
   };
   return (
     <IonPage>

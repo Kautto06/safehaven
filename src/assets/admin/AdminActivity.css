@@ -1,8 +1,9 @@
+/* Contenedor principal */
 .activity-admin-container {
   padding: 20px;
-  font-family: Arial, sans-serif;
-  overflow-y: auto; /* Permite el desplazamiento vertical */
-  height: 100vh; 
+  font-family: 'Roboto', sans-serif;
+  overflow-y: auto;
+  height: 100vh;
   background-color: #F5F5DC;
 }
 
@@ -18,87 +19,239 @@
 
 .activity-admin-header h1 {
   font-size: 2.5rem;
-  color: white;
-  font-weight: bold;
+  font-weight: 600;
+  margin: 0;
 }
 
 .activity-admin-description {
   font-size: 1.1rem;
-  color: white;
   line-height: 1.6;
+  color: #ecf0f1;
   margin-top: 10px;
 }
 
-.back-button:hover {
-  background-color: #0056b3; /* Efecto hover en el botón */
-}
-
+/* Estadísticas */
 .activity-admin-stats {
   margin-top: 40px;
 }
 
 .activity-admin-stat-card {
   background-color: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 25px;
   transition: all 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .activity-admin-stat-card:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Efecto hover para tarjetas de estadísticas */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .activity-admin-stat-card strong {
-  font-size: 1.2rem;
-  color: #343a40;
+  font-size: 1.4rem;
+  color: #2c3e50;
 }
 
 .activity-admin-stat-card span {
-  font-size: 1.1rem;
-  color: #495057;
+  font-size: 1.2rem;
+  color: #7f8c8d;
 }
 
+/* Lista de actividades */
 .activity-admin-list {
   margin-top: 50px;
 }
 
 .activity-admin-card {
   background-color: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 25px;
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .activity-admin-card:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Efecto hover para tarjetas de actividad */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .activity-admin-card-header {
   font-weight: bold;
-  font-size: 1.3rem;
-  color: #007bff;
+  font-size: 1.4rem;
+  color: #2980b9;
 }
 
 .activity-admin-card-header span {
   font-weight: normal;
-  font-size: 1rem;
-  color: #868e96;
+  font-size: 1.1rem;
+  color: #95a5a6;
 }
 
 .activity-admin-card-content {
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .activity-admin-card-content p {
-  margin: 5px 0;
-  font-size: 1rem;
-  color: #495057;
+  margin: 10px 0;
+  font-size: 1.1rem;
+  color: #34495e;
 }
 
 .activity-admin-card-content p strong {
-  color: #007bff;
+  color: #2980b9;
+}
+
+/* Formularios */
+.activity-admin-notification-form {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+}
+
+.activity-admin-notification-form h2 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.activity-admin-notification-form input,
+.activity-admin-notification-form textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #bdc3c7;
+  margin-bottom: 15px;
+  transition: border-color 0.3s ease;
+}
+
+.activity-admin-notification-form input:focus,
+.activity-admin-notification-form textarea:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.activity-admin-notification-form button {
+  background-color: #3498db;
+  color: white;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.activity-admin-notification-form button:hover {
+  background-color: #2980b9;
+}
+
+.activity-admin-notifications-list {
+  margin-top: 50px;
+}
+
+.activity-admin-notification-card {
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 25px;
+  transition: all 0.3s ease;
+}
+
+.activity-admin-notification-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.notification-card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.notification-card-actions button {
+  background-color: #e74c3c;
+  color: white;
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 767px) {
+  .activity-admin-header {
+    padding: 20px;
+  }
+
+  .activity-admin-header h1 {
+    font-size: 2rem;
+  }
+
+  .activity-admin-description {
+    font-size: 1rem;
+  }
+
+  .activity-admin-stat-card,
+  .activity-admin-card,
+  .activity-admin-notification-card {
+    padding: 15px;
+  }
+
+  .activity-admin-stat-card {
+    display: block; /* Cambia a un formato en bloque para móviles */
+    margin-bottom: 15px;
+  }
+
+  .back-button-admin {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+
+  .activity-admin-notification-form {
+    padding: 20px;
+  }
+
+  .activity-admin-notification-form input,
+  .activity-admin-notification-form textarea {
+    font-size: 0.9rem;
+  }
+
+  .activity-admin-notification-form button {
+    font-size: 1rem;
+  }
+}
+
+/* Pantallas medianas (tabletas) */
+@media (max-width: 1024px) {
+  .activity-admin-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .activity-admin-card,
+  .activity-admin-notification-card {
+    padding: 20px;
+  }
+
+  .activity-admin-stat-card {
+    display: flex;
+    flex-direction: column; /* Asegura que las estadísticas estén apiladas */
+  }
+
+  .activity-admin-stat-card strong {
+    font-size: 1.3rem;
+  }
+
+  .activity-admin-stat-card span {
+    font-size: 1.1rem;
+  }
 }

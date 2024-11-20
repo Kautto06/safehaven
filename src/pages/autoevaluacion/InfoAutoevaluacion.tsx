@@ -30,7 +30,7 @@ export const AutoevaluacionInfo: React.FC = () => {
             comunidad. 
           </p>
 
-          <IonButton className="begin-button"  expand="block" onClick={() => history.push('/autoevaluacion/formulario')}>
+          <IonButton className="begin-button"  expand="block" onClick={() => window.location.href = '/autoevaluacion/formulario'}>
             Comenzar Autoevaluación
           </IonButton>
         </main>

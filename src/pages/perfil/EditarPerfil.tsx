@@ -138,7 +138,7 @@ export const EditProfile: React.FC = () => {
         setShowSuccessMessage(true); // Mostrar el mensaje de éxito
         setTimeout(() => {
           setShowSuccessMessage(false); // Ocultar el mensaje después de 2 segundos
-          history.push('/PerfilUsuario'); // Redirigir a la página de perfil
+          window.location.href ='/PerfilUsuario'
         }, 2000);
 
 
@@ -151,7 +151,7 @@ export const EditProfile: React.FC = () => {
   };
 
   const handleCancel = () => {
-    history.push('/PerfilUsuario'); // Redirige a la página de perfil
+    window.location.href ='/PerfilUsuario' // Redirige a la página de perfil
   };
 
   return (

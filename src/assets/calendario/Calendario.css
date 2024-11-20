@@ -21,6 +21,13 @@ main {
     align-items: center;
 }
 
+.event-day {
+    background-color: #ffd700; /* Color dorado */
+    border-radius: 50%; /* Para que el fondo sea un círculo */
+    color: #000; /* Texto negro para contraste */
+    font-weight: bold;
+  }
+
 /* Responsividad */
 @media (max-width: 768px) {
     .expert-item {
@@ -152,4 +159,215 @@ main {
 #month-year {
     font-size: 18px;
     font-weight: bold;
+}
+
+.calendar-day {
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .calendar-day:hover {
+    background-color: #e0e0e0; /* Cambia el color al pasar el mouse */
+  }
+  
+  .outside-month {
+    color: #ccc; /* Días fuera del mes actual en gris */
+  }
+  
+  .event-day:hover {
+    background-color: #ffa500; /* Resalta los días con eventos al pasar el mouse */
+  }
+
+/* Contenedor principal del modal */
+.modal-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 16px;
+    background-color: white;
+    border-radius: 8px;
+  }
+  
+  /* Título del modal */
+  .modal-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+  }
+  
+  /* Lista de eventos en el modal */
+  .modal-eventos-lista {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-top: 16px;
+    padding: 8px 0;
+  }
+  
+  /* Estilo de cada evento */
+  .modal-evento-item {
+    border-bottom: 1px solid #ddd;
+    padding: 12px 0;
+  }
+  
+  .modal-evento-item h3 {
+    margin: 0 0 8px;
+    font-size: 1.2rem;
+    color: #222;
+  }
+  
+  .modal-evento-item p {
+    margin: 0;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  /* Mensaje cuando no hay eventos */
+  .modal-no-eventos {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+    margin: auto;
+  }
+  
+  /* Botón para cerrar */
+  .modal-container ion-button {
+    margin-top: 16px;
+  }
+  
+  @media (max-width: 600px) {
+    .pagination-link {
+        padding: 8px 12px; /* Reduce el padding en pantallas pequeñas */
+        font-size: 0.9em; /* Reduce el tamaño del texto en pantallas pequeñas */
+    }
+
+    .calendar-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .calendar {
+        width: 100%; /* El calendario ocupa el 100% del ancho */
+        font-size: 14px; /* Reduce el tamaño del texto en el calendario */
+    }
+
+    .calendar th,
+    .calendar td {
+        padding: 15px; /* Reduce el padding */
+        font-size: 14px; /* Reduce el tamaño de la fuente */
+        height: auto; /* Ajusta la altura de las celdas */
+    }
+
+    .calendar td::before {
+        font-size: 14px; /* Reduce el tamaño del número del día */
+    }
+
+    .event-title {
+        font-size: 20px; /* Reduce el tamaño del título de evento */
+    }
+
+    .search-event-input {
+        width: 80%; /* Aumenta el ancho del input */
+        padding: 8px; /* Ajusta el padding */
+    }
+
+    .search-event-button {
+        padding: 8px; /* Ajusta el padding del botón */
+    }
+
+    .save-event-btn {
+        width: 40%; /* Aumenta el tamaño del botón */
+        padding: 8px 16px; /* Ajusta el padding */
+    }
+
+    .calendar-controls-button {
+        padding: 8px; /* Ajusta el tamaño de los botones de control */
+    }
+
+    .modal-container {
+        padding: 10px; /* Ajusta el padding del modal */
+    }
+
+    .modal-title {
+        font-size: 1.3rem; /* Reduce el tamaño del título en el modal */
+    }
+
+    .modal-evento-item h3 {
+        font-size: 1.1rem; /* Reduce el tamaño del título del evento en el modal */
+    }
+
+    .modal-evento-item p {
+        font-size: 0.9rem; /* Reduce el tamaño de la descripción del evento en el modal */
+    }
+}
+
+/* Para pantallas medianas (máximo 768px) */
+@media (max-width: 768px) {
+    .calendar-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .calendar {
+        width: 100%;
+        font-size: 15px; /* Ajusta el tamaño del texto */
+    }
+
+    .calendar th,
+    .calendar td {
+        padding: 18px; /* Ajusta el padding de las celdas */
+        font-size: 15px; /* Ajusta el tamaño del texto */
+    }
+
+    .event-title {
+        font-size: 22px; /* Reduce el tamaño del título de evento */
+    }
+
+    .search-event-input {
+        width: 70%; /* Ajusta el tamaño del input */
+    }
+
+    .save-event-btn {
+        width: 30%; /* Ajusta el tamaño del botón */
+    }
+
+    .calendar-controls-button {
+        padding: 10px; /* Ajusta el tamaño de los botones de control */
+    }
+
+    .modal-container {
+        padding: 12px; /* Ajusta el padding del modal */
+    }
+
+    .modal-title {
+        font-size: 1.4rem; /* Reduce el tamaño del título del modal */
+    }
+
+    .modal-evento-item h3 {
+        font-size: 1.1rem; /* Ajusta el tamaño del título del evento */
+    }
+
+    .modal-evento-item p {
+        font-size: 1rem; /* Ajusta el tamaño de la descripción del evento */
+    }
+}
+
+/* Para pantallas grandes */
+@media (min-width: 769px) {
+    .calendar th,
+    .calendar td {
+        padding: 20px; /* Mantiene el padding original para pantallas grandes */
+        font-size: 16px; /* Mantiene el tamaño de la fuente */
+    }
+
+    .event-title {
+        font-size: 24px; /* Mantiene el tamaño de fuente original */
+    }
+
+    .save-event-btn {
+        width: 20%; /* Mantiene el tamaño original del botón */
+    }
 }

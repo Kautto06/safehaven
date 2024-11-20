@@ -121,3 +121,82 @@
     background-color: #c82333; /* Cambio de color al pasar el ratón */
   }
   
+
+/* Para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .admin-page {
+    padding: 15px;
+  }
+
+  .admin-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .admin-icon {
+    width: 80px;
+    height: 80px;
+    margin: 10px auto;
+  }
+
+  .icon-image {
+    width: 30%; /* Ajustamos el tamaño de la imagen */
+    height: auto; /* Ajusta la altura proporcionalmente */
+  }
+
+  .admin-main {
+    padding: 15px;
+  }
+
+  .admin-grid {
+    display: block; /* Usamos un diseño de bloque para pantallas pequeñas */
+    width: 100%;
+  }
+
+  .admin-card {
+    flex: 1 1 100%; /* Cada tarjeta ocupará todo el ancho disponible */
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .admin-card-title {
+    font-size: 1.3rem;
+  }
+
+  .admin-card-description {
+    font-size: 0.9rem;
+  }
+
+  .admin-logout-button {
+    font-size: 1rem;
+    padding: 10px 18px;
+  }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .admin-header h1 {
+    font-size: 1.3rem;
+  }
+
+  .admin-icon {
+    width: 70px;
+    height: 70px;
+  }
+
+  .icon-image {
+    width: 40%; /* Ajustamos el tamaño de la imagen */
+  }
+
+  .admin-card-title {
+    font-size: 1.1rem;
+  }
+
+  .admin-card-description {
+    font-size: 0.85rem;
+  }
+
+  .admin-logout-button {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+}

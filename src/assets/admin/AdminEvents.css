@@ -121,3 +121,86 @@
 .events-admin-button.danger {
   background-color: #dc3545;
 }
+
+@media (max-width: 768px) {
+  .events-admin-container {
+    padding: 10px;
+  }
+
+  .events-admin-header {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .events-admin-description {
+    font-size: 1rem;
+  }
+
+  .events-admin-card {
+    padding: 10px;
+  }
+
+  .events-admin-card-actions .events-admin-button {
+    padding: 6px 10px;
+  }
+
+  .events-admin-add-button {
+    margin-top: 10px;
+  }
+
+  .events-admin-popup-content {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .events-admin-popup input,
+  .events-admin-popup textarea {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .events-admin-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Para pantallas pequeñas */
+@media (max-width: 480px) {
+  .events-admin-header {
+    padding: 10px;
+  }
+
+  .events-admin-description {
+    font-size: 0.9rem;
+  }
+
+  .events-admin-card {
+    padding: 8px;
+  }
+
+  .events-admin-card-actions .events-admin-button {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
+
+  .events-admin-add-button {
+    margin-top: 5px;
+  }
+
+  .events-admin-popup-content {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .events-admin-popup input,
+  .events-admin-popup textarea {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+
+  .events-admin-button {
+    padding: 8px 15px;
+    font-size: 0.8rem;
+  }
+}

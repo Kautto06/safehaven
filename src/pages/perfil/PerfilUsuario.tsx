@@ -28,10 +28,10 @@ export const UserProfile: React.FC = () => {
     startLogout(); // Llama a la función para cerrar sesión
     localStorage.clear(); // Limpia el localStorage
     setShowProfileMenu(false); // Cierra el menú de perfil
-    history.push('/login'); // Redirige a la página de inicio de sesión
+    window.location.href ='/login' // Redirige a la página de inicio de sesión
   };
   const handleEditProfile = () => {
-    history.push('/EditarPerfil'); // Redirige a una página de edición
+    window.location.href ='/EditarPerfil' // Redirige a una página de edición
   };
 
   if (status !== 'authenticated' || !user || !('name' in user)) {

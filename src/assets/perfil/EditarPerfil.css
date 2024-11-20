@@ -127,22 +127,56 @@
   }
   
   /* Estilos responsivos para dispositivos móviles */
-  @media (max-width: 768px) {
-    h2 {
-      font-size: 1.8em;
-    }
-  
-    .edit-profile-content {
-      padding: 20px;
-    }
-  
-    .edit-profile-form label {
-      font-size: 1.1em;
-    }
-  
-    .button-group button {
-      font-size: 1em;
-      padding: 10px;
-    }
+ /* Estilos responsivos para dispositivos móviles */
+@media (max-width: 768px) {
+  /* Título */
+  h2 {
+      font-size: 1.8em; /* Reducir tamaño del título */
   }
+
+  /* Recuadro del formulario */
+  .edit-profile-content {
+      padding: 20px; /* Reducir el padding */
+      max-width: 90%; /* Ajustar el ancho máximo */
+  }
+
+  /* Estilos de los campos del formulario */
+  .edit-profile-form label {
+      font-size: 1.1em; /* Reducir tamaño del texto */
+  }
+
+  .edit-profile-form input {
+      padding: 8px; /* Reducir padding de los campos */
+      font-size: 1em; /* Ajustar tamaño de fuente */
+  }
+
+  /* Botones de "Guardar Cambios" y "Volver" */
+  .button-group button {
+      font-size: 1em; /* Reducir tamaño del texto en botones */
+      padding: 10px; /* Reducir padding de los botones */
+  }
+
+  /* Botón "Guardar Cambios" */
+  .save-button {
+      padding: 10px 18px; /* Reducir padding */
+      font-size: 1.1em; /* Ajustar tamaño de la fuente */
+  }
+
+  /* Botón "Volver" */
+  .cancel-button {
+      padding: 10px 18px; /* Reducir padding */
+      font-size: 1.1em; /* Ajustar tamaño de la fuente */
+  }
+
+  /* Mensaje de éxito */
+  .success-message {
+      font-size: 1em; /* Reducir tamaño de fuente */
+      margin-top: 15px; /* Reducir margen */
+  }
+
+  /* Contenedor de carga */
+  .loading-container {
+      padding: 20px; /* Ajustar el padding para dispositivos pequeños */
+  }
+}
   
