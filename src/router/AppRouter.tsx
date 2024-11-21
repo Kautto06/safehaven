@@ -69,7 +69,7 @@ const AppRouter: React.FC = () => {
     
     try {
       const {data} = await pageApi.get(`/user/`, { params:{ email }});
-      if (data.estado === 'Bloqueado') {
+      if (data[0].estado === 'Bloqueado') {
         localStorage.clear(); // Limpiar el localStorage
         window.location.href = '/login'; // Redirigir a la página de login
       }
